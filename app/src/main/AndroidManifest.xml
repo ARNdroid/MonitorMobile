@@ -3,6 +3,7 @@
     package="br.gov.caixa.monitormobile" >
 
     <application
+        android:name=".app.MonitorMobileApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
