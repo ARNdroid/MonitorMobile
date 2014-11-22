@@ -18,7 +18,7 @@ public class MonitorMobileApp extends Application {
                 Some exceptions will not be caught by this handler:
                 - All exceptions before this statement (like super.onCreate() above);
                 - Exceptions outside the main thread.
-                Therefore, a weird and not logged exception may be in console but NOT with '==>ETD'
+                Therefore, a weird and not logged exception may be in console but NOT with '==>MOB'
                 string prefix. Be careful!
              */
             LOG.trace("About to set new default uncaught exception handler.");

@@ -9,6 +9,7 @@ import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.gov.caixa.monitormobile.provider.users.UsersOperator;
 import br.gov.caixa.monitormobile.sqlite.DBOpenHelper;
 
 public class Provider extends ContentProvider {
@@ -17,8 +18,7 @@ public class Provider extends ContentProvider {
 
     static {
         // Safe change ProviderOperator: on new implementation add a new line.
-        // TODO: implement
-        // operators.add(new DaysOperator());
+        operators.add(new UsersOperator());
     }
 
     private ProviderOperator providerOperatorForUri(Uri uri) {
