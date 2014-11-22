@@ -19,7 +19,7 @@ public class DBScripts {
             // Users:
             db.execSQL("CREATE TABLE " + Contract.Users.TABLE_NAME + " ("
                     + Contract.Users._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Users.SHORT_NAME + " TEXT);");
+                    + Contract.Users.SHORT_NAME + " TEXT NOT NULL);");
             db.execSQL("CREATE UNIQUE INDEX " + Contract.Users.TABLE_NAME + "_"
                     + Contract.Users.SHORT_NAME + "_idx "
                     + "ON " + Contract.Users.TABLE_NAME + " (" + Contract.Users.SHORT_NAME + ");");
@@ -27,8 +27,8 @@ public class DBScripts {
             // Systems:
             db.execSQL("CREATE TABLE " + Contract.Systems.TABLE_NAME + " ("
                     + Contract.Systems._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Systems.ACRONYM_ID + " TEXT, "
-                    + Contract.Systems.DESCRIPTION + " TEXT);");
+                    + Contract.Systems.ACRONYM_ID + " TEXT NOT NULL, "
+                    + Contract.Systems.DESCRIPTION + " TEXT NOT NULL);");
             db.execSQL("CREATE UNIQUE INDEX " + Contract.Systems.TABLE_NAME + "_"
                     + Contract.Systems.ACRONYM_ID + "_idx "
                     + "ON " + Contract.Systems.TABLE_NAME + " (" + Contract.Systems.ACRONYM_ID + ");");
