@@ -1,4 +1,4 @@
-package br.gov.caixa.monitormobile.provider.systems;
+package br.gov.caixa.monitormobile.provider.issues;
 
 import android.content.UriMatcher;
 import android.net.Uri;
@@ -12,32 +12,32 @@ import br.gov.caixa.monitormobile.provider.OperationParameters;
 import br.gov.caixa.monitormobile.provider.Provider;
 import br.gov.caixa.monitormobile.utils.UrisUtils;
 
-public class SystemsOperator extends BaseProviderOperator {
+public class IssuesOperator extends BaseProviderOperator {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SystemsOperator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IssuesOperator.class);
 
-    // Safe change Systems.Uri: add line for a new uri.
-    private static final int SYSTEMS_URI_MATCH = 1;
-    private static final int SYSTEMS_ITEM_URI_MATCH = 2;
+    // Safe change Issues.Uri: add line for a new uri.
+    private static final int ISSUES_URI_MATCH = 1;
+    private static final int ISSUES_ITEM_URI_MATCH = 2;
 
-    public SystemsOperator() {
+    public IssuesOperator() {
         UriMatcher matcher =  getUriMatcher();
-        // Safe change Systems.Uri: add line for a new uri.
-        matcher.addURI(Contract.Systems.CONTENT_URI.getAuthority(),
-                UrisUtils.pathForUriMatcherFromUri(Contract.Systems.CONTENT_URI), SYSTEMS_URI_MATCH);
-        matcher.addURI(Contract.Systems.CONTENT_URI.getAuthority(),
-                UrisUtils.pathForUriMatcherFromUri(Contract.Systems.CONTENT_URI) + "/#",
-                SYSTEMS_ITEM_URI_MATCH);
+        // Safe change Issues.Uri: add line for a new uri.
+        matcher.addURI(Contract.Issues.CONTENT_URI.getAuthority(),
+                UrisUtils.pathForUriMatcherFromUri(Contract.Issues.CONTENT_URI), ISSUES_URI_MATCH);
+        matcher.addURI(Contract.Issues.CONTENT_URI.getAuthority(),
+                UrisUtils.pathForUriMatcherFromUri(Contract.Issues.CONTENT_URI) + "/#",
+                ISSUES_ITEM_URI_MATCH);
     }
 
     @Override
     public String getType(Uri uri) {
         switch (getUriMatcher().match(uri)) {
-            // Safe change Systems.Uri: add line for a new uri.
-            case SYSTEMS_URI_MATCH:
-                return Contract.Systems.CONTENT_TYPE;
-            case SYSTEMS_ITEM_URI_MATCH:
-                return Contract.Systems.CONTENT_ITEM_TYPE;
+            // Safe change Issues.Uri: add line for a new uri.
+            case ISSUES_URI_MATCH:
+                return Contract.Issues.CONTENT_TYPE;
+            case ISSUES_ITEM_URI_MATCH:
+                return Contract.Issues.CONTENT_ITEM_TYPE;
             default:
                 LOG.trace("Unknown uri in getType(Uri):{}", uri);
                 return null;
@@ -46,7 +46,7 @@ public class SystemsOperator extends BaseProviderOperator {
 
     @Override
     public String tableName() {
-        return Contract.Systems.TABLE_NAME;
+        return Contract.Issues.TABLE_NAME;
     }
 
     @Override
@@ -54,12 +54,12 @@ public class SystemsOperator extends BaseProviderOperator {
         int match = getUriMatcher().match(uri);
         if(match == UriMatcher.NO_MATCH) throw new IllegalArgumentException("Unknown uri: " + uri);
 
-        // Safe change Systems.Uri: evaluate line addition for new uri.
+        // Safe change Issues.Uri: evaluate line addition for new uri.
         switch (operation) {
             case QUERY_OPERATION:
                 return false;
             case INSERT_OPERATION:
-                return match != SYSTEMS_URI_MATCH;
+                return match != ISSUES_URI_MATCH;
             case UPDATE_OPERATION:
                 return false;
             case DELETE_OPERATION:
@@ -73,9 +73,9 @@ public class SystemsOperator extends BaseProviderOperator {
     public void onValidateParameters(int operation, Uri uri, OperationParameters parameters,
                                      Provider provider) {
 
-        // Safe change Systems.Uri: evaluate line(s) addition for new uri.
-        if (getUriMatcher().match(uri) == SYSTEMS_ITEM_URI_MATCH) {
-            parameters.setSelection(Contract.Systems.ID_SELECTION);
+        // Safe change Issues.Uri: evaluate line(s) addition for new uri.
+        if (getUriMatcher().match(uri) == ISSUES_ITEM_URI_MATCH) {
+            parameters.setSelection(Contract.Issues.ID_SELECTION);
             parameters.setSelectionArgs(new String[] {uri.getLastPathSegment()});
         }
     }

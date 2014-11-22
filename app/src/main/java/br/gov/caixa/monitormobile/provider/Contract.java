@@ -193,7 +193,8 @@ public class Contract {
     public static final class Systems implements BaseColumns, SystemsColumns {
 
         // This utility class cannot be instantiated:
-        private Systems() {}
+        private Systems() {
+        }
 
 		/*
 		 * URI's
@@ -228,6 +229,66 @@ public class Contract {
 
         @SuppressWarnings("UnusedDeclaration")
         public static final String ACRONYM_ID_ASC = ACRONYM_ID + " ASC";
+    }
+
+    /*
+	 * Issues Definitions
+	 */
+
+        protected interface IssuesColumns {
+
+            // Table:
+            public static final String TABLE_NAME = "issues";
+
+            // Columns:
+            public static final String ACRONYM_ID = "system_id";
+            public static final String TIME_STAMP = "time_stamp";
+            public static final String STATE = "state";
+            public static final String FLAG_TYPE = "flag_type";
+            public static final String CLOCK_TYPE = "clock_type";
+            public static final String SUMMARY = "summary";
+            public static final String DESCRIPTION = "description";
+            public static final String REPORTER_ID = "reporter_id";
+            public static final String OWNER_ID = "owner_id";
+        }
+
+        public static final class Issues implements BaseColumns, IssuesColumns {
+
+            // This utility class cannot be instantiated:
+            private Issues() {}
+
+		/*
+		 * URI's
+		 */
+
+            public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+
+            /*
+                Projections
+             */
+            @SuppressWarnings("UnusedDeclaration")
+            public static final String[] ID_PROJECTION = {_ID};
+
+		/*
+		 * MIME types
+		 */
+
+            public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
+            public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
+
+        /*
+		 * Selection
+		 */
+
+            public static final String ID_SELECTION = _ID + "=?";
+            public static final String SYSTEM_ID_SELECTION = ACRONYM_ID + "=?";
+
+		/*
+		 * Sort order
+		 */
+
+            @SuppressWarnings("UnusedDeclaration")
+            public static final String SYSTEM_ID_ASC = ACRONYM_ID + " ASC";
 
 		/*
 		 * Utility methods
@@ -256,6 +317,30 @@ public class Contract {
                 return FIELD_TYPE_STRING;
             } else if (Systems.DESCRIPTION.equals(columnName)) {
                 return FIELD_TYPE_STRING;
+            } else {
+                throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
+            }
+        } else if(Issues.TABLE_NAME.equals(tableName)) {
+            if (Issues._ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Issues.ACRONYM_ID.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Issues.TIME_STAMP.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Issues.STATE.equals(columnName)) {
+                return FIELD_TYPE_INTEGER;
+            } else if (Issues.FLAG_TYPE.equals(columnName)) {
+                return FIELD_TYPE_INTEGER;
+            } else if (Issues.CLOCK_TYPE.equals(columnName)) {
+                return FIELD_TYPE_INTEGER;
+            } else if (Issues.SUMMARY.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Issues.DESCRIPTION.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Issues.REPORTER_ID.equals(columnName)) {
+                return FIELD_TYPE_INTEGER;
+            } else if (Issues.OWNER_ID.equals(columnName)) {
+                return FIELD_TYPE_INTEGER;
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
