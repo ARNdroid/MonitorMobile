@@ -7,6 +7,7 @@ import android.test.ProviderTestCase2;
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.Provider;
 import br.gov.caixa.monitormobile.provider.systems.SystemsEntity;
+import br.gov.caixa.monitormobile.provider.users.UsersEntity;
 
 public class SystemsManagerTest extends ProviderTestCase2<Provider> {
 
@@ -111,5 +112,25 @@ public class SystemsManagerTest extends ProviderTestCase2<Provider> {
 
         entity.setAcronymId(entity.getAcronymId() + " Updated");
         assertFalse(mManager.entityWillCauseConstraintViolation(entity));
+    }
+
+    public void testEntityWithNullForNotNullableColumnMustThrow() {
+        boolean exceptionThrew = false;
+        SystemsEntity entity = new SystemsEntity(null, null, "Some description");
+        try {
+            mManager.refresh(entity);
+        } catch (Contract.TargetException e) {
+            exceptionThrew = true;
+        }
+        assertTrue("We expected a exception here.", exceptionThrew);
+
+        exceptionThrew = false;
+        entity = new SystemsEntity(null, "Some acronym id", null);
+        try {
+            mManager.refresh(entity);
+        } catch (Contract.TargetException e) {
+            exceptionThrew = true;
+        }
+        assertTrue("We expected a exception here.", exceptionThrew);
     }
 }

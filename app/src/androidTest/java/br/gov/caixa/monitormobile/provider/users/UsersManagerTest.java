@@ -106,4 +106,16 @@ public class UsersManagerTest extends ProviderTestCase2<Provider> {
         entity.setShortName(entity.getShortName() + " Updated");
         assertFalse(mManager.entityWillCauseConstraintViolation(entity));
     }
+
+    public void testEntityWithNullForNotNullableColumnMustThrow() {
+        UsersEntity entity = new UsersEntity(null, null);
+
+        try {
+            mManager.refresh(entity);
+        } catch (Contract.TargetException e) {
+            assertTrue(true);
+            return;
+        }
+        assertTrue("We expected a exception here.", false);
+    }
 }
