@@ -57,4 +57,21 @@ public class UsersManager {
         mContext.getContentResolver().delete(ContentUris.withAppendedId(Contract.Users.CONTENT_URI,
                 id), null, null);
     }
+
+    public boolean entityWillCauseConstraintViolation(UsersEntity entity) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Users.CONTENT_URI,
+                    Contract.Users.ID_PROJECTION, Contract.Users.SHORT_NAME_SELECTION,
+                    new String[]{entity.getShortName()}, null);
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                final UsersEntity resultEntity = UsersEntity.fromCursor(c);
+                return !resultEntity.getId().equals(entity.getId());
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+        return false;
+    }
 }

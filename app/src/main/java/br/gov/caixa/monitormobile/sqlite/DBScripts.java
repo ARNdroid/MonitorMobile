@@ -18,6 +18,9 @@ public class DBScripts {
             db.execSQL("CREATE TABLE " + Contract.Users.TABLE_NAME + " ("
                     + Contract.Users._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
                     + Contract.Users.SHORT_NAME + " TEXT);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Users.TABLE_NAME + "_"
+                    + Contract.Users.SHORT_NAME + "_idx "
+                    + "ON " + Contract.Users.TABLE_NAME + " (" + Contract.Users.SHORT_NAME + ");");
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

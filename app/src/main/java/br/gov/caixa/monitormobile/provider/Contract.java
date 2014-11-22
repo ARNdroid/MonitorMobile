@@ -157,6 +157,7 @@ public class Contract {
 		 */
 
         public static final String ID_SELECTION = _ID + "=?";
+        public static final String SHORT_NAME_SELECTION = SHORT_NAME + "=?";
 
 		/*
 		 * Sort order

@@ -1,6 +1,7 @@
 package br.gov.caixa.monitormobile.provider.users;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.test.ProviderTestCase2;
 
 import br.gov.caixa.monitormobile.provider.Contract;
@@ -72,5 +73,37 @@ public class UsersManagerTest extends ProviderTestCase2<Provider> {
         mManager.refresh(entity);
         UsersEntity entityUpdated = mManager.userFromId(entity.getId());
         assertEquals(entity, entityUpdated);
+    }
+
+    public void testEntityDuplicatedShortNameMustThrow() {
+        final String shortName = "Duplicated Short Name";
+
+        UsersEntity entityInDatabase = new UsersEntity(null, shortName);
+        mManager.refresh(entityInDatabase);
+
+        UsersEntity duplicatedShortName = new UsersEntity(null, shortName);
+        try {
+            mManager.refresh(duplicatedShortName);
+        } catch (SQLiteConstraintException e) {
+            assertTrue(true);
+            return;
+        }
+        assertTrue("We expected a exception here.", false);
+    }
+
+    public void testEntityWillCauseConstraintViolationMustReturnsCorrectValue() {
+        final String shortName = "Duplicated Short Name";
+
+        UsersEntity entity = new UsersEntity(null, shortName);
+        assertFalse(mManager.entityWillCauseConstraintViolation(entity));
+
+        UsersEntity entityInDatabase = new UsersEntity(entity);
+        mManager.refresh(entityInDatabase);
+
+        assertTrue(mManager.entityWillCauseConstraintViolation(entity));
+        assertFalse(mManager.entityWillCauseConstraintViolation(entityInDatabase));
+
+        entity.setShortName(entity.getShortName() + " Updated");
+        assertFalse(mManager.entityWillCauseConstraintViolation(entity));
     }
 }
