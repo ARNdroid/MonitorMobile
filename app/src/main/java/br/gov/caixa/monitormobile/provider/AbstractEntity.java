@@ -17,4 +17,11 @@ public abstract class AbstractEntity {
 
     @SuppressWarnings({"SameReturnValue", "UnusedDeclaration"})
     abstract public String getIdColumnName();
+
+    protected void throwNullValueException(String columnName) {
+        throw new Contract.TargetException(Contract.TargetException.NULL_VALUE,
+                new Contract.TargetException.FieldDescriptor[] {
+                        new Contract.TargetException.FieldDescriptor(getTableName(),
+                                columnName, null)}, null);
+    }
 }

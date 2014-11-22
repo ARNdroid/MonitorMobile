@@ -52,13 +52,6 @@ public class UsersEntity extends AbstractEntity {
         }
     }
 
-    private void throwNullValueException(String columnName) {
-        throw new Contract.TargetException(Contract.TargetException.NULL_VALUE,
-                new Contract.TargetException.FieldDescriptor[] {
-                        new Contract.TargetException.FieldDescriptor(Contract.Users.TABLE_NAME,
-                                columnName, null)}, null);
-    }
-
     @Override
     public String getTableName() {
         return Contract.Users.TABLE_NAME;
