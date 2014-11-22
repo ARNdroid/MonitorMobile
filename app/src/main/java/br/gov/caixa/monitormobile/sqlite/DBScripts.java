@@ -6,12 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import br.gov.caixa.monitormobile.provider.Contract;
+import br.gov.caixa.monitormobile.provider.systems.SystemsEntity;
 import br.gov.caixa.monitormobile.provider.users.UsersEntity;
 
 public class DBScripts {
 
     public static void scriptV00ToV01(SQLiteDatabase db) {
         // Tables Creation
+
         db.beginTransaction();
         try {
             // Users:
@@ -21,12 +23,23 @@ public class DBScripts {
             db.execSQL("CREATE UNIQUE INDEX " + Contract.Users.TABLE_NAME + "_"
                     + Contract.Users.SHORT_NAME + "_idx "
                     + "ON " + Contract.Users.TABLE_NAME + " (" + Contract.Users.SHORT_NAME + ");");
+
+            // Systems:
+            db.execSQL("CREATE TABLE " + Contract.Systems.TABLE_NAME + " ("
+                    + Contract.Systems._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Systems.ACRONYM_ID + " TEXT, "
+                    + Contract.Systems.DESCRIPTION + " TEXT);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Systems.TABLE_NAME + "_"
+                    + Contract.Systems.ACRONYM_ID + "_idx "
+                    + "ON " + Contract.Systems.TABLE_NAME + " (" + Contract.Systems.ACRONYM_ID + ");");
+
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
 
         // Data Population
+
         db.beginTransaction();
         try {
             final UsersEntity usersEntity = new UsersEntity(null, null);
@@ -46,5 +59,26 @@ public class DBScripts {
             db.endTransaction();
         }
 
+        db.beginTransaction();
+        try {
+            final SystemsEntity systemsEntity = new SystemsEntity(null, null, null);
+            systemsEntity.setAcronymId("SI001");
+            systemsEntity.setDescription("Description for SI001");
+            db.insert(Contract.Systems.TABLE_NAME, null,
+                    systemsEntity.toContentValuesIgnoreNulls());
+            systemsEntity.setAcronymId("SI002");
+            systemsEntity.setDescription("Description for SI002");
+            db.insert(Contract.Systems.TABLE_NAME, null,
+                    systemsEntity.toContentValuesIgnoreNulls());
+            systemsEntity.setAcronymId("SI003");
+            systemsEntity.setDescription("Description for SI003");
+            db.insert(Contract.Systems.TABLE_NAME, null,
+                    systemsEntity.toContentValuesIgnoreNulls());
+
+            db.setTransactionSuccessful();
+
+        } finally {
+            db.endTransaction();
+        }
     }
 }

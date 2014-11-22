@@ -176,12 +176,85 @@ public class Contract {
         }
     }
 
+    /*
+	 * Systems Definitions
+	 */
+
+    protected interface SystemsColumns {
+
+        // Table:
+        public static final String TABLE_NAME = "systems";
+
+        // Columns:
+        public static final String ACRONYM_ID = "acronym_id";
+        public static final String DESCRIPTION = "description";
+    }
+
+    public static final class Systems implements BaseColumns, SystemsColumns {
+
+        // This utility class cannot be instantiated:
+        private Systems() {}
+
+		/*
+		 * URI's
+		 */
+
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+
+        /*
+            Projections
+         */
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String[] ID_PROJECTION = {_ID};
+        public static final String[] ACRONYM_ID_PROJECTION = {ACRONYM_ID};
+
+		/*
+		 * MIME types
+		 */
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
+
+        /*
+		 * Selection
+		 */
+
+        public static final String ID_SELECTION = _ID + "=?";
+        public static final String ACRONYM_ID_SELECTION = ACRONYM_ID + "=?";
+
+		/*
+		 * Sort order
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String ACRONYM_ID_ASC = ACRONYM_ID + " ASC";
+
+		/*
+		 * Utility methods
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static int fieldTypeForColumn(String columnName) {
+            return fieldTypeForTableAndColumn(TABLE_NAME, columnName);
+        }
+    }
+
     private static int fieldTypeForTableAndColumn(String tableName, String columnName) {
 
         if(Users.TABLE_NAME.equals(tableName)) {
             if (Users._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Users.SHORT_NAME.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else {
+                throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
+            }
+        } else if(Systems.TABLE_NAME.equals(tableName)) {
+            if (Systems._ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Systems.ACRONYM_ID.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Systems.DESCRIPTION.equals(columnName)) {
                 return FIELD_TYPE_STRING;
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
