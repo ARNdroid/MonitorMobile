@@ -6,6 +6,7 @@ import java.util.Date;
 
 import br.gov.caixa.monitormobile.provider.actions.ActionsEntity;
 import br.gov.caixa.monitormobile.provider.comments.CommentsEntity;
+import br.gov.caixa.monitormobile.provider.followers.FollowersEntity;
 import br.gov.caixa.monitormobile.provider.subscriptions.SubscriptionsEntity;
 import br.gov.caixa.monitormobile.utils.IssueUtils;
 import br.gov.caixa.monitormobile.provider.Contract;
@@ -79,6 +80,16 @@ public class DBScripts {
                     + Contract.Subscriptions.ACRONYM_ID + "_" + Contract.Subscriptions.SUBSCRIBER_ID + "_idx "
                     + "ON " + Contract.Subscriptions.TABLE_NAME
                     + " (" + Contract.Subscriptions.ACRONYM_ID + ", " + Contract.Subscriptions.SUBSCRIBER_ID + ");");
+
+            // Followers:
+            db.execSQL("CREATE TABLE " + Contract.Followers.TABLE_NAME + " ("
+                    + Contract.Followers._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Followers.ISSUE_ID + " INTEGER NOT NULL, "
+                    + Contract.Followers.FOLLOWER_ID + " INTEGER NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Followers.TABLE_NAME + "_"
+                    + Contract.Followers.ISSUE_ID + "_" + Contract.Followers.FOLLOWER_ID + "_idx "
+                    + "ON " + Contract.Followers.TABLE_NAME
+                    + " (" + Contract.Followers.ISSUE_ID + ", " + Contract.Followers.FOLLOWER_ID + ");");
 
             db.setTransactionSuccessful();
         } finally {
@@ -211,6 +222,24 @@ public class DBScripts {
                     SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, "SI002", 1L);
             db.insert(Contract.Subscriptions.TABLE_NAME, null,
                     subscriptionsEntity.toContentValuesIgnoreNulls());
+            db.setTransactionSuccessful();
+
+        } finally {
+            db.endTransaction();
+        }
+
+        // Subscriptions:
+        db.beginTransaction();
+        try {
+            FollowersEntity followersEntity = new FollowersEntity(null, 1L, 1L);
+            db.insert(Contract.Followers.TABLE_NAME, null,
+                    followersEntity.toContentValuesIgnoreNulls());
+            followersEntity = new FollowersEntity(null, 1L, 2L);
+            db.insert(Contract.Followers.TABLE_NAME, null,
+                    followersEntity.toContentValuesIgnoreNulls());
+            followersEntity = new FollowersEntity(null, 2L, 1L);
+            db.insert(Contract.Followers.TABLE_NAME, null,
+                    followersEntity.toContentValuesIgnoreNulls());
             db.setTransactionSuccessful();
 
         } finally {

@@ -11,6 +11,7 @@ import java.util.List;
 
 import br.gov.caixa.monitormobile.provider.actions.ActionsOperator;
 import br.gov.caixa.monitormobile.provider.comments.CommentsOperator;
+import br.gov.caixa.monitormobile.provider.followers.FollowersOperator;
 import br.gov.caixa.monitormobile.provider.issues.IssuesOperator;
 import br.gov.caixa.monitormobile.provider.subscriptions.SubscriptionsOperator;
 import br.gov.caixa.monitormobile.provider.systems.SystemsOperator;
@@ -29,6 +30,7 @@ public class Provider extends ContentProvider {
         operators.add(new ActionsOperator());
         operators.add(new CommentsOperator());
         operators.add(new SubscriptionsOperator());
+        operators.add(new FollowersOperator());
     }
 
     private ProviderOperator providerOperatorForUri(Uri uri) {

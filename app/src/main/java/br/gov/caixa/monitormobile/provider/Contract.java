@@ -493,6 +493,69 @@ public class Contract {
         }
     }
 
+    /*
+	 * Followers Definitions
+	 */
+
+    protected interface FollowersColumns {
+
+        // Table:
+        public static final String TABLE_NAME = "followers";
+
+        // Columns:
+        public static final String ISSUE_ID = "issue_id";
+        public static final String FOLLOWER_ID = "follower_id";
+    }
+
+    public static final class Followers implements BaseColumns, FollowersColumns {
+
+        // This utility class cannot be instantiated:
+        private Followers() {}
+
+		/*
+		 * URI's
+		 */
+
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+
+        /*
+            Projections
+         */
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String[] ID_PROJECTION = {_ID};
+
+		/*
+		 * MIME types
+		 */
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
+
+        /*
+		 * Selection
+		 */
+
+        public static final String ID_SELECTION = _ID + "=?";
+        public static final String ISSUE_ID_AND_FOLLOWER_ID_SELECTION = ISSUE_ID + "=? AND " + FOLLOWER_ID + "=?";
+        public static final String ISSUE_ID_SELECTION = ISSUE_ID + "=?";
+
+		/*
+		 * Sort order
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String ISSUE_ID_ASC = ISSUE_ID + " ASC";
+
+		/*
+		 * Utility methods
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static int fieldTypeForColumn(String columnName) {
+            return fieldTypeForTableAndColumn(TABLE_NAME, columnName);
+        }
+    }
+
     private static int fieldTypeForTableAndColumn(String tableName, String columnName) {
 
         if(Users.TABLE_NAME.equals(tableName)) {
@@ -575,6 +638,16 @@ public class Contract {
             } else if (Subscriptions.ACRONYM_ID.equals(columnName)) {
                 return FIELD_TYPE_STRING;
             } else if (Subscriptions.SUBSCRIBER_ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else {
+                throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
+            }
+        } else if(Followers.TABLE_NAME.equals(tableName)) {
+            if (Followers._ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Followers.ISSUE_ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Followers.FOLLOWER_ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
