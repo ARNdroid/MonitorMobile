@@ -1,6 +1,6 @@
-package br.gov.caixa.monitormobile.issue;
+package br.gov.caixa.monitormobile.utils;
 
-public class Issue {
+public class IssueUtils {
 
     // Attention: don't change this values. They are stored in database.
     public static final int STATE_CLOSED = 0;
@@ -18,5 +18,5 @@ public class Issue {
     public static final int CLOCK_BLACK = 4;
 
     // Utility class.
-    protected Issue() {}
+    protected IssueUtils() {}
 }

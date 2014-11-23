@@ -2,7 +2,7 @@ package br.gov.caixa.monitormobile.sqlite;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import br.gov.caixa.monitormobile.issue.Issue;
+import br.gov.caixa.monitormobile.utils.IssueUtils;
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.issues.IssuesEntity;
 import br.gov.caixa.monitormobile.provider.systems.SystemsEntity;
@@ -96,17 +96,17 @@ public class DBScripts {
         db.beginTransaction();
         try {
             IssuesEntity issuesEntity = new IssuesEntity(null, "SI001", "201411221734",
-                    Issue.STATE_OPEN, Issue.FLAG_BLACK, Issue.CLOCK_BLUE, "Summary SI001",
+                    IssueUtils.STATE_OPEN, IssueUtils.FLAG_BLACK, IssueUtils.CLOCK_BLUE, "Summary SI001",
                     "Description SI001", 1L, 2L);
             db.insert(Contract.Issues.TABLE_NAME, null,
                     issuesEntity.toContentValuesIgnoreNulls());
             issuesEntity = new IssuesEntity(null, "SI002", "201411231734",
-                    Issue.STATE_OPEN, Issue.FLAG_BLUE, Issue.CLOCK_RED, "Summary SI002",
+                    IssueUtils.STATE_OPEN, IssueUtils.FLAG_BLUE, IssueUtils.CLOCK_RED, "Summary SI002",
                     "Description SI002", 2L, 2L);
             db.insert(Contract.Issues.TABLE_NAME, null,
                     issuesEntity.toContentValuesIgnoreNulls());
             issuesEntity = new IssuesEntity(null, "SI003", "20141124734",
-                    Issue.STATE_OPEN, Issue.FLAG_RED, Issue.CLOCK_YELLOW, "Summary SI003",
+                    IssueUtils.STATE_OPEN, IssueUtils.FLAG_RED, IssueUtils.CLOCK_YELLOW, "Summary SI003",
                     "Description SI003", 3L, 2L);
             db.insert(Contract.Systems.TABLE_NAME, null,
                     issuesEntity.toContentValuesIgnoreNulls());
