@@ -241,7 +241,7 @@ public class Contract {
             public static final String TABLE_NAME = "issues";
 
             // Columns:
-            public static final String ACRONYM_ID = "system_id";
+            public static final String ACRONYM_ID = "acronym_id";
             public static final String TIME_STAMP = "time_stamp";
             public static final String STATE = "state";
             public static final String FLAG_TYPE = "flag_type";
@@ -281,7 +281,7 @@ public class Contract {
 		 */
 
             public static final String ID_SELECTION = _ID + "=?";
-            public static final String SYSTEM_ID_SELECTION = ACRONYM_ID + "=?";
+            public static final String ACRONYM_ID_SELECTION = ACRONYM_ID + "=?";
 
 		/*
 		 * Sort order
@@ -429,6 +429,70 @@ public class Contract {
         }
     }
 
+    /*
+	 * Subscriptions Definitions
+	 */
+
+    protected interface SubscriptionsColumns {
+
+        // Table:
+        public static final String TABLE_NAME = "subscriptions";
+
+        // Columns:
+        public static final String MODE_TYPE = "mode_type";
+        public static final String ACRONYM_ID = "acronym_id";
+        public static final String SUBSCRIBER_ID = "subscriber_id";
+    }
+
+    public static final class Subscriptions implements BaseColumns, SubscriptionsColumns {
+
+        // This utility class cannot be instantiated:
+        private Subscriptions() {}
+
+		/*
+		 * URI's
+		 */
+
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+
+        /*
+            Projections
+         */
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String[] ID_PROJECTION = {_ID};
+
+		/*
+		 * MIME types
+		 */
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
+
+        /*
+		 * Selection
+		 */
+
+        public static final String ID_SELECTION = _ID + "=?";
+        public static final String SUBSCRIBER_ID_SELECTION = SUBSCRIBER_ID + "=?";
+        public static final String ACRONYM_ID_AND_SUBSCRIBER_ID_SELECTION = ACRONYM_ID + "=? AND " + SUBSCRIBER_ID + "=?";
+
+		/*
+		 * Sort order
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String ACRONYM_ID_ASC = ACRONYM_ID + " ASC";
+
+		/*
+		 * Utility methods
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static int fieldTypeForColumn(String columnName) {
+            return fieldTypeForTableAndColumn(TABLE_NAME, columnName);
+        }
+    }
+
     private static int fieldTypeForTableAndColumn(String tableName, String columnName) {
 
         if(Users.TABLE_NAME.equals(tableName)) {
@@ -499,6 +563,18 @@ public class Contract {
             } else if (Comments.DESCRIPTION.equals(columnName)) {
                 return FIELD_TYPE_STRING;
             } else if (Comments.COMMENTER_ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else {
+                throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
+            }
+        } else if(Subscriptions.TABLE_NAME.equals(tableName)) {
+            if (Subscriptions._ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Subscriptions.MODE_TYPE.equals(columnName)) {
+                return FIELD_TYPE_INTEGER;
+            } else if (Subscriptions.ACRONYM_ID.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Subscriptions.SUBSCRIBER_ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);

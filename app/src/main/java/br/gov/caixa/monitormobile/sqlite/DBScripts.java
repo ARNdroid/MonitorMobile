@@ -6,11 +6,13 @@ import java.util.Date;
 
 import br.gov.caixa.monitormobile.provider.actions.ActionsEntity;
 import br.gov.caixa.monitormobile.provider.comments.CommentsEntity;
+import br.gov.caixa.monitormobile.provider.subscriptions.SubscriptionsEntity;
 import br.gov.caixa.monitormobile.utils.IssueUtils;
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.issues.IssuesEntity;
 import br.gov.caixa.monitormobile.provider.systems.SystemsEntity;
 import br.gov.caixa.monitormobile.provider.users.UsersEntity;
+import br.gov.caixa.monitormobile.utils.SubscriptionsUtils;
 import br.gov.caixa.monitormobile.utils.TimeStampUtils;
 
 public class DBScripts {
@@ -66,6 +68,17 @@ public class DBScripts {
                     + Contract.Comments.TIME_STAMP + " TEXT NOT NULL, "
                     + Contract.Comments.DESCRIPTION + " TEXT NOT NULL, "
                     + Contract.Comments.COMMENTER_ID + " INTEGER NOT NULL);");
+
+            // Subscriptions:
+            db.execSQL("CREATE TABLE " + Contract.Subscriptions.TABLE_NAME + " ("
+                    + Contract.Subscriptions._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Subscriptions.MODE_TYPE + " INTEGER NOT NULL, "
+                    + Contract.Subscriptions.ACRONYM_ID + " TEXT NOT NULL, "
+                    + Contract.Subscriptions.SUBSCRIBER_ID + " INTEGER NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Subscriptions.TABLE_NAME + "_"
+                    + Contract.Subscriptions.ACRONYM_ID + "_" + Contract.Subscriptions.SUBSCRIBER_ID + "_idx "
+                    + "ON " + Contract.Subscriptions.TABLE_NAME
+                    + " (" + Contract.Subscriptions.ACRONYM_ID + ", " + Contract.Subscriptions.SUBSCRIBER_ID + ");");
 
             db.setTransactionSuccessful();
         } finally {
@@ -133,7 +146,7 @@ public class DBScripts {
             issuesEntity = new IssuesEntity(null, "SI003", "20141124734",
                     IssueUtils.STATE_OPEN, IssueUtils.FLAG_RED, IssueUtils.CLOCK_YELLOW, "Summary SI003",
                     "Description SI003", 3L, 2L);
-            db.insert(Contract.Systems.TABLE_NAME, null,
+            db.insert(Contract.Issues.TABLE_NAME, null,
                     issuesEntity.toContentValuesIgnoreNulls());
             db.setTransactionSuccessful();
 
@@ -146,15 +159,15 @@ public class DBScripts {
         try {
             ActionsEntity actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
                     "Summary action 001", "Description action 001", 1L);
-            db.insert(Contract.Issues.TABLE_NAME, null,
+            db.insert(Contract.Actions.TABLE_NAME, null,
                     actionsEntity.toContentValuesIgnoreNulls());
             actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
                     "Summary action 002", "Description action 002", 2L);
-            db.insert(Contract.Issues.TABLE_NAME, null,
+            db.insert(Contract.Actions.TABLE_NAME, null,
                     actionsEntity.toContentValuesIgnoreNulls());
             actionsEntity = new ActionsEntity(null, 2L, TimeStampUtils.dateToTimeStamp(new Date()),
                     "Summary action 003", "Description action 003", 3L);
-            db.insert(Contract.Systems.TABLE_NAME, null,
+            db.insert(Contract.Actions.TABLE_NAME, null,
                     actionsEntity.toContentValuesIgnoreNulls());
             db.setTransactionSuccessful();
 
@@ -167,16 +180,37 @@ public class DBScripts {
         try {
             CommentsEntity commentsEntity = new CommentsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
                     "Description comment 001", 1L);
-            db.insert(Contract.Issues.TABLE_NAME, null,
+            db.insert(Contract.Comments.TABLE_NAME, null,
                     commentsEntity.toContentValuesIgnoreNulls());
             commentsEntity = new CommentsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
                     "Description comment 002", 2L);
-            db.insert(Contract.Issues.TABLE_NAME, null,
+            db.insert(Contract.Comments.TABLE_NAME, null,
                     commentsEntity.toContentValuesIgnoreNulls());
             commentsEntity = new CommentsEntity(null, 2L, TimeStampUtils.dateToTimeStamp(new Date()),
                     "Description comment 003", 3L);
-            db.insert(Contract.Systems.TABLE_NAME, null,
+            db.insert(Contract.Comments.TABLE_NAME, null,
                     commentsEntity.toContentValuesIgnoreNulls());
+            db.setTransactionSuccessful();
+
+        } finally {
+            db.endTransaction();
+        }
+
+        // Subscriptions:
+        db.beginTransaction();
+        try {
+            SubscriptionsEntity subscriptionsEntity = new SubscriptionsEntity(null,
+                    SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, "SI001", 1L);
+            db.insert(Contract.Subscriptions.TABLE_NAME, null,
+                    subscriptionsEntity.toContentValuesIgnoreNulls());
+            subscriptionsEntity = new SubscriptionsEntity(null,
+                    SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, "SI001", 2L);
+            db.insert(Contract.Subscriptions.TABLE_NAME, null,
+                    subscriptionsEntity.toContentValuesIgnoreNulls());
+            subscriptionsEntity = new SubscriptionsEntity(null,
+                    SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, "SI002", 1L);
+            db.insert(Contract.Subscriptions.TABLE_NAME, null,
+                    subscriptionsEntity.toContentValuesIgnoreNulls());
             db.setTransactionSuccessful();
 
         } finally {
