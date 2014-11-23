@@ -3,8 +3,11 @@ package br.gov.caixa.monitormobile.provider.issues;
 import android.database.Cursor;
 import android.test.ProviderTestCase2;
 
+import java.util.Date;
+
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.Provider;
+import br.gov.caixa.monitormobile.utils.TimeStampUtils;
 
 public class IssuesManagerTest extends ProviderTestCase2<Provider> {
 
@@ -25,8 +28,9 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
     }
 
     public void testRemoveMustDelete() {
-        final IssuesEntity entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, 0, 0,
-                "Some summary", "Some description", 0L, 0L);
+        final IssuesEntity entity = new IssuesEntity(null, "SIXYZ",
+                TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, 0, "Some summary",
+                "Some description", 0L, 0L);
         mManager.refresh(entity);
         int totalRecords = -1;
         Cursor c = null;
@@ -57,8 +61,9 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
             if (c != null) c.close();
         }
 
-        final IssuesEntity entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, 0, 0,
-                "Some summary", "Some description", 0L, 0L);
+        final IssuesEntity entity = new IssuesEntity(null, "SIXYZ",
+                TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, 0, "Some summary",
+                "Some description", 0L, 0L);
         mManager.refresh(entity);
 
         try {
@@ -76,8 +81,8 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
 
     public void testEntityWithNullForNotNullableColumnMustThrow() {
         boolean exceptionThrew = false;
-        IssuesEntity entity = new IssuesEntity(null, null, "201411221716", 0, 0, 0,
-                "Some summary", "Some description", 0L, 0L);
+        IssuesEntity entity = new IssuesEntity(null, null, TimeStampUtils.dateToTimeStamp(new Date()),
+                0, 0, 0, "Some summary", "Some description", 0L, 0L);
         try {
             mManager.refresh(entity);
         } catch (Contract.TargetException e) {
@@ -96,7 +101,7 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
         assertTrue("We expected a exception here.", exceptionThrew);
 
         exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", "201411221716", null, 0, 0,
+        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), null, 0, 0,
                 "Some summary", "Some description", 0L, 0L);
         try {
             mManager.refresh(entity);
@@ -106,7 +111,7 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
         assertTrue("We expected a exception here.", exceptionThrew);
 
         exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, null, 0,
+        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), 0, null, 0,
                 "Some summary", "Some description", 0L, 0L);
         try {
             mManager.refresh(entity);
@@ -116,7 +121,7 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
         assertTrue("We expected a exception here.", exceptionThrew);
 
         exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, 0, null,
+        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, null,
                 "Some summary", "Some description", 0L, 0L);
         try {
             mManager.refresh(entity);
@@ -126,7 +131,7 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
         assertTrue("We expected a exception here.", exceptionThrew);
 
         exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, 0, 0,
+        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, 0,
                 null, "Some description", 0L, 0L);
         try {
             mManager.refresh(entity);
@@ -136,7 +141,7 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
         assertTrue("We expected a exception here.", exceptionThrew);
 
         exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, 0, 0,
+        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, 0,
                 "Some summary", null, 0L, 0L);
         try {
             mManager.refresh(entity);
@@ -146,7 +151,7 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
         assertTrue("We expected a exception here.", exceptionThrew);
 
         exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, 0, 0,
+        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, 0,
                 "Some summary", "Some description", null, 0L);
         try {
             mManager.refresh(entity);
@@ -156,7 +161,7 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
         assertTrue("We expected a exception here.", exceptionThrew);
 
         exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", "201411221716", 0, 0, 0,
+        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, 0,
                 "Some summary", "Some description", 0L, null);
         try {
             mManager.refresh(entity);

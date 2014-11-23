@@ -288,7 +288,72 @@ public class Contract {
 		 */
 
             @SuppressWarnings("UnusedDeclaration")
-            public static final String SYSTEM_ID_ASC = ACRONYM_ID + " ASC";
+            public static final String TIME_STAMP_DESC = TIME_STAMP + " DESC";
+
+		/*
+		 * Utility methods
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static int fieldTypeForColumn(String columnName) {
+            return fieldTypeForTableAndColumn(TABLE_NAME, columnName);
+        }
+    }
+
+    /*
+	 * Actions Definitions
+	 */
+
+    protected interface ActionsColumns {
+
+        // Table:
+        public static final String TABLE_NAME = "actions";
+
+        // Columns:
+        public static final String ISSUE_ID = "issue_id";
+        public static final String TIME_STAMP = "time_stamp";
+        public static final String SUMMARY = "summary";
+        public static final String DESCRIPTION = "description";
+        public static final String AGENT_ID = "agent_id";
+    }
+
+    public static final class Actions implements BaseColumns, ActionsColumns {
+
+        // This utility class cannot be instantiated:
+        private Actions() {}
+
+		/*
+		 * URI's
+		 */
+
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+
+        /*
+            Projections
+         */
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String[] ID_PROJECTION = {_ID};
+
+		/*
+		 * MIME types
+		 */
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
+
+        /*
+		 * Selection
+		 */
+
+        public static final String ID_SELECTION = _ID + "=?";
+        public static final String ISSUE_ID_SELECTION = ISSUE_ID + "=?";
+
+		/*
+		 * Sort order
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String TIME_STAMP_DESC = TIME_STAMP + " DESC";
 
 		/*
 		 * Utility methods
@@ -338,9 +403,25 @@ public class Contract {
             } else if (Issues.DESCRIPTION.equals(columnName)) {
                 return FIELD_TYPE_STRING;
             } else if (Issues.REPORTER_ID.equals(columnName)) {
-                return FIELD_TYPE_INTEGER;
+                return FIELD_TYPE_LONG;
             } else if (Issues.OWNER_ID.equals(columnName)) {
-                return FIELD_TYPE_INTEGER;
+                return FIELD_TYPE_LONG;
+            } else {
+                throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
+            }
+        } else if(Actions.TABLE_NAME.equals(tableName)) {
+            if (Actions._ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Actions.ISSUE_ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Actions.TIME_STAMP.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Actions.SUMMARY.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Actions.DESCRIPTION.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Actions.AGENT_ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }

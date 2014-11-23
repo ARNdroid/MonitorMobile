@@ -2,11 +2,15 @@ package br.gov.caixa.monitormobile.sqlite;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.Date;
+
+import br.gov.caixa.monitormobile.provider.actions.ActionsEntity;
 import br.gov.caixa.monitormobile.utils.IssueUtils;
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.issues.IssuesEntity;
 import br.gov.caixa.monitormobile.provider.systems.SystemsEntity;
 import br.gov.caixa.monitormobile.provider.users.UsersEntity;
+import br.gov.caixa.monitormobile.utils.TimeStampUtils;
 
 public class DBScripts {
 
@@ -44,6 +48,15 @@ public class DBScripts {
                     + Contract.Issues.DESCRIPTION + " TEXT NOT NULL, "
                     + Contract.Issues.REPORTER_ID + " INTEGER NOT NULL, "
                     + Contract.Issues.OWNER_ID + " INTEGER NOT NULL);");
+
+            // Actions:
+            db.execSQL("CREATE TABLE " + Contract.Actions.TABLE_NAME + " ("
+                    + Contract.Actions._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Actions.ISSUE_ID + " INTEGER NOT NULL, "
+                    + Contract.Actions.TIME_STAMP + " TEXT NOT NULL, "
+                    + Contract.Actions.SUMMARY + " TEXT NOT NULL, "
+                    + Contract.Actions.DESCRIPTION + " TEXT NOT NULL, "
+                    + Contract.Actions.AGENT_ID + " INTEGER NOT NULL);");
 
             db.setTransactionSuccessful();
         } finally {
@@ -95,7 +108,7 @@ public class DBScripts {
 
         db.beginTransaction();
         try {
-            IssuesEntity issuesEntity = new IssuesEntity(null, "SI001", "201411221734",
+            IssuesEntity issuesEntity = new IssuesEntity(null, "SI001", TimeStampUtils.dateToTimeStamp(new Date()),
                     IssueUtils.STATE_OPEN, IssueUtils.FLAG_BLACK, IssueUtils.CLOCK_BLUE, "Summary SI001",
                     "Description SI001", 1L, 2L);
             db.insert(Contract.Issues.TABLE_NAME, null,
@@ -110,6 +123,26 @@ public class DBScripts {
                     "Description SI003", 3L, 2L);
             db.insert(Contract.Systems.TABLE_NAME, null,
                     issuesEntity.toContentValuesIgnoreNulls());
+            db.setTransactionSuccessful();
+
+        } finally {
+            db.endTransaction();
+        }
+
+        db.beginTransaction();
+        try {
+            ActionsEntity actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
+                    "Summary Action 001", "Description Action 001", 1L);
+            db.insert(Contract.Issues.TABLE_NAME, null,
+                    actionsEntity.toContentValuesIgnoreNulls());
+            actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
+                    "Summary Action 002", "Description Action 002", 2L);
+            db.insert(Contract.Issues.TABLE_NAME, null,
+                    actionsEntity.toContentValuesIgnoreNulls());
+            actionsEntity = new ActionsEntity(null, 2L, TimeStampUtils.dateToTimeStamp(new Date()),
+                    "Summary Action 003", "Description Action 003", 3L);
+            db.insert(Contract.Systems.TABLE_NAME, null,
+                    actionsEntity.toContentValuesIgnoreNulls());
             db.setTransactionSuccessful();
 
         } finally {
