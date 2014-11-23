@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.Date;
 
 import br.gov.caixa.monitormobile.provider.actions.ActionsEntity;
+import br.gov.caixa.monitormobile.provider.comments.CommentsEntity;
 import br.gov.caixa.monitormobile.utils.IssueUtils;
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.issues.IssuesEntity;
@@ -58,6 +59,14 @@ public class DBScripts {
                     + Contract.Actions.DESCRIPTION + " TEXT NOT NULL, "
                     + Contract.Actions.AGENT_ID + " INTEGER NOT NULL);");
 
+            // Comments:
+            db.execSQL("CREATE TABLE " + Contract.Comments.TABLE_NAME + " ("
+                    + Contract.Comments._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Comments.ACTION_ID + " INTEGER NOT NULL, "
+                    + Contract.Comments.TIME_STAMP + " TEXT NOT NULL, "
+                    + Contract.Comments.DESCRIPTION + " TEXT NOT NULL, "
+                    + Contract.Comments.COMMENTER_ID + " INTEGER NOT NULL);");
+
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -65,6 +74,7 @@ public class DBScripts {
 
         // Data Population
 
+        // Users:
         db.beginTransaction();
         try {
             final UsersEntity usersEntity = new UsersEntity(null, null);
@@ -84,6 +94,7 @@ public class DBScripts {
             db.endTransaction();
         }
 
+        // Systems:
         db.beginTransaction();
         try {
             final SystemsEntity systemsEntity = new SystemsEntity(null, null, null);
@@ -106,6 +117,7 @@ public class DBScripts {
             db.endTransaction();
         }
 
+        // Issues:
         db.beginTransaction();
         try {
             IssuesEntity issuesEntity = new IssuesEntity(null, "SI001", TimeStampUtils.dateToTimeStamp(new Date()),
@@ -129,20 +141,42 @@ public class DBScripts {
             db.endTransaction();
         }
 
+        // Actions:
         db.beginTransaction();
         try {
             ActionsEntity actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Summary Action 001", "Description Action 001", 1L);
+                    "Summary action 001", "Description action 001", 1L);
             db.insert(Contract.Issues.TABLE_NAME, null,
                     actionsEntity.toContentValuesIgnoreNulls());
             actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Summary Action 002", "Description Action 002", 2L);
+                    "Summary action 002", "Description action 002", 2L);
             db.insert(Contract.Issues.TABLE_NAME, null,
                     actionsEntity.toContentValuesIgnoreNulls());
             actionsEntity = new ActionsEntity(null, 2L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Summary Action 003", "Description Action 003", 3L);
+                    "Summary action 003", "Description action 003", 3L);
             db.insert(Contract.Systems.TABLE_NAME, null,
                     actionsEntity.toContentValuesIgnoreNulls());
+            db.setTransactionSuccessful();
+
+        } finally {
+            db.endTransaction();
+        }
+
+        // Comments:
+        db.beginTransaction();
+        try {
+            CommentsEntity commentsEntity = new CommentsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
+                    "Description comment 001", 1L);
+            db.insert(Contract.Issues.TABLE_NAME, null,
+                    commentsEntity.toContentValuesIgnoreNulls());
+            commentsEntity = new CommentsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
+                    "Description comment 002", 2L);
+            db.insert(Contract.Issues.TABLE_NAME, null,
+                    commentsEntity.toContentValuesIgnoreNulls());
+            commentsEntity = new CommentsEntity(null, 2L, TimeStampUtils.dateToTimeStamp(new Date()),
+                    "Description comment 003", 3L);
+            db.insert(Contract.Systems.TABLE_NAME, null,
+                    commentsEntity.toContentValuesIgnoreNulls());
             db.setTransactionSuccessful();
 
         } finally {

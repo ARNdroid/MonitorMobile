@@ -365,6 +365,70 @@ public class Contract {
         }
     }
 
+    /*
+	 * Comments Definitions
+	 */
+
+    protected interface CommentsColumns {
+
+        // Table:
+        public static final String TABLE_NAME = "comments";
+
+        // Columns:
+        public static final String ACTION_ID = "action_id";
+        public static final String TIME_STAMP = "time_stamp";
+        public static final String DESCRIPTION = "description";
+        public static final String COMMENTER_ID = "commenter_id";
+    }
+
+    public static final class Comments implements BaseColumns, CommentsColumns {
+
+        // This utility class cannot be instantiated:
+        private Comments() {}
+
+		/*
+		 * URI's
+		 */
+
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+
+        /*
+            Projections
+         */
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String[] ID_PROJECTION = {_ID};
+
+		/*
+		 * MIME types
+		 */
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
+
+        /*
+		 * Selection
+		 */
+
+        public static final String ID_SELECTION = _ID + "=?";
+        public static final String ACTION_ID_SELECTION = ACTION_ID + "=?";
+
+		/*
+		 * Sort order
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static final String TIME_STAMP_DESC = TIME_STAMP + " DESC";
+
+		/*
+		 * Utility methods
+		 */
+
+        @SuppressWarnings("UnusedDeclaration")
+        public static int fieldTypeForColumn(String columnName) {
+            return fieldTypeForTableAndColumn(TABLE_NAME, columnName);
+        }
+    }
+
     private static int fieldTypeForTableAndColumn(String tableName, String columnName) {
 
         if(Users.TABLE_NAME.equals(tableName)) {
@@ -421,6 +485,20 @@ public class Contract {
             } else if (Actions.DESCRIPTION.equals(columnName)) {
                 return FIELD_TYPE_STRING;
             } else if (Actions.AGENT_ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else {
+                throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
+            }
+        } else if(Comments.TABLE_NAME.equals(tableName)) {
+            if (Comments._ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Comments.ACTION_ID.equals(columnName)) {
+                return FIELD_TYPE_LONG;
+            } else if (Comments.TIME_STAMP.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Comments.DESCRIPTION.equals(columnName)) {
+                return FIELD_TYPE_STRING;
+            } else if (Comments.COMMENTER_ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
