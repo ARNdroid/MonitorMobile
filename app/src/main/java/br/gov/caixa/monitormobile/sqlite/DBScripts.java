@@ -8,6 +8,7 @@ import br.gov.caixa.monitormobile.provider.actions.ActionsEntity;
 import br.gov.caixa.monitormobile.provider.comments.CommentsEntity;
 import br.gov.caixa.monitormobile.provider.followers.FollowersEntity;
 import br.gov.caixa.monitormobile.provider.subscriptions.SubscriptionsEntity;
+import br.gov.caixa.monitormobile.provider.xs.XsEntity;
 import br.gov.caixa.monitormobile.utils.IssueUtils;
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.issues.IssuesEntity;
@@ -90,6 +91,16 @@ public class DBScripts {
                     + Contract.Followers.ISSUE_ID + "_" + Contract.Followers.FOLLOWER_ID + "_idx "
                     + "ON " + Contract.Followers.TABLE_NAME
                     + " (" + Contract.Followers.ISSUE_ID + ", " + Contract.Followers.FOLLOWER_ID + ");");
+
+            // Xs:
+            db.execSQL("CREATE TABLE " + Contract.Xs.TABLE_NAME + " ("
+                    + Contract.Xs._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Xs.ACTION_ID + " INTEGER NOT NULL, "
+                    + Contract.Xs.LIKER_ID + " INTEGER NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Xs.TABLE_NAME + "_"
+                    + Contract.Xs.ACTION_ID + "_" + Contract.Xs.LIKER_ID + "_idx "
+                    + "ON " + Contract.Xs.TABLE_NAME
+                    + " (" + Contract.Xs.ACTION_ID + ", " + Contract.Xs.LIKER_ID + ");");
 
             db.setTransactionSuccessful();
         } finally {
@@ -228,7 +239,7 @@ public class DBScripts {
             db.endTransaction();
         }
 
-        // Subscriptions:
+        // Followers:
         db.beginTransaction();
         try {
             FollowersEntity followersEntity = new FollowersEntity(null, 1L, 1L);
@@ -240,6 +251,24 @@ public class DBScripts {
             followersEntity = new FollowersEntity(null, 2L, 1L);
             db.insert(Contract.Followers.TABLE_NAME, null,
                     followersEntity.toContentValuesIgnoreNulls());
+            db.setTransactionSuccessful();
+
+        } finally {
+            db.endTransaction();
+        }
+
+        // Xs:
+        db.beginTransaction();
+        try {
+            XsEntity xsEntity = new XsEntity(null, 1L, 1L);
+            db.insert(Contract.Xs.TABLE_NAME, null,
+                    xsEntity.toContentValuesIgnoreNulls());
+            xsEntity = new XsEntity(null, 1L, 2L);
+            db.insert(Contract.Xs.TABLE_NAME, null,
+                    xsEntity.toContentValuesIgnoreNulls());
+            xsEntity = new XsEntity(null, 2L, 1L);
+            db.insert(Contract.Xs.TABLE_NAME, null,
+                    xsEntity.toContentValuesIgnoreNulls());
             db.setTransactionSuccessful();
 
         } finally {

@@ -16,6 +16,7 @@ import br.gov.caixa.monitormobile.provider.issues.IssuesOperator;
 import br.gov.caixa.monitormobile.provider.subscriptions.SubscriptionsOperator;
 import br.gov.caixa.monitormobile.provider.systems.SystemsOperator;
 import br.gov.caixa.monitormobile.provider.users.UsersOperator;
+import br.gov.caixa.monitormobile.provider.xs.XsOperator;
 import br.gov.caixa.monitormobile.sqlite.DBOpenHelper;
 
 public class Provider extends ContentProvider {
@@ -31,6 +32,7 @@ public class Provider extends ContentProvider {
         operators.add(new CommentsOperator());
         operators.add(new SubscriptionsOperator());
         operators.add(new FollowersOperator());
+        operators.add(new XsOperator());
     }
 
     private ProviderOperator providerOperatorForUri(Uri uri) {
