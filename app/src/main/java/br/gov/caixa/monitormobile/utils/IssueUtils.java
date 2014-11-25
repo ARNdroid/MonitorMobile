@@ -7,15 +7,15 @@ public class IssueUtils {
     public static final int STATE_OPEN = 1;
 
 
-    public static final int FLAG_BLUE = 1;
-    public static final int FLAG_YELLOW = 2;
-    public static final int FLAG_RED = 3;
-    public static final int FLAG_BLACK = 4;
+    public static final int FLAG_BLUE = 0;
+    public static final int FLAG_YELLOW = 1;
+    public static final int FLAG_RED = 2;
+    public static final int FLAG_BLACK = 3;
 
-    public static final int CLOCK_BLUE = 1;
-    public static final int CLOCK_YELLOW = 2;
-    public static final int CLOCK_RED = 3;
-    public static final int CLOCK_BLACK = 4;
+    public static final int CLOCK_BLUE = 0;
+    public static final int CLOCK_YELLOW = 1;
+    public static final int CLOCK_RED = 2;
+    public static final int CLOCK_BLACK = 3;
 
     // Utility class.
     protected IssueUtils() {}
