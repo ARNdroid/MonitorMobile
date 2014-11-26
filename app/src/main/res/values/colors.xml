@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="accent_dark">#0033cc</color>
+    <color name="accent_light">#3366cc</color>
+
+    <color name="card_background">#e0eafc</color>
+    <color name="card_foreground">@color/accent_light</color>
+    <color name="card_pressed">#99ccff</color>
+
+    <color name="settings_background">@color/card_background</color>
+
+    <color name="activity_background">#ffffff</color>
+    <color name="item_divider">@color/accent_light</color>
+
+</resources>

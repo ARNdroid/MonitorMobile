@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material.Light">
+
+    <!--
+    Base application theme for API 21+. This theme completely replaces
+    AppBaseTheme from res/values/styles.xml on API 21+ devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Material.Light">
+        <!-- API 21 theme customizations can go here. -->
     </style>
+
 </resources>
