@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="br.gov.caixa.monitormobile" >
+    package="br.com.arndroid.monitormobile" >
 
     <application
-        android:name="br.gov.caixa.monitormobile.app.MonitorMobileApp"
+        android:name="br.com.arndroid.monitormobile.app.MonitorMobileApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <provider
-            android:name="br.gov.caixa.monitormobile.provider.Provider"
-            android:authorities="br.gov.caixa.monitormobile.provider"
+            android:name="br.com.arndroid.monitormobile.provider.Provider"
+            android:authorities="br.com.arndroid.monitormobile.provider"
             android:exported="false" />
 
         <activity
-            android:name="br.gov.caixa.monitormobile.DashboardActivity"
+            android:name="br.com.arndroid.monitormobile.DashboardActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,32 +24,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.gov.caixa.monitormobile.SimulationsActivity"
+            android:name="br.com.arndroid.monitormobile.SimulationsActivity"
             android:label="@string/title_activity_simulations"
-            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity"
+            android:parentActivityName="br.com.arndroid.monitormobile.DashboardActivity"
             tools:ignore="UnusedAttribute" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.gov.caixa.monitormobile.DashboardActivity" />
+                android:value="br.com.arndroid.monitormobile.DashboardActivity" />
         </activity>
         <activity
-            android:name="br.gov.caixa.monitormobile.AboutActivity"
+            android:name="br.com.arndroid.monitormobile.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity"
+            android:parentActivityName="br.com.arndroid.monitormobile.DashboardActivity"
             tools:ignore="UnusedAttribute" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.gov.caixa.monitormobile.DashboardActivity" />
+                android:value="br.com.arndroid.monitormobile.DashboardActivity" />
         </activity>
         <activity
-            android:name="br.gov.caixa.monitormobile.WelcomeActivity"
+            android:name="br.com.arndroid.monitormobile.WelcomeActivity"
             android:label="@string/title_activity_welcome"
             android:windowSoftInputMode="stateHidden"
-            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity"
+            android:parentActivityName="br.com.arndroid.monitormobile.DashboardActivity"
             tools:ignore="UnusedAttribute" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.gov.caixa.monitormobile.DashboardActivity" />
+                android:value="br.com.arndroid.monitormobile.DashboardActivity" />
         </activity>
     </application>
 
