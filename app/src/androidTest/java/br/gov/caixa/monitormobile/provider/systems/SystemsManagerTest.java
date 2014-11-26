@@ -6,8 +6,6 @@ import android.test.ProviderTestCase2;
 
 import br.gov.caixa.monitormobile.provider.Contract;
 import br.gov.caixa.monitormobile.provider.Provider;
-import br.gov.caixa.monitormobile.provider.systems.SystemsEntity;
-import br.gov.caixa.monitormobile.provider.users.UsersEntity;
 
 public class SystemsManagerTest extends ProviderTestCase2<Provider> {
 
@@ -28,8 +26,8 @@ public class SystemsManagerTest extends ProviderTestCase2<Provider> {
     }
 
     public void testRemoveMustDelete() {
-        final String acronymId = "SIXYZ";
-        final String description = "Description for SIXYZ";
+        final String acronymId = "SIABC";
+        final String description = "Description for SIABC";
         final SystemsEntity entity = new SystemsEntity(null, acronymId, description);
         mManager.refresh(entity);
         int totalRecords = -1;
@@ -52,8 +50,8 @@ public class SystemsManagerTest extends ProviderTestCase2<Provider> {
     }
 
     public void testRefreshMustInsertOrUpdate() {
-        final String acronymId = "SIXYZ";
-        final String description = "Description for SIXYZ";
+        final String acronymId = "SIABC";
+        final String description = "Description for SIABC";
 
         int totalRecords = -1;
         Cursor c = null;
@@ -81,8 +79,8 @@ public class SystemsManagerTest extends ProviderTestCase2<Provider> {
     }
 
     public void testEntityDuplicatedAcronymIdMustThrow() {
-        final String acronymId = "SIXYZ";
-        final String description = "Some description for SIXYZ";
+        final String acronymId = "SIABC";
+        final String description = "Some description for SIABC";
 
         SystemsEntity entityInDatabase = new SystemsEntity(null, acronymId, description);
         mManager.refresh(entityInDatabase);
@@ -98,8 +96,8 @@ public class SystemsManagerTest extends ProviderTestCase2<Provider> {
     }
 
     public void testEntityWillCauseConstraintViolationMustReturnsCorrectValue() {
-        final String acronymId = "SIXYZ";
-        final String description = "Some description for SIXYZ";
+        final String acronymId = "SIABC";
+        final String description = "Some description for SIABC";
 
         SystemsEntity entity = new SystemsEntity(null, acronymId, description);
         assertFalse(mManager.entityWillCauseConstraintViolation(entity));

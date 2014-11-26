@@ -2,7 +2,11 @@
 <resources>
 
     <string name="app_name">Claridade Monitor Mobile</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Pessoal, futuramente aqui o nosso dashboard. Para testar as outras funcionalidades acesse o menu.</string>
+    <string name="action_simulations">Simulações</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_simulations">Simulações</string>
     <string name="action_settings">Settings</string>
+    <string name="database_reset">Resetar banco de dados</string>
 
 </resources>

@@ -2,7 +2,9 @@ package br.gov.caixa.monitormobile.sqlite;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import br.gov.caixa.monitormobile.provider.actions.ActionsEntity;
 import br.gov.caixa.monitormobile.provider.comments.CommentsEntity;
@@ -18,6 +20,9 @@ import br.gov.caixa.monitormobile.utils.SubscriptionsUtils;
 import br.gov.caixa.monitormobile.utils.TimeStampUtils;
 
 public class DBScripts {
+
+    // Utility:
+    private DBScripts() {}
 
     public static void scriptV00ToV01(SQLiteDatabase db) {
         // Tables Creation
@@ -107,172 +112,298 @@ public class DBScripts {
             db.endTransaction();
         }
 
-        // Data Population
+        populateDB(db);
+
+
+    }
+
+    public static void populateDB(SQLiteDatabase db) {
 
         // Users:
+        List<UsersEntity> users = new ArrayList<UsersEntity>(8);
+        users.add(new UsersEntity(null, "Alceu Neto"));
+        users.add(new UsersEntity(null, "Bruno Maia"));
+        users.add(new UsersEntity(null, "Eliane Queiroz"));
+        users.add(new UsersEntity(null, "Sergio Medeiros"));
+        users.add(new UsersEntity(null, "Diego Sohstein"));
+        users.add(new UsersEntity(null, "Thiago Tatagiba"));
+        users.add(new UsersEntity(null, "Nubio Revoredo"));
+        users.add(new UsersEntity(null, "Marco Gutierrez"));
         db.beginTransaction();
         try {
-            final UsersEntity usersEntity = new UsersEntity(null, null);
-            usersEntity.setShortName("User 1");
-            db.insert(Contract.Users.TABLE_NAME, null,
-                    usersEntity.toContentValuesIgnoreNulls());
-            usersEntity.setShortName("User 2");
-            db.insert(Contract.Users.TABLE_NAME, null,
-                    usersEntity.toContentValuesIgnoreNulls());
-            usersEntity.setShortName("User 3");
-            db.insert(Contract.Users.TABLE_NAME, null,
-                    usersEntity.toContentValuesIgnoreNulls());
-
+            for (UsersEntity u : users) {
+                final long id = db.insert(Contract.Users.TABLE_NAME, null, u.toContentValuesIgnoreNulls());
+                u.setId(id);
+            }
             db.setTransactionSuccessful();
-
         } finally {
             db.endTransaction();
         }
 
         // Systems:
+        List<SystemsEntity> systems = new ArrayList<SystemsEntity>(6);
+        systems.add(new SystemsEntity(null, "SIXYZ", "Sistema XYZ"));
+        systems.add(new SystemsEntity(null, "SICLI", "Sistema Cliente CAIXA"));
+        systems.add(new SystemsEntity(null, "SICID", "Sistema Cartão do Cidadão"));
+        systems.add(new SystemsEntity(null, "SIBEC", "Sistema de Benefícios Sociais"));
+        systems.add(new SystemsEntity(null, "SICPF", "Sistema CPF"));
+        systems.add(new SystemsEntity(null, "SIISO", "Sistema de Informações Sociais"));
         db.beginTransaction();
         try {
-            final SystemsEntity systemsEntity = new SystemsEntity(null, null, null);
-            systemsEntity.setAcronymId("SI001");
-            systemsEntity.setDescription("Description for SI001");
-            db.insert(Contract.Systems.TABLE_NAME, null,
-                    systemsEntity.toContentValuesIgnoreNulls());
-            systemsEntity.setAcronymId("SI002");
-            systemsEntity.setDescription("Description for SI002");
-            db.insert(Contract.Systems.TABLE_NAME, null,
-                    systemsEntity.toContentValuesIgnoreNulls());
-            systemsEntity.setAcronymId("SI003");
-            systemsEntity.setDescription("Description for SI003");
-            db.insert(Contract.Systems.TABLE_NAME, null,
-                    systemsEntity.toContentValuesIgnoreNulls());
-
+            for (SystemsEntity s : systems) {
+                final long id = db.insert(Contract.Systems.TABLE_NAME, null, s.toContentValuesIgnoreNulls());
+                s.setId(id);
+            }
             db.setTransactionSuccessful();
-
-        } finally {
-            db.endTransaction();
-        }
-
-        // Issues:
-        db.beginTransaction();
-        try {
-            IssuesEntity issuesEntity = new IssuesEntity(null, "SI001", TimeStampUtils.dateToTimeStamp(new Date()),
-                    IssueUtils.STATE_OPEN, IssueUtils.FLAG_BLACK, IssueUtils.CLOCK_BLUE, "Summary SI001",
-                    "Description SI001", 1L, 2L);
-            db.insert(Contract.Issues.TABLE_NAME, null,
-                    issuesEntity.toContentValuesIgnoreNulls());
-            issuesEntity = new IssuesEntity(null, "SI002", "201411231734",
-                    IssueUtils.STATE_OPEN, IssueUtils.FLAG_BLUE, IssueUtils.CLOCK_RED, "Summary SI002",
-                    "Description SI002", 2L, 2L);
-            db.insert(Contract.Issues.TABLE_NAME, null,
-                    issuesEntity.toContentValuesIgnoreNulls());
-            issuesEntity = new IssuesEntity(null, "SI003", "20141124734",
-                    IssueUtils.STATE_OPEN, IssueUtils.FLAG_RED, IssueUtils.CLOCK_YELLOW, "Summary SI003",
-                    "Description SI003", 3L, 2L);
-            db.insert(Contract.Issues.TABLE_NAME, null,
-                    issuesEntity.toContentValuesIgnoreNulls());
-            db.setTransactionSuccessful();
-
-        } finally {
-            db.endTransaction();
-        }
-
-        // Actions:
-        db.beginTransaction();
-        try {
-            ActionsEntity actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Summary action 001", "Description action 001", 1L);
-            db.insert(Contract.Actions.TABLE_NAME, null,
-                    actionsEntity.toContentValuesIgnoreNulls());
-            actionsEntity = new ActionsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Summary action 002", "Description action 002", 2L);
-            db.insert(Contract.Actions.TABLE_NAME, null,
-                    actionsEntity.toContentValuesIgnoreNulls());
-            actionsEntity = new ActionsEntity(null, 2L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Summary action 003", "Description action 003", 3L);
-            db.insert(Contract.Actions.TABLE_NAME, null,
-                    actionsEntity.toContentValuesIgnoreNulls());
-            db.setTransactionSuccessful();
-
-        } finally {
-            db.endTransaction();
-        }
-
-        // Comments:
-        db.beginTransaction();
-        try {
-            CommentsEntity commentsEntity = new CommentsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Description comment 001", 1L);
-            db.insert(Contract.Comments.TABLE_NAME, null,
-                    commentsEntity.toContentValuesIgnoreNulls());
-            commentsEntity = new CommentsEntity(null, 1L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Description comment 002", 2L);
-            db.insert(Contract.Comments.TABLE_NAME, null,
-                    commentsEntity.toContentValuesIgnoreNulls());
-            commentsEntity = new CommentsEntity(null, 2L, TimeStampUtils.dateToTimeStamp(new Date()),
-                    "Description comment 003", 3L);
-            db.insert(Contract.Comments.TABLE_NAME, null,
-                    commentsEntity.toContentValuesIgnoreNulls());
-            db.setTransactionSuccessful();
-
         } finally {
             db.endTransaction();
         }
 
         // Subscriptions:
+        List<SubscriptionsEntity> subscriptions = new ArrayList<SubscriptionsEntity>(13);
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(0).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(1).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(2).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(3).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(4).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(5).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(2).getAcronymId(), users.get(1).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(3).getAcronymId(), users.get(2).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(4).getAcronymId(), users.get(3).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(5).getAcronymId(), users.get(4).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(0).getAcronymId(), users.get(5).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(1).getAcronymId(), users.get(6).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(2).getAcronymId(), users.get(7).getId()));
         db.beginTransaction();
         try {
-            SubscriptionsEntity subscriptionsEntity = new SubscriptionsEntity(null,
-                    SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, "SI001", 1L);
-            db.insert(Contract.Subscriptions.TABLE_NAME, null,
-                    subscriptionsEntity.toContentValuesIgnoreNulls());
-            subscriptionsEntity = new SubscriptionsEntity(null,
-                    SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, "SI001", 2L);
-            db.insert(Contract.Subscriptions.TABLE_NAME, null,
-                    subscriptionsEntity.toContentValuesIgnoreNulls());
-            subscriptionsEntity = new SubscriptionsEntity(null,
-                    SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, "SI002", 1L);
-            db.insert(Contract.Subscriptions.TABLE_NAME, null,
-                    subscriptionsEntity.toContentValuesIgnoreNulls());
+            for (SubscriptionsEntity s : subscriptions) {
+                final long id = db.insert(Contract.Subscriptions.TABLE_NAME, null, s.toContentValuesIgnoreNulls());
+                s.setId(id);
+            }
             db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
 
+        // Issues:
+        List<IssuesEntity> issues = new ArrayList<IssuesEntity>(30);
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_BLUE,   "Incidente 1 do sistema XYZ",       "Descrição detalhada do incidente 1 do sistema XYZ.",        users.get(0).getId(), users.get(7).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_YELLOW, "Incidente 2 do sistema XYZ",       "Descrição detalhada do incidente 2 do sistema XYZ.",        users.get(1).getId(), users.get(6).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_RED,    "Incidente 3 do sistema XYZ",       "Descrição detalhada do incidente 3 do sistema XYZ.",        users.get(2).getId(), users.get(5).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_BLACK,  "Incidente 4 do sistema XYZ",       "Descrição detalhada do incidente 4 do sistema XYZ.",        users.get(3).getId(), users.get(4).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_BLUE,   "Incidente 5 do sistema XYZ",       "Descrição detalhada do incidente 5 do sistema XYZ.",        users.get(4).getId(), users.get(3).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_YELLOW, "Incidente 6 do sistema XYZ",       "Descrição detalhada do incidente 6 do sistema XYZ.",        users.get(5).getId(), users.get(2).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_RED,    "Incidente 7 do sistema XYZ",       "Descrição detalhada do incidente 7 do sistema XYZ.",        users.get(6).getId(), users.get(1).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_BLACK,  "Incidente 8 do sistema XYZ",       "Descrição detalhada do incidente 8 do sistema XYZ.",        users.get(7).getId(), users.get(0).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_RED,    IssueUtils.CLOCK_BLUE,   "Incidente 9 do sistema XYZ",       "Descrição detalhada do incidente 9 do sistema XYZ.",        users.get(0).getId(), users.get(7).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_RED,    IssueUtils.CLOCK_YELLOW, "Incidente 10 do sistema XYZ",      "Descrição detalhada do incidente 10 do sistema XYZ.",       users.get(1).getId(), users.get(6).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_RED,    IssueUtils.CLOCK_RED,    "Incidente 11 do sistema XYZ",      "Descrição detalhada do incidente 11 do sistema XYZ.",       users.get(2).getId(), users.get(5).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_RED,    IssueUtils.CLOCK_BLACK,  "Incidente 12 do sistema XYZ",      "Descrição detalhada do incidente 12 do sistema XYZ.",       users.get(3).getId(), users.get(4).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLACK,  IssueUtils.CLOCK_BLUE,   "Incidente 13 do sistema XYZ",      "Descrição detalhada do incidente 13 do sistema XYZ.",       users.get(4).getId(), users.get(3).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLACK,  IssueUtils.CLOCK_YELLOW, "Incidente 14 do sistema XYZ",      "Descrição detalhada do incidente 14 do sistema XYZ.",       users.get(5).getId(), users.get(2).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLACK,  IssueUtils.CLOCK_RED,    "Incidente 15 do sistema XYZ",      "Descrição detalhada do incidente 15 do sistema XYZ.",       users.get(6).getId(), users.get(1).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLACK,  IssueUtils.CLOCK_BLACK,  "Incidente 16 do sistema XYZ",      "Descrição detalhada do incidente 16 do sistema XYZ.",       users.get(7).getId(), users.get(0).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_BLACK,  "Incidente 17 do sistema XYZ",      "Descrição detalhada do incidente 17 do sistema XYZ.",       users.get(0).getId(), users.get(7).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_RED,    "Incidente 18 do sistema XYZ",      "Descrição detalhada do incidente 18 do sistema XYZ.",       users.get(1).getId(), users.get(6).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_RED,    IssueUtils.CLOCK_YELLOW, "Incidente 19 do sistema XYZ",      "Descrição detalhada do incidente 19 do sistema XYZ.",       users.get(2).getId(), users.get(5).getId()));
+        issues.add(new IssuesEntity(null, systems.get(0).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_BLACK,  IssueUtils.CLOCK_BLUE,   "Incidente 20 do sistema XYZ",      "Descrição detalhada do incidente 20 do sistema XYZ.",       users.get(3).getId(), users.get(4).getId()));
+        issues.add(new IssuesEntity(null, systems.get(1).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_BLACK,  "Um incidente do sistema SICLI",    "Descrição detalhada de um incidente  do sistema SICLI.",    users.get(4).getId(), users.get(5).getId()));
+        issues.add(new IssuesEntity(null, systems.get(1).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_RED,    "Outro incidente do sistema SICLI", "Descrição detalhada do outro incidente  do sistema SICLI.", users.get(5).getId(), users.get(6).getId()));
+        issues.add(new IssuesEntity(null, systems.get(2).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_RED,    IssueUtils.CLOCK_YELLOW, "Um incidente do sistema SICID",    "Descrição detalhada de um incidente  do sistema SICID.",    users.get(6).getId(), users.get(7).getId()));
+        issues.add(new IssuesEntity(null, systems.get(2).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLACK,  IssueUtils.CLOCK_BLUE,   "Outro incidente do sistema SICID", "Descrição detalhada do outro incidente  do sistema SICID.", users.get(7).getId(), users.get(0).getId()));
+        issues.add(new IssuesEntity(null, systems.get(3).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_RED,    "Um incidente do sistema SIBEC",    "Descrição detalhada de um incidente  do sistema SIBEC.",    users.get(0).getId(), users.get(1).getId()));
+        issues.add(new IssuesEntity(null, systems.get(3).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_BLACK,  "Outro incidente do sistema SIBEC", "Descrição detalhada do outro incidente  do sistema SIBEC.", users.get(1).getId(), users.get(2).getId()));
+        issues.add(new IssuesEntity(null, systems.get(4).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_RED,    IssueUtils.CLOCK_BLUE,   "Um incidente do sistema SICPF",    "Descrição detalhada de um incidente  do sistema SICPF.",    users.get(2).getId(), users.get(3).getId()));
+        issues.add(new IssuesEntity(null, systems.get(4).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_BLACK,  IssueUtils.CLOCK_YELLOW, "Outro incidente do sistema SICPF", "Descrição detalhada do outro incidente  do sistema SICPF.", users.get(3).getId(), users.get(4).getId()));
+        issues.add(new IssuesEntity(null, systems.get(5).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_CLOSED, IssueUtils.FLAG_BLUE,   IssueUtils.CLOCK_YELLOW, "Um incidente do sistema SIISO",    "Descrição detalhada de um incidente  do sistema SIISO.",    users.get(4).getId(), users.get(5).getId()));
+        issues.add(new IssuesEntity(null, systems.get(5).getAcronymId(), TimeStampUtils.dateToTimeStamp(new Date()), IssueUtils.STATE_OPEN,   IssueUtils.FLAG_YELLOW, IssueUtils.CLOCK_BLUE,   "Outro incidente do sistema SIISO", "Descrição detalhada do outro incidente  do sistema SIISO.", users.get(5).getId(), users.get(6).getId()));
+        db.beginTransaction();
+        try {
+            for (IssuesEntity i : issues) {
+                final long id = db.insert(Contract.Issues.TABLE_NAME, null, i.toContentValuesIgnoreNulls());
+                i.setId(id);
+            }
+            db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
 
         // Followers:
+        List<FollowersEntity> followers = new ArrayList<FollowersEntity>(50);
+        followers.add(new FollowersEntity(null, issues.get(0).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(1).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(2).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(3).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(4).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(5).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(6).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(7).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(8).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(9).getId(),  users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(10).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(11).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(12).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(13).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(14).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(15).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(16).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(17).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(18).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(19).getId(), users.get(0).getId()));
+        followers.add(new FollowersEntity(null, issues.get(20).getId(), users.get(1).getId()));
+        followers.add(new FollowersEntity(null, issues.get(21).getId(), users.get(2).getId()));
+        followers.add(new FollowersEntity(null, issues.get(22).getId(), users.get(3).getId()));
+        followers.add(new FollowersEntity(null, issues.get(23).getId(), users.get(4).getId()));
+        followers.add(new FollowersEntity(null, issues.get(24).getId(), users.get(5).getId()));
+        followers.add(new FollowersEntity(null, issues.get(25).getId(), users.get(6).getId()));
+        followers.add(new FollowersEntity(null, issues.get(26).getId(), users.get(7).getId()));
+        followers.add(new FollowersEntity(null, issues.get(27).getId(), users.get(1).getId()));
+        followers.add(new FollowersEntity(null, issues.get(28).getId(), users.get(2).getId()));
+        followers.add(new FollowersEntity(null, issues.get(29).getId(), users.get(3).getId()));
+        followers.add(new FollowersEntity(null, issues.get(0).getId(),  users.get(4).getId()));
+        followers.add(new FollowersEntity(null, issues.get(1).getId(),  users.get(1).getId()));
+        followers.add(new FollowersEntity(null, issues.get(2).getId(),  users.get(2).getId()));
+        followers.add(new FollowersEntity(null, issues.get(3).getId(),  users.get(3).getId()));
+        followers.add(new FollowersEntity(null, issues.get(4).getId(),  users.get(4).getId()));
+        followers.add(new FollowersEntity(null, issues.get(5).getId(),  users.get(5).getId()));
+        followers.add(new FollowersEntity(null, issues.get(6).getId(),  users.get(6).getId()));
+        followers.add(new FollowersEntity(null, issues.get(7).getId(),  users.get(7).getId()));
+        followers.add(new FollowersEntity(null, issues.get(8).getId(),  users.get(1).getId()));
+        followers.add(new FollowersEntity(null, issues.get(9).getId(),  users.get(1).getId()));
+        followers.add(new FollowersEntity(null, issues.get(0).getId(),  users.get(1).getId()));
+        followers.add(new FollowersEntity(null, issues.get(1).getId(),  users.get(2).getId()));
+        followers.add(new FollowersEntity(null, issues.get(2).getId(),  users.get(3).getId()));
+        followers.add(new FollowersEntity(null, issues.get(3).getId(),  users.get(4).getId()));
+        followers.add(new FollowersEntity(null, issues.get(4).getId(),  users.get(5).getId()));
+        followers.add(new FollowersEntity(null, issues.get(5).getId(),  users.get(6).getId()));
+        followers.add(new FollowersEntity(null, issues.get(6).getId(),  users.get(7).getId()));
+        followers.add(new FollowersEntity(null, issues.get(7).getId(),  users.get(1).getId()));
+        followers.add(new FollowersEntity(null, issues.get(8).getId(),  users.get(2).getId()));
+        followers.add(new FollowersEntity(null, issues.get(9).getId(),  users.get(3).getId()));
         db.beginTransaction();
         try {
-            FollowersEntity followersEntity = new FollowersEntity(null, 1L, 1L);
-            db.insert(Contract.Followers.TABLE_NAME, null,
-                    followersEntity.toContentValuesIgnoreNulls());
-            followersEntity = new FollowersEntity(null, 1L, 2L);
-            db.insert(Contract.Followers.TABLE_NAME, null,
-                    followersEntity.toContentValuesIgnoreNulls());
-            followersEntity = new FollowersEntity(null, 2L, 1L);
-            db.insert(Contract.Followers.TABLE_NAME, null,
-                    followersEntity.toContentValuesIgnoreNulls());
+            for (FollowersEntity f : followers) {
+                final long id = db.insert(Contract.Followers.TABLE_NAME, null, f.toContentValuesIgnoreNulls());
+                f.setId(id);
+            }
             db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
 
+        // Actions:
+        List<ActionsEntity> actions = new ArrayList<ActionsEntity>(39);
+        actions.add(new ActionsEntity(null, issues.get(0).getId(),  issues.get(0).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(0).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(1).getId(),  issues.get(1).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(1).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(2).getId(),  issues.get(2).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(2).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(3).getId(),  issues.get(3).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(3).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(4).getId(),  issues.get(4).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(4).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(5).getId(),  issues.get(5).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(5).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(6).getId(),  issues.get(6).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(6).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(7).getId(),  issues.get(7).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(7).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(8).getId(),  issues.get(8).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(8).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(9).getId(),  issues.get(9).getTimeStamp(),  "Abertura",   "Abertura do incidente",                                                        issues.get(9).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(10).getId(), issues.get(10).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(10).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(11).getId(), issues.get(11).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(11).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(12).getId(), issues.get(12).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(12).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(13).getId(), issues.get(13).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(13).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(14).getId(), issues.get(14).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(14).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(15).getId(), issues.get(15).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(15).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(16).getId(), issues.get(16).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(16).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(17).getId(), issues.get(17).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(17).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(18).getId(), issues.get(18).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(18).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(19).getId(), issues.get(19).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(19).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(20).getId(), issues.get(20).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(20).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(21).getId(), issues.get(21).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(21).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(22).getId(), issues.get(22).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(22).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(23).getId(), issues.get(23).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(23).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(24).getId(), issues.get(24).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(24).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(25).getId(), issues.get(25).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(25).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(26).getId(), issues.get(26).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(26).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(27).getId(), issues.get(27).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(27).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(28).getId(), issues.get(28).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(28).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(29).getId(), issues.get(29).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(29).getReporterId()));
+        actions.add(new ActionsEntity(null, issues.get(16).getId(), issues.get(16).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(0).getId()));
+        actions.add(new ActionsEntity(null, issues.get(17).getId(), issues.get(17).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(1).getId()));
+        actions.add(new ActionsEntity(null, issues.get(18).getId(), issues.get(18).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(2).getId()));
+        actions.add(new ActionsEntity(null, issues.get(19).getId(), issues.get(19).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(3).getId()));
+        actions.add(new ActionsEntity(null, issues.get(20).getId(), issues.get(20).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(4).getId()));
+        actions.add(new ActionsEntity(null, issues.get(22).getId(), issues.get(22).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(5).getId()));
+        actions.add(new ActionsEntity(null, issues.get(24).getId(), issues.get(24).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(6).getId()));
+        actions.add(new ActionsEntity(null, issues.get(26).getId(), issues.get(26).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(7).getId()));
+        actions.add(new ActionsEntity(null, issues.get(28).getId(), issues.get(28).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(0).getId()));
+        db.beginTransaction();
+        try {
+            for (ActionsEntity a : actions) {
+                final long id = db.insert(Contract.Actions.TABLE_NAME, null, a.toContentValuesIgnoreNulls());
+                a.setId(id);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        // Comments:
+        List<CommentsEntity> comments = new ArrayList<CommentsEntity>(7);
+        comments.add(new CommentsEntity(null, actions.get(31).getId(), actions.get(31).getTimeStamp(), "Um exemplo de comentário...", users.get(0).getId()));
+        comments.add(new CommentsEntity(null, actions.get(32).getId(), actions.get(32).getTimeStamp(), "Um exemplo de comentário...", users.get(0).getId()));
+        comments.add(new CommentsEntity(null, actions.get(33).getId(), actions.get(33).getTimeStamp(), "Um exemplo de comentário...", users.get(0).getId()));
+        comments.add(new CommentsEntity(null, actions.get(34).getId(), actions.get(34).getTimeStamp(), "Um exemplo de comentário...", users.get(0).getId()));
+        comments.add(new CommentsEntity(null, actions.get(35).getId(), actions.get(35).getTimeStamp(), "Um exemplo de comentário...", users.get(0).getId()));
+        comments.add(new CommentsEntity(null, actions.get(36).getId(), actions.get(36).getTimeStamp(), "Um exemplo de comentário...", users.get(0).getId()));
+        comments.add(new CommentsEntity(null, actions.get(37).getId(), actions.get(37).getTimeStamp(), "Um exemplo de comentário...", users.get(0).getId()));
+        db.beginTransaction();
+        try {
+            for (CommentsEntity c : comments) {
+                final long id = db.insert(Contract.Comments.TABLE_NAME, null, c.toContentValuesIgnoreNulls());
+                c.setId(id);
+            }
+            db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
 
         // Xs:
+        List<XsEntity> xs = new ArrayList<XsEntity>(4);
+        xs.add(new XsEntity(null, actions.get(31).getId(), users.get(0).getId()));
+        xs.add(new XsEntity(null, actions.get(32).getId(), users.get(0).getId()));
+        xs.add(new XsEntity(null, actions.get(33).getId(), users.get(0).getId()));
+        xs.add(new XsEntity(null, actions.get(34).getId(), users.get(0).getId()));
         db.beginTransaction();
         try {
-            XsEntity xsEntity = new XsEntity(null, 1L, 1L);
-            db.insert(Contract.Xs.TABLE_NAME, null,
-                    xsEntity.toContentValuesIgnoreNulls());
-            xsEntity = new XsEntity(null, 1L, 2L);
-            db.insert(Contract.Xs.TABLE_NAME, null,
-                    xsEntity.toContentValuesIgnoreNulls());
-            xsEntity = new XsEntity(null, 2L, 1L);
-            db.insert(Contract.Xs.TABLE_NAME, null,
-                    xsEntity.toContentValuesIgnoreNulls());
+            for (XsEntity x : xs) {
+                final long id = db.insert(Contract.Xs.TABLE_NAME, null, x.toContentValuesIgnoreNulls());
+                x.setId(id);
+            }
             db.setTransactionSuccessful();
-
         } finally {
             db.endTransaction();
         }
+    }
+
+    public static void cleanDB(SQLiteDatabase db) {
+        // Xs:
+        db.delete(Contract.Xs.TABLE_NAME, null, null);
+
+        // Comments:
+        db.delete(Contract.Comments.TABLE_NAME, null, null);
+
+        // Actions:
+        db.delete(Contract.Actions.TABLE_NAME, null, null);
+
+        // Followers:
+        db.delete(Contract.Followers.TABLE_NAME, null, null);
+
+        // Issues:
+        db.delete(Contract.Issues.TABLE_NAME, null, null);
+
+        // Subscriptions:
+        db.delete(Contract.Subscriptions.TABLE_NAME, null, null);
+
+        // Systems:
+        db.delete(Contract.Systems.TABLE_NAME, null, null);
+
+        // Users:
+        db.delete(Contract.Users.TABLE_NAME, null, null);
     }
 }

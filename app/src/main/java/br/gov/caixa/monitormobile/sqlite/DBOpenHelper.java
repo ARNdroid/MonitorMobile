@@ -52,4 +52,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 throw new SQLiteException(errorMessage);
         }
     }
+
+    public static void resetDB(Context context) {
+        DBOpenHelper helper = new DBOpenHelper(context);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        LOG.trace("About to clean all database");
+        DBScripts.cleanDB(db);
+        LOG.trace("About to populate database again");
+        DBScripts.populateDB(db);
+        db.close();
+    }
 }

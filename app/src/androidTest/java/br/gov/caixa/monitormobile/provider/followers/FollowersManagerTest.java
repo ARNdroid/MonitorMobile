@@ -25,7 +25,7 @@ public class FollowersManagerTest extends ProviderTestCase2<Provider> {
     }
 
     public void testRemoveMustDelete() {
-        final FollowersEntity entity = new FollowersEntity(null, 7L, 7L);
+        final FollowersEntity entity = new FollowersEntity(null, 9999L, 9999L);
         mManager.refresh(entity);
         int totalRecords = -1;
         Cursor c = null;
@@ -56,7 +56,7 @@ public class FollowersManagerTest extends ProviderTestCase2<Provider> {
             if (c != null) c.close();
         }
 
-        final FollowersEntity entity = new FollowersEntity(null, 7L, 7L);
+        final FollowersEntity entity = new FollowersEntity(null, 9999L, 9999L);
         mManager.refresh(entity);
 
         try {

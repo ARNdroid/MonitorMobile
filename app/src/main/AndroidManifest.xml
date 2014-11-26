@@ -3,27 +3,32 @@
     package="br.gov.caixa.monitormobile" >
 
     <application
-        android:name=".app.MonitorMobileApp"
+        android:name="br.gov.caixa.monitormobile.app.MonitorMobileApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <provider
+            android:name="br.gov.caixa.monitormobile.provider.Provider"
+            android:authorities="br.gov.caixa.monitormobile.provider"
+            android:exported="false" />
 
         <activity
-            android:name="br.gov.caixa.monitormobile.TimeLine"
-            android:label="@string/app_name" >
+            android:name="br.gov.caixa.monitormobile.DashboardActivity"
+            android:label="@string/title_activity_dashboard" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name=".provider.Provider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false" />
-
+        <activity
+            android:name="br.gov.caixa.monitormobile.SimulationsActivity"
+            android:label="@string/title_activity_simulations"
+            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.gov.caixa.monitormobile.DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>
