@@ -44,7 +44,9 @@
         <activity
             android:name="br.gov.caixa.monitormobile.WelcomeActivity"
             android:label="@string/title_activity_welcome"
-            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity" >
+            android:windowSoftInputMode="stateHidden"
+            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity"
+            tools:ignore="UnusedAttribute" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.gov.caixa.monitormobile.DashboardActivity" />

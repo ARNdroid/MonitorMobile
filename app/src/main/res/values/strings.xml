@@ -14,5 +14,6 @@
     <string name="action_about">Sobre</string>
     <string name="title_activity_welcome">Bem Vindo!</string>
     <string name="register">REGISTRAR</string>
+    <string name="user_reset">RESETAR USUÁRIO ATUAL</string>
 
 </resources>

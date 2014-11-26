@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import br.gov.caixa.monitormobile.utils.PreferencesUtils;
+
 public class DashboardActivity extends Activity {
+
+    private String mUserShortName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +18,17 @@ public class DashboardActivity extends Activity {
         setContentView(R.layout.activity_dashboard);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!PreferencesUtils.isUserRegistered(this)) {
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+        } else {
+            mUserShortName = PreferencesUtils.getUserShortName(this);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

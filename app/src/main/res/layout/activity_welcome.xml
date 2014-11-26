@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_view_padding">
 
-        <ImageView
+    <ImageView
             android:paddingBottom="@dimen/doubled_view_padding"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edtName"
+            android:id="@+id/edtUserShortName"
             android:layout_gravity="start|center_vertical"
             android:inputType="text"
             android:hint="Seu nome aqui"/>
@@ -60,6 +60,11 @@
             android:layout_height="wrap_content"
             android:text="@string/register"
             android:onClick="dbRegister"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_view_padding"/>
 
     </LinearLayout>
 

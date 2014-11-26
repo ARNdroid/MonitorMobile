@@ -19,6 +19,18 @@
             android:text="@string/database_reset"
             android:onClick="dbReset"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_view_padding"/>
+
+        <Button
+            style="@style/CardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_reset"
+            android:onClick="userReset"/>
+
     </LinearLayout>
 
 </ScrollView>

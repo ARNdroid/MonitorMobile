@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import br.gov.caixa.monitormobile.sqlite.DBOpenHelper;
+import br.gov.caixa.monitormobile.utils.PreferencesUtils;
 
 public class SimulationsActivity extends Activity {
 
@@ -38,5 +39,10 @@ public class SimulationsActivity extends Activity {
     public void dbReset(View view) {
         DBOpenHelper.resetDB(this);
         Toast.makeText(this, "Database reset realizado com sucesso.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void userReset(View view) {
+        PreferencesUtils.setUserShortName(this, null);
+        Toast.makeText(this, "Usuário reset realizado com sucesso.", Toast.LENGTH_SHORT).show();
     }
 }
