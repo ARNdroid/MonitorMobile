@@ -161,19 +161,19 @@ public class DBScripts {
 
         // Subscriptions:
         List<SubscriptionsEntity> subscriptions = new ArrayList<SubscriptionsEntity>(13);
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(0).getAcronymId(), users.get(0).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(1).getAcronymId(), users.get(0).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(2).getAcronymId(), users.get(0).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(3).getAcronymId(), users.get(0).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(4).getAcronymId(), users.get(0).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(5).getAcronymId(), users.get(0).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(2).getAcronymId(), users.get(1).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(3).getAcronymId(), users.get(2).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(4).getAcronymId(), users.get(3).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(5).getAcronymId(), users.get(4).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(0).getAcronymId(), users.get(5).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(1).getAcronymId(), users.get(6).getId()));
-        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE, systems.get(2).getAcronymId(), users.get(7).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE_AND_FOLLOW, systems.get(0).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(1).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(2).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(3).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(4).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(5).getAcronymId(), users.get(0).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(2).getAcronymId(), users.get(1).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(3).getAcronymId(), users.get(2).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(4).getAcronymId(), users.get(3).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(5).getAcronymId(), users.get(4).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(0).getAcronymId(), users.get(5).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(1).getAcronymId(), users.get(6).getId()));
+        subscriptions.add(new SubscriptionsEntity(null, SubscriptionsUtils.MODE_TYPE_SUBSCRIBE,            systems.get(2).getAcronymId(), users.get(7).getId()));
         db.beginTransaction();
         try {
             for (SubscriptionsEntity s : subscriptions) {
