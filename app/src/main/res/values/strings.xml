@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Claridade</string>
-    <string name="hello_world">Pessoal, futuramente aqui o nosso dashboard. Para testar as outras funcionalidades acesse o menu.</string>
+    <string name="hello_world">Que bom que você está com a gente! Futuramente aqui o nosso dashboard. Para testar as outras funcionalidades acesse o menu.</string>
     <string name="action_simulations">Simulações</string>
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="title_activity_simulations">Simulações</string>

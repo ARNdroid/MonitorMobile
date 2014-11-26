@@ -5,17 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import br.com.arndroid.monitormobile.utils.PreferencesUtils;
 
 public class DashboardActivity extends Activity {
 
     private String mUserShortName;
+    private TextView mTxtUserShortName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        bindScreen();
     }
 
 
@@ -27,7 +30,12 @@ public class DashboardActivity extends Activity {
             startActivity(intent);
         } else {
             mUserShortName = PreferencesUtils.getUserShortName(this);
+            refreshScreen();
         }
+    }
+
+    private void refreshScreen() {
+        mTxtUserShortName.setText(mUserShortName + ",");
     }
 
     @Override
@@ -57,5 +65,9 @@ public class DashboardActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void bindScreen() {
+        mTxtUserShortName = (TextView) findViewById(R.id.txtUserShortName);
     }
 }
