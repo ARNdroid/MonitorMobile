@@ -63,7 +63,6 @@
     <style name="CardFont.Header">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/accent_dark</item>
-        <item name="android:paddingLeft">4dp</item>
     </style>
 
     <style name="CardFont.Header.Dialog">

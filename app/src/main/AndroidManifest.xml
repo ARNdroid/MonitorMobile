@@ -18,12 +18,21 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="br.gov.caixa.monitormobile.SimulationsActivity"
             android:label="@string/title_activity_simulations"
+            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.gov.caixa.monitormobile.DashboardActivity" />
+        </activity>
+        <activity
+            android:name="br.gov.caixa.monitormobile.AboutActivity"
+            android:label="@string/title_activity_about"
             android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
