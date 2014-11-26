@@ -1,0 +1,66 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="br.gov.caixa.monitormobile.WelcomeActivity">
+
+    <LinearLayout
+        style="@style/Card"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_view_padding">
+
+        <ImageView
+            android:paddingBottom="@dimen/doubled_view_padding"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/caixa_lab_logo"
+            android:contentDescription="CAIXA Lab logo" />
+
+        <TextView
+            style="@style/CardFont.Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Obrigado por utilizar o Claridade Monitor Mobile!" />
+
+        <TextView
+            style="@style/CardFont.Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/doubled_view_padding"
+            android:text="Este é um protótipo para apresentação na feira do CAIXA Lab." />
+
+        <TextView
+            style="@style/CardFont.Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/doubled_view_padding"
+            android:paddingBottom="@dimen/doubled_view_padding"
+            android:text="Tudo o que precisamos para iniciar a demonstração é o nome pelo qual você gostaria de ser conhecido na rede social dos sistemas da CAIXA:" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtName"
+            android:layout_gravity="start|center_vertical"
+            android:inputType="text"
+            android:hint="Seu nome aqui"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_view_padding"/>
+        <Button
+            style="@style/CardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:onClick="dbRegister"/>
+
+    </LinearLayout>
+
+</ScrollView>

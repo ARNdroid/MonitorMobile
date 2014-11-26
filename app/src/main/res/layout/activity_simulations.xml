@@ -1,18 +1,24 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Card"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_view_padding"
     tools:context="br.gov.caixa.monitormobile.SimulationsActivity">
 
-    <Button
-        style="@style/CardButton"
+    <LinearLayout
+        style="@style/Card"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/database_reset"
-        android:onClick="dbReset"/>
+        android:layout_margin="@dimen/default_view_padding">
 
-</LinearLayout>
+        <Button
+            style="@style/CardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/database_reset"
+            android:onClick="dbReset"/>
+
+    </LinearLayout>
+
+</ScrollView>

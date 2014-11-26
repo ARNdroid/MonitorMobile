@@ -1,70 +1,77 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Card"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_view_padding"
     tools:context="br.gov.caixa.monitormobile.AboutActivity">
 
-    <TextView
-        style="@style/CardFont.Header"
-        android:text="@string/header_current_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <View
-        style="@style/HeaderDivider" />
-
-    <TextView
-        style="@style/CardFont.Item"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        style="@style/Card"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_view_padding"
-        android:text="0.1.0 em 26/11/2014" />
+        android:layout_margin="@dimen/default_view_padding">
 
-    <TextView
-        style="@style/CardFont.Header"
-        android:text="@string/header_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="24dp"/>
-    <View
-        style="@style/HeaderDivider" />
+        <TextView
+            style="@style/CardFont.Header"
+            android:text="@string/header_current_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            style="@style/HeaderDivider" />
 
-    <TextView
-        style="@style/CardFont.Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_view_padding"
-        android:text="0.0.5 em 25/11/14" />
+        <TextView
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="0.1.0 em 26/11/2014" />
 
-    <TextView
-        style="@style/CardFont.Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_view_padding"
-        android:text="0.0.4 em 23/11/14" />
+        <TextView
+            style="@style/CardFont.Header"
+            android:text="@string/header_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="24dp"/>
 
-    <TextView
-        style="@style/CardFont.Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_view_padding"
-        android:text="0.0.3 em 22/11/14" />
+        <View
+            style="@style/HeaderDivider" />
 
-    <TextView
-        style="@style/CardFont.Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_view_padding"
-        android:text="0.0.2 em 21/11/14" />
+        <TextView
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="0.0.5 em 25/11/14" />
 
-    <TextView
-        style="@style/CardFont.Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/default_view_padding"
-        android:text="0.0.1 em 20/11/14" />
+        <TextView
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="0.0.4 em 23/11/14" />
 
-</LinearLayout>
+        <TextView
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="0.0.3 em 22/11/14" />
+
+        <TextView
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="0.0.2 em 21/11/14" />
+
+        <TextView
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="0.0.1 em 20/11/14" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -12,5 +12,7 @@
     <string name="header_current_version">VERSÃO ATUAL</string>
     <string name="header_history">HISTÓRICO</string>
     <string name="action_about">Sobre</string>
+    <string name="title_activity_welcome">Bem Vindo!</string>
+    <string name="register">REGISTRAR</string>
 
 </resources>
