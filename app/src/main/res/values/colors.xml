@@ -5,7 +5,7 @@
     <color name="accent_light">#3366cc</color>
 
     <color name="card_background">#e0eafc</color>
-    <color name="card_foreground">@color/accent_light</color>
+    <color name="card_foreground">@color/accent_dark</color>
     <color name="card_pressed">#99ccff</color>
 
     <color name="settings_background">@color/card_background</color>
