@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="br.gov.caixa.monitormobile" >
 
     <application
@@ -25,7 +27,8 @@
         <activity
             android:name="br.gov.caixa.monitormobile.SimulationsActivity"
             android:label="@string/title_activity_simulations"
-            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity" >
+            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity"
+            tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.gov.caixa.monitormobile.DashboardActivity" />
@@ -33,7 +36,8 @@
         <activity
             android:name="br.gov.caixa.monitormobile.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity" >
+            android:parentActivityName="br.gov.caixa.monitormobile.DashboardActivity"
+            tools:ignore="UnusedAttribute" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.gov.caixa.monitormobile.DashboardActivity" />
