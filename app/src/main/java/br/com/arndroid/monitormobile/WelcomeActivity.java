@@ -25,7 +25,7 @@ public class WelcomeActivity extends Activity {
 
     public void dbRegister(View view) {
         if (!TextUtils.isEmpty(mEdtUserShortName.getText())) {
-            final UsersEntity user = new UsersEntity(null, mEdtUserShortName.getText().toString());
+            final UsersEntity user = new UsersEntity(null, mEdtUserShortName.getText().toString().trim());
             final UsersManager manager = new UsersManager(this);
             if (manager.entityWillCauseConstraintViolation(user)) {
                 new AlertDialog.Builder(this)
