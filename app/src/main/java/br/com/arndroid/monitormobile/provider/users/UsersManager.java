@@ -74,4 +74,8 @@ public class UsersManager {
         }
         return false;
     }
+
+    public void insertCurrentUserAndRelationships(UsersEntity currentUser) {
+        refresh(currentUser);
+    }
 }

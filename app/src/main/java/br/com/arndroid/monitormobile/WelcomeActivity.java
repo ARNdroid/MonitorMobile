@@ -35,8 +35,8 @@ public class WelcomeActivity extends Activity {
                         .create()
                         .show();
             } else {
-                manager.refresh(user);
-                PreferencesUtils.setUserShortName(this, user.getShortName());
+                PreferencesUtils.setCurrentUserShortName(this, user.getShortName());
+                manager.insertCurrentUserAndRelationships(user);
                 NavUtils.navigateUpFromSameTask(this);
             }
         }

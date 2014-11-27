@@ -11,20 +11,19 @@ public class PreferencesUtils {
     // Utility:
     private PreferencesUtils() {}
 
-    public static boolean isUserRegistered(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
-        return getUserShortName(context) != null;
+    public static boolean isCurrentUserRegistered(Context context) {
+        return getCurrentUserShortName(context) != null;
     }
 
-    public static String getUserShortName(Context context) {
+    public static String getCurrentUserShortName(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
         return prefs.getString(USER_SHORT_NAME_PREFERENCE_KEY, null);
     }
 
-    public static void setUserShortName(Context context, String shortName) {
+    public static void setCurrentUserShortName(Context context, String shortName) {
         SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(USER_SHORT_NAME_PREFERENCE_KEY, shortName);
-        editor.commit();
+        editor.apply();
     }
 }

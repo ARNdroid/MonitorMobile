@@ -25,11 +25,11 @@ public class DashboardActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!PreferencesUtils.isUserRegistered(this)) {
+        if (!PreferencesUtils.isCurrentUserRegistered(this)) {
             Intent intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);
         } else {
-            mUserShortName = PreferencesUtils.getUserShortName(this);
+            mUserShortName = PreferencesUtils.getCurrentUserShortName(this);
             refreshScreen();
         }
     }
