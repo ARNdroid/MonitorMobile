@@ -38,6 +38,7 @@ public class IssuesEntity extends AbstractEntity {
         this.ownerId = ownerId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public IssuesEntity(IssuesEntity toClone) {
         id = toClone.id;
         acronymId = toClone.acronymId;
@@ -288,6 +289,7 @@ public class IssuesEntity extends AbstractEntity {
         this.id = id;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getAcronymId() {
         return acronymId;
     }
@@ -304,6 +306,7 @@ public class IssuesEntity extends AbstractEntity {
         this.timeStamp = timeStamp;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public Integer getState() {
         return state;
     }
@@ -312,6 +315,7 @@ public class IssuesEntity extends AbstractEntity {
         this.state = state;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public Integer getFlagType() {
         return flagType;
     }
@@ -320,6 +324,7 @@ public class IssuesEntity extends AbstractEntity {
         this.flagType = flagType;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public Integer getClockType() {
         return clockType;
     }
@@ -328,6 +333,7 @@ public class IssuesEntity extends AbstractEntity {
         this.clockType = clockType;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public String getSummary() {
         return summary;
     }
@@ -352,6 +358,7 @@ public class IssuesEntity extends AbstractEntity {
         this.reporterId = reporterId;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public Long getOwnerId() {
         return ownerId;
     }
@@ -363,6 +370,7 @@ public class IssuesEntity extends AbstractEntity {
     /*
      * Factories
      */
+    @SuppressWarnings("ConstantConditions")
     public static IssuesEntity fromCursor(Cursor cursor) {
         if(cursor == null) {
             throw new IllegalArgumentException("Cursor must be not null.");

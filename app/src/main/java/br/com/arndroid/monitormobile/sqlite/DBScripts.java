@@ -123,7 +123,7 @@ public class DBScripts {
         List<UsersEntity> users = new ArrayList<UsersEntity>(8);
         users.add(new UsersEntity(null, "Alceu Neto"));
         users.add(new UsersEntity(null, "Bruno Maia"));
-        users.add(new UsersEntity(null, "Eliane Queiroz"));
+        users.add(new UsersEntity(null, "Jorge Leandro"));
         users.add(new UsersEntity(null, "Sergio Medeiros"));
         users.add(new UsersEntity(null, "Diego Sohstein"));
         users.add(new UsersEntity(null, "Thiago Tatagiba"));

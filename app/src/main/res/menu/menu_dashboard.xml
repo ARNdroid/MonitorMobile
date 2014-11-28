@@ -2,15 +2,18 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="br.com.arndroid.monitormobile.DashboardActivity">
 
+    <item android:id="@+id/action_subscriptions"
+          android:title="@string/action_subscriptions"
+          android:showAsAction="never"
+          tools:ignore="AppCompatResource"/>
+
     <item android:id="@+id/action_simulations"
           android:title="@string/action_simulations"
-          android:orderInCategory="100"
           android:showAsAction="never"
           tools:ignore="AppCompatResource"/>
 
     <item android:id="@+id/action_about"
         android:title="@string/action_about"
-        android:orderInCategory="200"
         android:showAsAction="never"
         tools:ignore="AppCompatResource"/>
 

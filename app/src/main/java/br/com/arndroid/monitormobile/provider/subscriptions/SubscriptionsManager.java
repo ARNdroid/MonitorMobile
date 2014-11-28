@@ -20,7 +20,7 @@ public class SubscriptionsManager {
         mContext = context;
     }
 
-    public SubscriptionsEntity subscriptionsFromId(Long id) {
+    public SubscriptionsEntity subscriptionFromId(Long id) {
         Cursor c = null;
         try {
             c = mContext.getContentResolver().query(ContentUris.withAppendedId(

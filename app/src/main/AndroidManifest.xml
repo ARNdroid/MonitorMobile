@@ -4,25 +4,23 @@
     package="br.com.arndroid.monitormobile" >
 
     <application
+        android:supportsRtl="false"
         android:name="br.com.arndroid.monitormobile.app.MonitorMobileApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <provider
-            android:name=".provider.Provider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false" />
+        android:theme="@style/AppTheme"
+        tools:ignore="UnusedAttribute">
 
         <activity
             android:name="br.com.arndroid.monitormobile.DashboardActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="br.com.arndroid.monitormobile.SimulationsActivity"
             android:label="@string/title_activity_simulations"
@@ -32,6 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.arndroid.monitormobile.DashboardActivity" />
         </activity>
+
         <activity
             android:name="br.com.arndroid.monitormobile.AboutActivity"
             android:label="@string/title_activity_about"
@@ -41,6 +40,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.arndroid.monitormobile.DashboardActivity" />
         </activity>
+
         <activity
             android:name="br.com.arndroid.monitormobile.WelcomeActivity"
             android:label="@string/title_activity_welcome"
@@ -51,6 +51,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.arndroid.monitormobile.DashboardActivity" />
         </activity>
+
+        <activity
+            android:name="br.com.arndroid.monitormobile.SubscriptionsListActivity"
+            android:label="@string/title_activity_subscriptions"
+            android:parentActivityName="br.com.arndroid.monitormobile.DashboardActivity"
+            tools:ignore="UnusedAttribute" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.arndroid.monitormobile.DashboardActivity" />
+        </activity>
+
+        <provider
+            android:name=".provider.Provider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -71,7 +71,7 @@ public class SubscriptionsManagerTest extends ProviderTestCase2<Provider> {
 
         entity.setModeType(SubscriptionsUtils.MODE_TYPE_SUBSCRIBE_AND_FOLLOW);
         mManager.refresh(entity);
-        SubscriptionsEntity entityUpdated = mManager.subscriptionsFromId(entity.getId());
+        SubscriptionsEntity entityUpdated = mManager.subscriptionFromId(entity.getId());
         assertEquals(entity, entityUpdated);
     }
 

@@ -17,7 +17,7 @@ public class SimulationsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simulations);
+        setContentView(R.layout.simulations_activity);
 
         final ActionBar actionBar = getActionBar();
         //noinspection ConstantConditions

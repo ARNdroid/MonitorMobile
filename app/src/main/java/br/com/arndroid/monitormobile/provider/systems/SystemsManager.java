@@ -8,6 +8,9 @@ import android.net.Uri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.arndroid.monitormobile.provider.Contract;
 
 public class SystemsManager {
@@ -33,6 +36,22 @@ public class SystemsManager {
         } finally {
             if (c != null) c.close();
         }
+    }
+
+    public List<SystemsEntity> allSystems() {
+        ArrayList<SystemsEntity> result = new ArrayList<SystemsEntity>();
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Systems.CONTENT_URI, null, null, null, null);
+            if(c.moveToFirst()) {
+                do {
+                    result.add(SystemsEntity.fromCursor(c));
+                } while (c.moveToNext());
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+        return result;
     }
 
     public void refresh(SystemsEntity entity) {

@@ -15,5 +15,7 @@
     <string name="title_activity_welcome">Bem Vindo!</string>
     <string name="register">REGISTRAR</string>
     <string name="user_reset">RESETAR USUÁRIO ATUAL</string>
+    <string name="title_activity_subscriptions">Minhas Assinaturas</string>
+    <string name="action_subscriptions">Minhas assinaturas</string>
 
 </resources>

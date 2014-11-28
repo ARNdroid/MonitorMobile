@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import br.com.arndroid.monitormobile.BuildConfig;
 
+@SuppressWarnings("UnusedDeclaration")
 public class Contract {
 
     // This utility class cannot be instantiated.
@@ -480,7 +481,6 @@ public class Contract {
 		 * Sort order
 		 */
 
-        @SuppressWarnings("UnusedDeclaration")
         public static final String ACRONYM_ID_ASC = ACRONYM_ID + " ASC";
 
 		/*

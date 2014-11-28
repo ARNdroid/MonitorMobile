@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_before_item_divider"
+    android:background="@drawable/card_selector">
+
+    <TextView
+        style="@style/CardFont.Item.XLarge"
+        android:id="@+id/txtAcronymId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIXYZ"/>
+
+    <TextView
+        style="@style/CardFont.Item"
+        android:id="@+id/txtModeType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assino e sigo novos incidentes automaticamente"/>
+</LinearLayout>

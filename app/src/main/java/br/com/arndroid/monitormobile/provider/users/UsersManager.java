@@ -8,7 +8,14 @@ import android.net.Uri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import br.com.arndroid.monitormobile.provider.Contract;
+import br.com.arndroid.monitormobile.provider.subscriptions.SubscriptionsEntity;
+import br.com.arndroid.monitormobile.provider.subscriptions.SubscriptionsManager;
+import br.com.arndroid.monitormobile.provider.systems.SystemsEntity;
+import br.com.arndroid.monitormobile.provider.systems.SystemsManager;
+import br.com.arndroid.monitormobile.utils.PreferencesUtils;
 
 public class UsersManager {
     private static final Logger LOG = LoggerFactory.getLogger(UsersManager.class);
@@ -33,6 +40,30 @@ public class UsersManager {
         } finally {
             if (c != null) c.close();
         }
+    }
+
+    public UsersEntity userFromShortName(String shortName) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Users.CONTENT_URI, null,
+                    Contract.Users.SHORT_NAME_SELECTION, new String[]{shortName}, null);
+            if(c.getCount() > 0) {
+                c.moveToFirst();
+                return UsersEntity.fromCursor(c);
+            } else {
+                return null;
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+    }
+
+    public UsersEntity currentUser() {
+        UsersEntity result = null;
+        if (PreferencesUtils.isCurrentUserRegistered(mContext)) {
+            result = userFromShortName(PreferencesUtils.getCurrentUserShortName(mContext));
+        }
+        return result;
     }
 
     public void refresh(UsersEntity entity) {
@@ -76,6 +107,34 @@ public class UsersManager {
     }
 
     public void insertCurrentUserAndRelationships(UsersEntity currentUser) {
+        // Insert:
         refresh(currentUser);
+
+        // Subscriptions for all systems:
+        final SubscriptionsManager subscriptionsManager = new SubscriptionsManager(mContext);
+        final SystemsManager systemsManager = new SystemsManager(mContext);
+        List<SystemsEntity> allSystems = systemsManager.allSystems();
+        for (SystemsEntity system : allSystems) {
+            final int subscriptionMode;
+            final String acronymId = system.getAcronymId();
+            if ("SIXYZ".equals(acronymId)) {
+                subscriptionMode = 1;
+            } else if ("SICLI".equals(acronymId)) {
+                subscriptionMode = 2;
+            } else if ("SICID".equals(acronymId)) {
+                subscriptionMode = 1;
+            } else if ("SIBEC".equals(acronymId)) {
+                subscriptionMode = 1;
+            } else if ("SICPF".equals(acronymId)) {
+                subscriptionMode = 0;
+            } else if ("SIISO".equals(acronymId)) {
+                subscriptionMode = 2;
+            } else {
+                // For all 'new' systems:
+                subscriptionMode = 0;
+            }
+            subscriptionsManager.refresh(new SubscriptionsEntity(null, subscriptionMode, acronymId,
+                    currentUser.getId()));
+        }
     }
 }

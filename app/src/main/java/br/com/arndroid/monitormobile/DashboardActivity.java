@@ -17,7 +17,7 @@ public class DashboardActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.dashboard_activity);
         bindScreen();
     }
 
@@ -52,6 +52,11 @@ public class DashboardActivity extends Activity {
         final Intent intent;
 
         switch (itemId) {
+            case R.id.action_subscriptions:
+                intent = new Intent(this, SubscriptionsListActivity.class);
+                startActivity(intent);
+                return true;
+
             case R.id.action_simulations:
                 intent = new Intent(this, SimulationsActivity.class);
                 startActivity(intent);

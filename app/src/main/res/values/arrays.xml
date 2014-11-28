@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="subscription_mode_list">
+        <item>Não assino</item>
+        <item>Assino</item>
+        <item>Assino e sigo novos incidentes automaticamente</item>
+    </string-array>
+
+</resources>

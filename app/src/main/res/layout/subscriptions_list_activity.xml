@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/default_view_padding">
+
+    <ListView android:id="@android:id/list"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:divider="@color/card_foreground"
+              android:dividerHeight="1dp"/>
+
+    <TextView android:id="@android:id/empty"
+              style="@style/Card"
+              android:textSize="22sp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Os dados desta lista são populados no registro do usuário. Volte na tela do dashboard e selecione no menu a opção Simulações. Faça um RESET do usuário. Volte aqui e veja a lista preenchida."/>
+
+</LinearLayout>
