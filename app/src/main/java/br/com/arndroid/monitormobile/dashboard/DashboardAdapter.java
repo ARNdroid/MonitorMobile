@@ -238,6 +238,9 @@ public class DashboardAdapter extends BaseAdapter {
                 imageArray[i].setVisibility(View.GONE);
                 totalArray[i].setVisibility(View.GONE);
             }
+            for (int i = 1; i < TOTAL_ROWS; i++) {
+                layoutArray[i].setVisibility(View.VISIBLE);
+            }
             if (currentPosition <= 5) layoutArray[1].setVisibility(View.GONE);
             if (currentPosition <= 10) layoutArray[2].setVisibility(View.GONE);
             if (currentPosition <= 15) layoutArray[3].setVisibility(View.GONE);
