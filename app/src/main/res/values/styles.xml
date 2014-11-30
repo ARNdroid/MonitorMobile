@@ -60,6 +60,10 @@
         <item name="android:textColor">@color/card_foreground</item>
     </style>
 
+    <style name="CardFont.NumberDashboard">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="CardFont.Header">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/accent_dark</item>

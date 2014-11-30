@@ -1,0 +1,3 @@
+SELECT issues._id AS _id, issues.acronym_id AS acronym_id, state, flag_type, clock_type
+FROM issues INNER JOIN subscriptions ON issues.acronym_id=subscriptions.acronym_id
+WHERE subscriptions.subscriber_id=3 AND subscriptions.mode_type>0;

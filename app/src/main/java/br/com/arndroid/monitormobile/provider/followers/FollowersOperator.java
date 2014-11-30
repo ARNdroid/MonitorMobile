@@ -45,7 +45,7 @@ public class FollowersOperator extends BaseProviderOperator {
     }
 
     @Override
-    public String tableName() {
+    public String tableNameForUri(Uri uri) {
         return Contract.Followers.TABLE_NAME;
     }
 

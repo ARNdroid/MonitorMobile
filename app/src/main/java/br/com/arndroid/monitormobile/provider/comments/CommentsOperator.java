@@ -45,7 +45,7 @@ public class CommentsOperator extends BaseProviderOperator {
     }
 
     @Override
-    public String tableName() {
+    public String tableNameForUri(Uri uri) {
         return Contract.Comments.TABLE_NAME;
     }
 

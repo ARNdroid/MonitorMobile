@@ -45,7 +45,7 @@ public class XsOperator extends BaseProviderOperator {
     }
 
     @Override
-    public String tableName() {
+    public String tableNameForUri(Uri uri) {
         return Contract.Xs.TABLE_NAME;
     }
 

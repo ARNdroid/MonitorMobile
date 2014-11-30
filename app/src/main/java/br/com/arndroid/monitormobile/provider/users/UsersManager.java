@@ -58,7 +58,7 @@ public class UsersManager {
         }
     }
 
-    public UsersEntity currentUser() {
+    public UsersEntity getCurrentUser() {
         UsersEntity result = null;
         if (PreferencesUtils.isCurrentUserRegistered(mContext)) {
             result = userFromShortName(PreferencesUtils.getCurrentUserShortName(mContext));

@@ -9,6 +9,8 @@ public class MonitorMobileApp extends Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(MonitorMobileApp.class);
 
+    private boolean finishing = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -25,5 +27,13 @@ public class MonitorMobileApp extends Application {
             Thread.setDefaultUncaughtExceptionHandler(new LogExceptionHandler());
             LOG.trace("New default uncaught exception handler set.");
         }
+    }
+
+    public boolean isFinishing() {
+        return finishing;
+    }
+
+    public void setFinishing(boolean finishing) {
+        this.finishing = finishing;
     }
 }

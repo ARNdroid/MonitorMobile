@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_before_item_divider"
+    android:background="@drawable/card_selector">
+
+    <TextView
+        style="@style/CardFont.Item.XLarge"
+        android:id="@+id/txtAcronymId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIXYZ"/>
+
+    <TextView
+        style="@style/CardFont.Item.Small"
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sistema XYZ - Sistema XYZ - Sistema XYZ"/>
+
+    <LinearLayout
+        android:id="@+id/layRowZero"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:paddingTop="@dimen/padding_row_dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgColZero"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_red"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColZero"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColOne"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_blue"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColOne"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColTwo"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/flag_yellow_and_clock_yellow"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColTwo"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColThree"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/flag_red"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColThree"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColFour"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_black"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColFour"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layRowOne"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:paddingTop="@dimen/padding_row_dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgColFive"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/check"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColFive"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColSix"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_blue"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColSix"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColSeven"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/flag_yellow_and_clock_yellow"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColSeven"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColEight"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/flag_red"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColEight"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColNine"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_black"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColNine"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layRowTwo"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:paddingTop="@dimen/padding_row_dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgColTen"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/check"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColTen"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColEleven"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_blue"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColEleven"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColTwelve"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/flag_yellow_and_clock_yellow"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColTwelve"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColThirteen"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/flag_red"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColThirteen"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColFourteen"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_black"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColFourteen"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layRowThree"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:paddingTop="@dimen/padding_row_dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgColFifteen"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/clock_blue"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColFifteen"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+        <ImageView
+            android:id="@+id/imgColSixteen"
+            android:contentDescription="Flag and Clocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_image_dashboard"
+            android:paddingStart="@dimen/padding_image_dashboard"
+            android:src="@drawable/check"
+            tools:ignore="RtlSymmetry"/>
+        <TextView
+            style="@style/CardFont.NumberDashboard"
+            android:id="@+id/txtColSixteen"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"/>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/CardFont.Item"
+        android:id="@+id/txtFlags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="K=NN R=NN Y=NN B=NN"/>
+
+</LinearLayout>

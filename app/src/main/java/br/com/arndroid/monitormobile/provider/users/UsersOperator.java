@@ -45,7 +45,7 @@ public class UsersOperator extends BaseProviderOperator {
     }
 
     @Override
-    public String tableName() {
+    public String tableNameForUri(Uri uri) {
         return Contract.Users.TABLE_NAME;
     }
 

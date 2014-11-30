@@ -47,7 +47,7 @@ public abstract class BaseProviderOperator implements ProviderOperator {
         onValidateParameters(QUERY_OPERATION, uri, parameters, provider);
 
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        qb.setTables(tableName());
+        qb.setTables(tableNameForUri(uri));
 
         SQLiteDatabase db = provider.getOpenHelper().getReadableDatabase();
         Cursor c = qb.query(db, parameters.getProjection(), parameters.getSelection(),
@@ -79,7 +79,7 @@ public abstract class BaseProviderOperator implements ProviderOperator {
         return mUriMatcher;
     }
 
-    protected abstract String tableName();
+    protected abstract String tableNameForUri(Uri uri);
 
     @SuppressWarnings("UnusedParameters")
     protected abstract void onValidateParameters(int operation, Uri uri, OperationParameters parameters,
@@ -105,7 +105,7 @@ public abstract class BaseProviderOperator implements ProviderOperator {
         SQLiteDatabase db = provider.getOpenHelper().getWritableDatabase();
         long idInserted;
         try {
-            idInserted = db.insertOrThrow(tableName(), null, parameters.getValues());
+            idInserted = db.insertOrThrow(tableNameForUri(uri), null, parameters.getValues());
         } catch (SQLiteConstraintException e) {
             // We have a constraint violation here.
             // An example is an attribute used like a "primary key" but not a DB PK. Since this
@@ -157,7 +157,7 @@ public abstract class BaseProviderOperator implements ProviderOperator {
         SQLiteDatabase db = provider.getOpenHelper().getWritableDatabase();
         int rowsUpdated;
         try {
-            rowsUpdated = db.update(tableName(), parameters.getValues(), parameters.getSelection(),
+            rowsUpdated = db.update(tableNameForUri(uri), parameters.getValues(), parameters.getSelection(),
                     parameters.getSelectionArgs());
         } catch (SQLiteConstraintException e) {
             // We have a constraint violation here.
@@ -198,7 +198,7 @@ public abstract class BaseProviderOperator implements ProviderOperator {
         onValidateParameters(DELETE_OPERATION, uri, parameters, provider);
 
         SQLiteDatabase db = provider.getOpenHelper().getWritableDatabase();
-        int rowsDeleted = db.delete(tableName(), parameters.getSelection(), parameters.getSelectionArgs());
+        int rowsDeleted = db.delete(tableNameForUri(uri), parameters.getSelection(), parameters.getSelectionArgs());
         if (rowsDeleted > FAIL) {
             LOG.trace("delete about to notify uri={}", uri);
             doNotifyOperations(DELETE_OPERATION, uri, null, provider);

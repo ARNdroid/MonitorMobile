@@ -40,7 +40,7 @@ public class SubscriptionsListActivity extends ListActivity
         //noinspection ConstantConditions
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        mCurrentUser = new UsersManager(this).currentUser();
+        mCurrentUser = new UsersManager(this).getCurrentUser();
         mAdapter = new SubscriptionsAdapter(this);
         setListAdapter(mAdapter);
         getLoaderManager().restartLoader(SUBSCRIPTIONS_LOADER_ID, null, this);

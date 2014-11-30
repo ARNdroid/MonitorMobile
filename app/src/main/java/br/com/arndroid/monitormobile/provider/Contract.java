@@ -11,10 +11,11 @@ import br.com.arndroid.monitormobile.BuildConfig;
 public class Contract {
 
     // This utility class cannot be instantiated.
-    private Contract() {}
+    private Contract() {
+    }
 
 	/*
-	 * Global Definitions
+     * Global Definitions
 	 */
 
     public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
@@ -132,7 +133,8 @@ public class Contract {
     public static final class Users implements BaseColumns, UsersColumns {
 
         // This utility class cannot be instantiated:
-        private Users() {}
+        private Users() {
+        }
 
 		/*
 		 * URI's
@@ -230,74 +232,85 @@ public class Contract {
 
         @SuppressWarnings("UnusedDeclaration")
         public static final String ACRONYM_ID_ASC = ACRONYM_ID + " ASC";
+
+        public static String qualifiedColumnName(String columnName) {
+            return TABLE_NAME + "." + columnName + " AS " + columnName;
+        }
     }
 
     /*
 	 * Issues Definitions
 	 */
 
-        protected interface IssuesColumns {
+    protected interface IssuesColumns {
 
-            // Table:
-            public static final String TABLE_NAME = "issues";
+        // Table:
+        public static final String TABLE_NAME = "issues";
 
-            // Columns:
-            public static final String ACRONYM_ID = "acronym_id";
-            public static final String TIME_STAMP = "time_stamp";
-            public static final String STATE = "state";
-            public static final String FLAG_TYPE = "flag_type";
-            public static final String CLOCK_TYPE = "clock_type";
-            public static final String SUMMARY = "summary";
-            public static final String DESCRIPTION = "description";
-            public static final String REPORTER_ID = "reporter_id";
-            public static final String OWNER_ID = "owner_id";
+        // Columns:
+        public static final String ACRONYM_ID = "acronym_id";
+        public static final String TIME_STAMP = "time_stamp";
+        public static final String STATE = "state";
+        public static final String FLAG_TYPE = "flag_type";
+        public static final String CLOCK_TYPE = "clock_type";
+        public static final String SUMMARY = "summary";
+        public static final String DESCRIPTION = "description";
+        public static final String REPORTER_ID = "reporter_id";
+        public static final String OWNER_ID = "owner_id";
+    }
+
+    public static final class Issues implements BaseColumns, IssuesColumns {
+
+        // This utility class cannot be instantiated:
+        private Issues() {
         }
-
-        public static final class Issues implements BaseColumns, IssuesColumns {
-
-            // This utility class cannot be instantiated:
-            private Issues() {}
 
 		/*
 		 * URI's
 		 */
 
-            public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
+        public static final Uri DASHBOARD_URI = Uri.parse("content://" + AUTHORITY + "/"
+                + TABLE_NAME + "/dashboard");
 
-            /*
-                Projections
-             */
-            @SuppressWarnings("UnusedDeclaration")
-            public static final String[] ID_PROJECTION = {_ID};
+        /*
+            Projections
+         */
+        public static final String[] ID_PROJECTION = {_ID};
+        public static final String[] DASHBOARD_PROJECTION = {qualifiedColumnName(_ID), qualifiedColumnName(ACRONYM_ID),
+                Systems.qualifiedColumnName(Systems.DESCRIPTION), STATE, FLAG_TYPE, CLOCK_TYPE};
 
 		/*
 		 * MIME types
 		 */
 
-            public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
-            public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd." + AUTHORITY + "." + TABLE_NAME;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd." + AUTHORITY + "." + TABLE_NAME;
 
         /*
 		 * Selection
 		 */
 
-            public static final String ID_SELECTION = _ID + "=?";
-            public static final String ACRONYM_ID_SELECTION = ACRONYM_ID + "=?";
+        public static final String ID_SELECTION = _ID + "=?";
+        public static final String ACRONYM_ID_SELECTION = ACRONYM_ID + "=?";
+        public static final String DASHBOARD_SELECTION = Subscriptions.SUBSCRIBER_ID + "=? AND " + Subscriptions.MODE_TYPE + ">0";
 
 		/*
 		 * Sort order
 		 */
 
-            @SuppressWarnings("UnusedDeclaration")
-            public static final String TIME_STAMP_DESC = TIME_STAMP + " DESC";
+        public static final String TIME_STAMP_DESC = TIME_STAMP + " DESC";
 
 		/*
 		 * Utility methods
 		 */
 
-        @SuppressWarnings("UnusedDeclaration")
         public static int fieldTypeForColumn(String columnName) {
             return fieldTypeForTableAndColumn(TABLE_NAME, columnName);
+        }
+
+        public static String qualifiedColumnName(String columnName) {
+            return TABLE_NAME + "." + columnName + " AS " + columnName;
         }
     }
 
@@ -321,7 +334,8 @@ public class Contract {
     public static final class Actions implements BaseColumns, ActionsColumns {
 
         // This utility class cannot be instantiated:
-        private Actions() {}
+        private Actions() {
+        }
 
 		/*
 		 * URI's
@@ -385,7 +399,8 @@ public class Contract {
     public static final class Comments implements BaseColumns, CommentsColumns {
 
         // This utility class cannot be instantiated:
-        private Comments() {}
+        private Comments() {
+        }
 
 		/*
 		 * URI's
@@ -448,7 +463,8 @@ public class Contract {
     public static final class Subscriptions implements BaseColumns, SubscriptionsColumns {
 
         // This utility class cannot be instantiated:
-        private Subscriptions() {}
+        private Subscriptions() {
+        }
 
 		/*
 		 * URI's
@@ -510,7 +526,8 @@ public class Contract {
     public static final class Followers implements BaseColumns, FollowersColumns {
 
         // This utility class cannot be instantiated:
-        private Followers() {}
+        private Followers() {
+        }
 
 		/*
 		 * URI's
@@ -573,7 +590,8 @@ public class Contract {
     public static final class Xs implements BaseColumns, XsColumns {
 
         // This utility class cannot be instantiated:
-        private Xs() {}
+        private Xs() {
+        }
 
 		/*
 		 * URI's
@@ -621,7 +639,7 @@ public class Contract {
 
     private static int fieldTypeForTableAndColumn(String tableName, String columnName) {
 
-        if(Users.TABLE_NAME.equals(tableName)) {
+        if (Users.TABLE_NAME.equals(tableName)) {
             if (Users._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Users.SHORT_NAME.equals(columnName)) {
@@ -629,7 +647,7 @@ public class Contract {
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
-        } else if(Systems.TABLE_NAME.equals(tableName)) {
+        } else if (Systems.TABLE_NAME.equals(tableName)) {
             if (Systems._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Systems.ACRONYM_ID.equals(columnName)) {
@@ -639,7 +657,7 @@ public class Contract {
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
-        } else if(Issues.TABLE_NAME.equals(tableName)) {
+        } else if (Issues.TABLE_NAME.equals(tableName)) {
             if (Issues._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Issues.ACRONYM_ID.equals(columnName)) {
@@ -663,7 +681,7 @@ public class Contract {
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
-        } else if(Actions.TABLE_NAME.equals(tableName)) {
+        } else if (Actions.TABLE_NAME.equals(tableName)) {
             if (Actions._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Actions.ISSUE_ID.equals(columnName)) {
@@ -679,7 +697,7 @@ public class Contract {
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
-        } else if(Comments.TABLE_NAME.equals(tableName)) {
+        } else if (Comments.TABLE_NAME.equals(tableName)) {
             if (Comments._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Comments.ACTION_ID.equals(columnName)) {
@@ -693,7 +711,7 @@ public class Contract {
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
-        } else if(Subscriptions.TABLE_NAME.equals(tableName)) {
+        } else if (Subscriptions.TABLE_NAME.equals(tableName)) {
             if (Subscriptions._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Subscriptions.MODE_TYPE.equals(columnName)) {
@@ -705,7 +723,7 @@ public class Contract {
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
-        } else if(Followers.TABLE_NAME.equals(tableName)) {
+        } else if (Followers.TABLE_NAME.equals(tableName)) {
             if (Followers._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Followers.ISSUE_ID.equals(columnName)) {
@@ -715,7 +733,7 @@ public class Contract {
             } else {
                 throw new IllegalArgumentException("Unknown column " + columnName + " for table " + tableName);
             }
-        } else if(Xs.TABLE_NAME.equals(tableName)) {
+        } else if (Xs.TABLE_NAME.equals(tableName)) {
             if (Xs._ID.equals(columnName)) {
                 return FIELD_TYPE_LONG;
             } else if (Xs.ACTION_ID.equals(columnName)) {

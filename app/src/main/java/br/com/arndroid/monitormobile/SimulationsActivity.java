@@ -11,6 +11,7 @@ import android.widget.Toast;
 import br.com.arndroid.monitormobile.provider.users.UsersEntity;
 import br.com.arndroid.monitormobile.provider.users.UsersManager;
 import br.com.arndroid.monitormobile.sqlite.DBOpenHelper;
+import br.com.arndroid.monitormobile.utils.DashboardUtils;
 import br.com.arndroid.monitormobile.utils.PreferencesUtils;
 public class SimulationsActivity extends Activity {
 
@@ -22,6 +23,12 @@ public class SimulationsActivity extends Activity {
         final ActionBar actionBar = getActionBar();
         //noinspection ConstantConditions
         actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
+
     }
 
     @Override
@@ -50,6 +57,7 @@ public class SimulationsActivity extends Activity {
 
     public void userReset(View view) {
         PreferencesUtils.setCurrentUserShortName(this, null);
+        PreferencesUtils.setLastDashboardType(this, DashboardUtils.DASHBOARD_TYPE_FLAG_AND_CLOCK);
         Toast.makeText(this, "Usuário reset realizado com sucesso.", Toast.LENGTH_SHORT).show();
     }
 }
