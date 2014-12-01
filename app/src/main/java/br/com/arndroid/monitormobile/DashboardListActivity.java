@@ -18,6 +18,7 @@ import br.com.arndroid.monitormobile.dashboard.DashboardPanel;
 import br.com.arndroid.monitormobile.dialog.StringListDialog;
 import br.com.arndroid.monitormobile.provider.Contract;
 import br.com.arndroid.monitormobile.provider.users.UsersManager;
+import br.com.arndroid.monitormobile.utils.DashboardUtils;
 import br.com.arndroid.monitormobile.utils.PreferencesUtils;
 
 public class DashboardListActivity extends ListActivity implements
@@ -26,6 +27,7 @@ public class DashboardListActivity extends ListActivity implements
     private static final String DASHBOARD_TYPE_DIALOG = "DASHBOARD_TYPE_DIALOG";
 
     private DashboardAdapter mAdapter;
+    private MenuItem mDashboardTypeMenuItem;
 
     private static final int DASHBOARD_LOADER_ID = 1;
 
@@ -59,7 +61,23 @@ public class DashboardListActivity extends ListActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_dashboard, menu);
+        mDashboardTypeMenuItem = menu.findItem(R.id.action_dashboard_type);
+        updateMenuIcons();
         return true;
+    }
+
+    private void updateMenuIcons() {
+        final int dashboardType = PreferencesUtils.getLastDashboardType(this);
+        switch (dashboardType) {
+            case DashboardUtils.DASHBOARD_TYPE_FLAG:
+                mDashboardTypeMenuItem.setIcon(R.drawable.flag_action);
+                break;
+            case DashboardUtils.DASHBOARD_TYPE_CLOCK:
+                mDashboardTypeMenuItem.setIcon(R.drawable.clock_action);
+                break;
+            default:
+                mDashboardTypeMenuItem.setIcon(R.drawable.flag_and_clock_action);
+        }
     }
 
     @Override
@@ -125,6 +143,7 @@ public class DashboardListActivity extends ListActivity implements
     @Override
     public void onStringSelected(String tag, int chosenIndex) {
         PreferencesUtils.setLastDashboardType(this, chosenIndex);
+        updateMenuIcons();
         mAdapter.setDashboardType(chosenIndex);
     }
 }
