@@ -12,48 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_view_padding">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/claridade_logo"
-            android:contentDescription="Claridade banner" />
-
-        <TextView
-            style="@style/CardFont.Data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/doubled_view_padding"
-            android:text="Claridade - Monitor Mobile é a rede social dos sistemas da CAIXA" />
-
-        <TextView
-            style="@style/CardFont.Data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/doubled_view_padding"
-            android:text="Nela você poderá assinar os sistemas que achar mais relevantes e saber o que está acontecendo com cada um deles." />
-
-        <TextView
-            style="@style/CardFont.Data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/doubled_view_padding"
-            android:text="É um espaço para incentivo, críticas e sugestões. Envolva-se nesta rede! Você participa, nós melhoramos e todos ganham!" />
-
-        <TextView
-            style="@style/CardFont.Data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/doubled_view_padding"
-            android:text="Este é um protótipo do Claridade - Monitor Mobile para apresentação na feira do CAIXA Lab." />
-
-        <ImageView
-            android:paddingBottom="@dimen/doubled_view_padding"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/caixa_lab_logo"
-            android:contentDescription="CAIXA Lab logo" />
+        <include layout="@layout/claridade_info"/>
 
         <TextView
             style="@style/CardFont.Header"

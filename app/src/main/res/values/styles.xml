@@ -123,7 +123,7 @@
 
     <style name="CardButton">
         <item name="android:padding">@dimen/default_view_padding</item>
-        <item name="android:minHeight">30dp</item>
+        <item name="android:minHeight">48dp</item>
         <item name="android:minWidth">68dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/card_background</item>

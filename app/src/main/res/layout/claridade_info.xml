@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/claridade_logo"
+        android:contentDescription="Claridade banner" />
+
+    <TextView
+        style="@style/CardFont.Data"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/doubled_view_padding"
+        android:text="Claridade - Monitor Mobile é a rede social dos sistemas da CAIXA" />
+
+    <TextView
+        style="@style/CardFont.Data"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/doubled_view_padding"
+        android:text="Nela você poderá assinar os sistemas que achar mais relevantes e saber o que está acontecendo com cada um deles." />
+
+    <TextView
+        style="@style/CardFont.Data"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/doubled_view_padding"
+        android:text="É um espaço para incentivo, críticas e sugestões. Envolva-se nesta rede! Você participa, nós melhoramos e todos ganham!" />
+
+    <TextView
+        style="@style/CardFont.Data"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/doubled_view_padding"
+        android:text="Este é um protótipo. Todas as informações aqui contidas são fictícias e o único propósito deste aplicativo é a apresentação na feira do CAIXA Lab." />
+
+    <ImageView
+        android:paddingBottom="@dimen/doubled_view_padding"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/caixa_lab_logo"
+        android:contentDescription="CAIXA Lab logo" />
+
+</LinearLayout>
