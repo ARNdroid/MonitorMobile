@@ -9,14 +9,15 @@
     android:background="@drawable/card_selector">
 
     <TextView
-        style="@style/CardFont.Item.XLarge"
+        style="@style/CardFont.Item.Large"
         android:id="@+id/txtAcronymId"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SIXYZ"/>
 
     <TextView
-        style="@style/CardFont.Item.Small"
+        style="@style/CardFont.Item"
         android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
