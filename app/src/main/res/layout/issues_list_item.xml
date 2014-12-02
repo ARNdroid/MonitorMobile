@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/doubled_view_padding"
+    android:background="@drawable/card_selector">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/imgFlagAndClockType"
+            android:contentDescription="Flag and clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="@dimen/padding_image_dashboard"
+            android:paddingEnd="@dimen/padding_image_dashboard"
+            android:src="@drawable/flag_sample_and_clock_sample_full"
+            tools:ignore="RtlSymmetry"/>
+
+        <TextView
+            style="@style/CardFont.Item"
+            android:id="@+id/txtSummary"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uma breve descrição do incidente: aqui uma breve descrição do incidente. Aqui uma breve descrição do incidente."/>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/CardFont.Item.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_view_padding"
+        android:text="Proprietário"/>
+
+    <TextView
+        style="@style/CardFont.Item"
+        android:id="@+id/txtOwner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bruno de Azevedo Maia"/>
+
+    <TextView
+        style="@style/CardFont.Item.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_view_padding"
+        android:text="Seguem"/>
+
+    <TextView
+        style="@style/CardFont.Item"
+        android:id="@+id/txtFollowers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eu, Viviane Machado + 3 pessoas"/>
+
+    <LinearLayout
+        android:layout_gravity="end"
+        android:paddingTop="@dimen/default_view_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Última ação em "/>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:id="@+id/txtLastAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18/05/2014 às 18:03"/>
+
+    </LinearLayout>
+
+</LinearLayout>

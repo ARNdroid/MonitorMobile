@@ -67,6 +67,10 @@ public class DashboardAdapter extends BaseAdapter {
         return position;
     }
 
+    public String getAcronymIdForPosition(int position) {
+        return mPanel.getAcronymIdForPosition(position);
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
@@ -217,7 +221,7 @@ public class DashboardAdapter extends BaseAdapter {
                         if (count > 0) {
                             imageArray[currentPosition].setVisibility(View.VISIBLE);
                             totalArray[currentPosition].setVisibility(View.VISIBLE);
-                            imageArray[currentPosition].setImageResource(DashboardUtils.getImageResourceIdForFlagTypeAndClockType(flag, clock));
+                            imageArray[currentPosition].setImageResource(DashboardUtils.getImageResourceIdForFlagTypeAndClockType(flag, clock, false));
                             totalArray[currentPosition].setText(String.valueOf(count));
                             currentPosition++;
                         }

@@ -16,8 +16,8 @@ public class DashboardUtils {
         return R.drawable.check;
     }
 
-    public static int getImageResourceIdForFlagTypeAndClockType(int flagType, int clockType) {
-        return flagAndClockImage[flagType][clockType];
+    public static int getImageResourceIdForFlagTypeAndClockType(int flagType, int clockType, boolean fullSize) {
+        return fullSize ? flagAndClockImageFull[flagType][clockType] : flagAndClockImage[flagType][clockType];
     }
 
     private static int[][] flagAndClockImage = {
@@ -25,6 +25,13 @@ public class DashboardUtils {
             {R.drawable.flag_red_and_clock_black, R.drawable.flag_red_and_clock_red, R.drawable.flag_red_and_clock_yellow, R.drawable.flag_red_and_clock_blue},
             {R.drawable.flag_yellow_and_clock_black, R.drawable.flag_yellow_and_clock_red, R.drawable.flag_yellow_and_clock_yellow, R.drawable.flag_yellow_and_clock_blue},
             {R.drawable.flag_blue_and_clock_black, R.drawable.flag_blue_and_clock_red, R.drawable.flag_blue_and_clock_yellow, R.drawable.flag_blue_and_clock_blue}
+    };
+
+    private static int[][] flagAndClockImageFull = {
+            {R.drawable.flag_black_and_clock_black_full, R.drawable.flag_black_and_clock_red_full, R.drawable.flag_black_and_clock_yellow_full, R.drawable.flag_black_and_clock_blue_full},
+            {R.drawable.flag_red_and_clock_black_full, R.drawable.flag_red_and_clock_red_full, R.drawable.flag_red_and_clock_yellow_full, R.drawable.flag_red_and_clock_blue_full},
+            {R.drawable.flag_yellow_and_clock_black_full, R.drawable.flag_yellow_and_clock_red_full, R.drawable.flag_yellow_and_clock_yellow_full, R.drawable.flag_yellow_and_clock_blue_full},
+            {R.drawable.flag_blue_and_clock_black_full, R.drawable.flag_blue_and_clock_red_full, R.drawable.flag_blue_and_clock_yellow_full, R.drawable.flag_blue_and_clock_blue_full}
     };
 
     public static int getImageResourceIdForFlagType(int flag) {

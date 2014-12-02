@@ -54,7 +54,9 @@ public class DashboardListActivity extends ListActivity implements
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        // TODO: implement
+        Intent intent = new Intent(this, IssuesListActivity.class);
+        intent.putExtra(IssuesListActivity.ACRONYM_ID_KEY, mAdapter.getAcronymIdForPosition(position));
+        startActivity(intent);
     }
 
     @Override

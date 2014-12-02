@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.arndroid.monitormobile.provider.Contract;
+import br.com.arndroid.monitormobile.provider.users.UsersManager;
 
 public class FollowersManager {
 
@@ -30,6 +31,31 @@ public class FollowersManager {
                 return FollowersEntity.fromCursor(c);
             } else {
                 return null;
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+    }
+
+    public String humanPhraseFromIssueId(Long issueId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Followers.CONTENT_URI, null,
+                    Contract.Followers.ISSUE_ID_SELECTION, new String[] {issueId.toString()}, null);
+            final int count = c.getCount();
+            if(count > 0) {
+                c.moveToFirst();
+                final FollowersEntity entity = FollowersEntity.fromCursor(c);
+                final UsersManager manager = new UsersManager(mContext);
+                String firstFollowerName = manager.userFromId(entity.getFollowerId()).getShortName();
+                if (count > 2) {
+                    firstFollowerName += " +" + (count - 1) + " pessoas";
+                } else if (count > 1) {
+                    firstFollowerName += " +1 pessoa";
+                }
+                return firstFollowerName;
+            } else {
+                return "Sem seguidores";
             }
         } finally {
             if (c != null) c.close();
