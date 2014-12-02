@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.arndroid.monitormobile.provider.users.UsersEntity;
@@ -15,6 +16,8 @@ import br.com.arndroid.monitormobile.utils.DashboardUtils;
 import br.com.arndroid.monitormobile.utils.PreferencesUtils;
 public class SimulationsActivity extends Activity {
 
+    TextView mTxtUserShortName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,17 @@ public class SimulationsActivity extends Activity {
         final ActionBar actionBar = getActionBar();
         //noinspection ConstantConditions
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        bindScreen();
+        refreshScreen();
+    }
+
+    private void bindScreen() {
+        mTxtUserShortName = (TextView) findViewById(R.id.txtUserShortName);
+    }
+
+    private void refreshScreen() {
+        mTxtUserShortName.setText(PreferencesUtils.isCurrentUserRegistered(this) ? PreferencesUtils.getCurrentUserShortName(this) : "Usuário não cadastrado");
     }
 
     @Override
@@ -58,6 +72,7 @@ public class SimulationsActivity extends Activity {
     public void userReset(View view) {
         PreferencesUtils.setCurrentUserShortName(this, null);
         PreferencesUtils.setLastDashboardType(this, DashboardUtils.DASHBOARD_TYPE_FLAG_AND_CLOCK);
+        refreshScreen();
         Toast.makeText(this, "Usuário reset realizado com sucesso.", Toast.LENGTH_SHORT).show();
     }
 }

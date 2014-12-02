@@ -12,12 +12,27 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_view_padding">
 
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Usuário atual"/>
+
+        <TextView
+            style="@style/CardFont.Item"
+            android:id="@+id/txtUserShortName"
+            android:paddingBottom="@dimen/doubled_view_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[User Short Name]"/>
+
         <Button
             style="@style/CardButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/database_reset"
-            android:onClick="dbReset"/>
+            android:text="@string/user_reset"
+            android:onClick="userReset"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -28,8 +43,8 @@
             style="@style/CardButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/user_reset"
-            android:onClick="userReset"/>
+            android:text="@string/database_reset"
+            android:onClick="dbReset"/>
 
     </LinearLayout>
 
