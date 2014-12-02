@@ -4,8 +4,8 @@ public class IssueUtils {
 
     // Attention: don't change this values. They are stored in database.
 
-    public static final int STATE_CLOSED = 0;
     public static final int STATE_OPEN = 1;
+    public static final int STATE_CLOSED = 99;
 
 
     public static final int FLAG_BLACK = 0;

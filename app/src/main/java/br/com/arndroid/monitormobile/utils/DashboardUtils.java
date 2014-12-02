@@ -16,8 +16,12 @@ public class DashboardUtils {
         return R.drawable.check;
     }
 
-    public static int getImageResourceIdForFlagTypeAndClockType(int flagType, int clockType, boolean fullSize) {
-        return fullSize ? flagAndClockImageFull[flagType][clockType] : flagAndClockImage[flagType][clockType];
+    public static int getImageResourceIdForStateFlagTypeAndClockType(int state, int flagType, int clockType, boolean fullSize) {
+        if (state == IssueUtils.STATE_CLOSED) {
+            return fullSize ? R.drawable.check_full : R.drawable.check;
+        } else {
+            return fullSize ? flagAndClockImageFull[flagType][clockType] : flagAndClockImage[flagType][clockType];
+        }
     }
 
     private static int[][] flagAndClockImage = {

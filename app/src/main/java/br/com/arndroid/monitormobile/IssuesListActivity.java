@@ -76,7 +76,7 @@ public class IssuesListActivity extends ListActivity implements LoaderManager.Lo
             case ISSUES_LOADER_ID:
                 return new CursorLoader(this, Contract.Issues.CONTENT_URI, null,
                         Contract.Issues.ACRONYM_ID_SELECTION,
-                        new String[]{mAcronymId}, Contract.Issues.FLAG_AND_CLOCK_ASC);
+                        new String[]{mAcronymId}, Contract.Issues.STATE_ASC_FLAG_ASC_AND_CLOCK_ASC);
 
             default:
                 throw new IllegalArgumentException("Invalid loader id=" + id);

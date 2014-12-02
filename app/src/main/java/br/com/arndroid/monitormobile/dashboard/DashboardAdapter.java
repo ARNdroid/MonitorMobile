@@ -215,13 +215,14 @@ public class DashboardAdapter extends BaseAdapter {
                     }
                 }
             } else {
+                final int NOT_CLOSED = -1;
                 for (int flag = 0; flag < IssueUtils.TOTAL_FLAGS; flag++) {
                     for (int clock = 0; clock < IssueUtils.TOTAL_CLOCKS; clock++) {
                         final int count = dashboardItem.flagAndClockType[flag][clock];
                         if (count > 0) {
                             imageArray[currentPosition].setVisibility(View.VISIBLE);
                             totalArray[currentPosition].setVisibility(View.VISIBLE);
-                            imageArray[currentPosition].setImageResource(DashboardUtils.getImageResourceIdForFlagTypeAndClockType(flag, clock, false));
+                            imageArray[currentPosition].setImageResource(DashboardUtils.getImageResourceIdForStateFlagTypeAndClockType(NOT_CLOSED, flag, clock, false));
                             totalArray[currentPosition].setText(String.valueOf(count));
                             currentPosition++;
                         }

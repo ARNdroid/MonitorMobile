@@ -50,8 +50,8 @@ public class IssuesAdapter extends CursorAdapter {
         ViewHolder holder = (ViewHolder) view.getTag();
         final IssuesEntity entity = IssuesEntity.fromCursor(cursor);
         holder.imgFlagAndClockType.setImageResource(
-                DashboardUtils.getImageResourceIdForFlagTypeAndClockType(entity.getFlagType(),
-                        entity.getClockType(), true));
+                DashboardUtils.getImageResourceIdForStateFlagTypeAndClockType(entity.getState(),
+                        entity.getFlagType(), entity.getClockType(), true));
         holder.txtSummary.setText(entity.getSummary());
         holder.txtOwner.setText(mUsersManager.userFromId(entity.getOwnerId()).getShortName());
         holder.txtFollowers.setText(mFollowersManager.humanPhraseFromIssueId(entity.getId()));

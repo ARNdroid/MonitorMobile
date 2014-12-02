@@ -300,7 +300,7 @@ public class Contract {
 		 */
 
         public static final String TIME_STAMP_DESC = TIME_STAMP + " DESC";
-        public static final String FLAG_AND_CLOCK_ASC = FLAG_TYPE + ", " + CLOCK_TYPE + " ASC";
+        public static final String STATE_ASC_FLAG_ASC_AND_CLOCK_ASC = STATE + " ASC, " + FLAG_TYPE + " ASC, " + CLOCK_TYPE + " ASC";
 
 		/*
 		 * Utility methods

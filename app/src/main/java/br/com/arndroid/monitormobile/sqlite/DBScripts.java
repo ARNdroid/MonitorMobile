@@ -21,103 +21,14 @@ import br.com.arndroid.monitormobile.utils.TimeStampUtils;
 
 public class DBScripts {
 
+    private static boolean isDbPopulatedInThisSession = false;
+
     // Utility:
     private DBScripts() {}
 
-    public static void scriptV00ToV01(SQLiteDatabase db) {
-        // Tables Creation
-
-        db.beginTransaction();
-        try {
-            // Users:
-            db.execSQL("CREATE TABLE " + Contract.Users.TABLE_NAME + " ("
-                    + Contract.Users._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Users.SHORT_NAME + " TEXT NOT NULL);");
-            db.execSQL("CREATE UNIQUE INDEX " + Contract.Users.TABLE_NAME + "_"
-                    + Contract.Users.SHORT_NAME + "_idx "
-                    + "ON " + Contract.Users.TABLE_NAME + " (" + Contract.Users.SHORT_NAME + ");");
-
-            // Systems:
-            db.execSQL("CREATE TABLE " + Contract.Systems.TABLE_NAME + " ("
-                    + Contract.Systems._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Systems.ACRONYM_ID + " TEXT NOT NULL, "
-                    + Contract.Systems.DESCRIPTION + " TEXT NOT NULL);");
-            db.execSQL("CREATE UNIQUE INDEX " + Contract.Systems.TABLE_NAME + "_"
-                    + Contract.Systems.ACRONYM_ID + "_idx "
-                    + "ON " + Contract.Systems.TABLE_NAME + " (" + Contract.Systems.ACRONYM_ID + ");");
-
-            // Issues:
-            db.execSQL("CREATE TABLE " + Contract.Issues.TABLE_NAME + " ("
-                    + Contract.Issues._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Issues.ACRONYM_ID + " TEXT NOT NULL, "
-                    + Contract.Issues.TIME_STAMP + " TEXT NOT NULL, "
-                    + Contract.Issues.STATE + " INTEGER NOT NULL, "
-                    + Contract.Issues.FLAG_TYPE + " INTEGER NOT NULL, "
-                    + Contract.Issues.CLOCK_TYPE + " INTEGER NOT NULL, "
-                    + Contract.Issues.SUMMARY + " TEXT NOT NULL, "
-                    + Contract.Issues.DESCRIPTION + " TEXT NOT NULL, "
-                    + Contract.Issues.REPORTER_ID + " INTEGER NOT NULL, "
-                    + Contract.Issues.OWNER_ID + " INTEGER NOT NULL);");
-
-            // Actions:
-            db.execSQL("CREATE TABLE " + Contract.Actions.TABLE_NAME + " ("
-                    + Contract.Actions._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Actions.ISSUE_ID + " INTEGER NOT NULL, "
-                    + Contract.Actions.TIME_STAMP + " TEXT NOT NULL, "
-                    + Contract.Actions.SUMMARY + " TEXT NOT NULL, "
-                    + Contract.Actions.DESCRIPTION + " TEXT NOT NULL, "
-                    + Contract.Actions.AGENT_ID + " INTEGER NOT NULL);");
-
-            // Comments:
-            db.execSQL("CREATE TABLE " + Contract.Comments.TABLE_NAME + " ("
-                    + Contract.Comments._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Comments.ACTION_ID + " INTEGER NOT NULL, "
-                    + Contract.Comments.TIME_STAMP + " TEXT NOT NULL, "
-                    + Contract.Comments.DESCRIPTION + " TEXT NOT NULL, "
-                    + Contract.Comments.COMMENTER_ID + " INTEGER NOT NULL);");
-
-            // Subscriptions:
-            db.execSQL("CREATE TABLE " + Contract.Subscriptions.TABLE_NAME + " ("
-                    + Contract.Subscriptions._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Subscriptions.MODE_TYPE + " INTEGER NOT NULL, "
-                    + Contract.Subscriptions.ACRONYM_ID + " TEXT NOT NULL, "
-                    + Contract.Subscriptions.SUBSCRIBER_ID + " INTEGER NOT NULL);");
-            db.execSQL("CREATE UNIQUE INDEX " + Contract.Subscriptions.TABLE_NAME + "_"
-                    + Contract.Subscriptions.ACRONYM_ID + "_" + Contract.Subscriptions.SUBSCRIBER_ID + "_idx "
-                    + "ON " + Contract.Subscriptions.TABLE_NAME
-                    + " (" + Contract.Subscriptions.ACRONYM_ID + ", " + Contract.Subscriptions.SUBSCRIBER_ID + ");");
-
-            // Followers:
-            db.execSQL("CREATE TABLE " + Contract.Followers.TABLE_NAME + " ("
-                    + Contract.Followers._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Followers.ISSUE_ID + " INTEGER NOT NULL, "
-                    + Contract.Followers.FOLLOWER_ID + " INTEGER NOT NULL);");
-            db.execSQL("CREATE UNIQUE INDEX " + Contract.Followers.TABLE_NAME + "_"
-                    + Contract.Followers.ISSUE_ID + "_" + Contract.Followers.FOLLOWER_ID + "_idx "
-                    + "ON " + Contract.Followers.TABLE_NAME
-                    + " (" + Contract.Followers.ISSUE_ID + ", " + Contract.Followers.FOLLOWER_ID + ");");
-
-            // Xs:
-            db.execSQL("CREATE TABLE " + Contract.Xs.TABLE_NAME + " ("
-                    + Contract.Xs._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    + Contract.Xs.ACTION_ID + " INTEGER NOT NULL, "
-                    + Contract.Xs.LIKER_ID + " INTEGER NOT NULL);");
-            db.execSQL("CREATE UNIQUE INDEX " + Contract.Xs.TABLE_NAME + "_"
-                    + Contract.Xs.ACTION_ID + "_" + Contract.Xs.LIKER_ID + "_idx "
-                    + "ON " + Contract.Xs.TABLE_NAME
-                    + " (" + Contract.Xs.ACTION_ID + ", " + Contract.Xs.LIKER_ID + ");");
-
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
-
-        populateDB(db);
-
-
-    }
-
     public static void populateDB(SQLiteDatabase db) {
+
+        isDbPopulatedInThisSession = true;
 
         // Users:
         List<UsersEntity> users = new ArrayList<UsersEntity>(8);
@@ -405,5 +316,119 @@ public class DBScripts {
 
         // Users:
         db.delete(Contract.Users.TABLE_NAME, null, null);
+    }
+
+    public static void scriptV00ToV01(SQLiteDatabase db) {
+        // Tables Creation
+
+        db.beginTransaction();
+        try {
+            // Users:
+            db.execSQL("CREATE TABLE " + Contract.Users.TABLE_NAME + " ("
+                    + Contract.Users._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Users.SHORT_NAME + " TEXT NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Users.TABLE_NAME + "_"
+                    + Contract.Users.SHORT_NAME + "_idx "
+                    + "ON " + Contract.Users.TABLE_NAME + " (" + Contract.Users.SHORT_NAME + ");");
+
+            // Systems:
+            db.execSQL("CREATE TABLE " + Contract.Systems.TABLE_NAME + " ("
+                    + Contract.Systems._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Systems.ACRONYM_ID + " TEXT NOT NULL, "
+                    + Contract.Systems.DESCRIPTION + " TEXT NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Systems.TABLE_NAME + "_"
+                    + Contract.Systems.ACRONYM_ID + "_idx "
+                    + "ON " + Contract.Systems.TABLE_NAME + " (" + Contract.Systems.ACRONYM_ID + ");");
+
+            // Issues:
+            db.execSQL("CREATE TABLE " + Contract.Issues.TABLE_NAME + " ("
+                    + Contract.Issues._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Issues.ACRONYM_ID + " TEXT NOT NULL, "
+                    + Contract.Issues.TIME_STAMP + " TEXT NOT NULL, "
+                    + Contract.Issues.STATE + " INTEGER NOT NULL, "
+                    + Contract.Issues.FLAG_TYPE + " INTEGER NOT NULL, "
+                    + Contract.Issues.CLOCK_TYPE + " INTEGER NOT NULL, "
+                    + Contract.Issues.SUMMARY + " TEXT NOT NULL, "
+                    + Contract.Issues.DESCRIPTION + " TEXT NOT NULL, "
+                    + Contract.Issues.REPORTER_ID + " INTEGER NOT NULL, "
+                    + Contract.Issues.OWNER_ID + " INTEGER NOT NULL);");
+
+            // Actions:
+            db.execSQL("CREATE TABLE " + Contract.Actions.TABLE_NAME + " ("
+                    + Contract.Actions._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Actions.ISSUE_ID + " INTEGER NOT NULL, "
+                    + Contract.Actions.TIME_STAMP + " TEXT NOT NULL, "
+                    + Contract.Actions.SUMMARY + " TEXT NOT NULL, "
+                    + Contract.Actions.DESCRIPTION + " TEXT NOT NULL, "
+                    + Contract.Actions.AGENT_ID + " INTEGER NOT NULL);");
+
+            // Comments:
+            db.execSQL("CREATE TABLE " + Contract.Comments.TABLE_NAME + " ("
+                    + Contract.Comments._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Comments.ACTION_ID + " INTEGER NOT NULL, "
+                    + Contract.Comments.TIME_STAMP + " TEXT NOT NULL, "
+                    + Contract.Comments.DESCRIPTION + " TEXT NOT NULL, "
+                    + Contract.Comments.COMMENTER_ID + " INTEGER NOT NULL);");
+
+            // Subscriptions:
+            db.execSQL("CREATE TABLE " + Contract.Subscriptions.TABLE_NAME + " ("
+                    + Contract.Subscriptions._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Subscriptions.MODE_TYPE + " INTEGER NOT NULL, "
+                    + Contract.Subscriptions.ACRONYM_ID + " TEXT NOT NULL, "
+                    + Contract.Subscriptions.SUBSCRIBER_ID + " INTEGER NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Subscriptions.TABLE_NAME + "_"
+                    + Contract.Subscriptions.ACRONYM_ID + "_" + Contract.Subscriptions.SUBSCRIBER_ID + "_idx "
+                    + "ON " + Contract.Subscriptions.TABLE_NAME
+                    + " (" + Contract.Subscriptions.ACRONYM_ID + ", " + Contract.Subscriptions.SUBSCRIBER_ID + ");");
+
+            // Followers:
+            db.execSQL("CREATE TABLE " + Contract.Followers.TABLE_NAME + " ("
+                    + Contract.Followers._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Followers.ISSUE_ID + " INTEGER NOT NULL, "
+                    + Contract.Followers.FOLLOWER_ID + " INTEGER NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Followers.TABLE_NAME + "_"
+                    + Contract.Followers.ISSUE_ID + "_" + Contract.Followers.FOLLOWER_ID + "_idx "
+                    + "ON " + Contract.Followers.TABLE_NAME
+                    + " (" + Contract.Followers.ISSUE_ID + ", " + Contract.Followers.FOLLOWER_ID + ");");
+
+            // Xs:
+            db.execSQL("CREATE TABLE " + Contract.Xs.TABLE_NAME + " ("
+                    + Contract.Xs._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Xs.ACTION_ID + " INTEGER NOT NULL, "
+                    + Contract.Xs.LIKER_ID + " INTEGER NOT NULL);");
+            db.execSQL("CREATE UNIQUE INDEX " + Contract.Xs.TABLE_NAME + "_"
+                    + Contract.Xs.ACTION_ID + "_" + Contract.Xs.LIKER_ID + "_idx "
+                    + "ON " + Contract.Xs.TABLE_NAME
+                    + " (" + Contract.Xs.ACTION_ID + ", " + Contract.Xs.LIKER_ID + ");");
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        populateDB(db);
+
+    }
+
+    public static void scriptV01ToV02(SQLiteDatabase db) {
+
+        db.beginTransaction();
+        try {
+
+            db.execSQL("CREATE INDEX " + Contract.Issues.TABLE_NAME + "_"
+                    + Contract.Issues.STATE + "_" + Contract.Issues.FLAG_TYPE + "_" + Contract.Issues.CLOCK_TYPE + "_idx "
+                    + "ON " + Contract.Issues.TABLE_NAME + " (" + Contract.Issues.STATE + " ASC, "
+                    + Contract.Issues.FLAG_TYPE + " ASC, " + Contract.Issues.CLOCK_TYPE + " ASC);");
+
+            if (!isDbPopulatedInThisSession) {
+                db.execSQL("UPDATE " + Contract.Issues.TABLE_NAME
+                        + " SET " + Contract.Issues.STATE + "=" + IssueUtils.STATE_CLOSED
+                        + " WHERE " + Contract.Issues.STATE + "=0;");
+            }
+            
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
     }
 }

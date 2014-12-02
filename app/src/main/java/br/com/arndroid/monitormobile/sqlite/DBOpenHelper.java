@@ -15,7 +15,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     // Versions:
     private static final int FIRST_DATABASE_CREATION = 0;
     private static final int V_01 = 1;
-    private static final int CURRENT_DATABASE_VERSION = V_01;
+    private static final int V_02 = 2;
+    private static final int CURRENT_DATABASE_VERSION = V_02;
 
     private static final String DATA_BASE_NAME = "monitor_mobile_db";
 
@@ -44,6 +45,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 LOG.trace("About to execute scriptV00ToV01");
                 DBScripts.scriptV00ToV01(db);
                 LOG.trace("scriptV00ToV01 executed");
+                break;
+            case V_01:
+                LOG.trace("About to execute scriptV01ToV02");
+                DBScripts.scriptV01ToV02(db);
+                LOG.trace("scriptV01ToV02 executed");
                 break;
             default:
                 final String errorMessage = String.format(
