@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/doubled_view_padding"
-        android:text="Claridade - Monitor Mobile é a rede social dos sistemas da CAIXA" />
+        android:text="Claridade - Monitor Mobile é a rede social dos sistemas da CAIXA." />
 
     <TextView
         style="@style/CardFont.Data"
