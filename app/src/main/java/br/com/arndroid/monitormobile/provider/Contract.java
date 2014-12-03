@@ -428,6 +428,7 @@ public class Contract {
 
         public static final String ID_SELECTION = _ID + "=?";
         public static final String ACTION_ID_SELECTION = ACTION_ID + "=?";
+        public static final String ACTION_ID_AND_COMMENTER_ID_SELECTION = ACTION_ID + "=? AND " + COMMENTER_ID + "=?";
 
 		/*
 		 * Sort order

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_view_padding"
+    tools:context="br.com.arndroid.monitormobile.IssueActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_selector"
+        android:orientation="vertical"
+        android:padding="@dimen/doubled_view_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/imgFlagAndClockType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="Flag and clock"
+                android:paddingEnd="@dimen/padding_image_dashboard"
+                android:paddingRight="@dimen/padding_image_dashboard"
+                android:src="@drawable/flag_sample_and_clock_sample_full"
+                tools:ignore="RtlSymmetry"/>
+
+            <TextView
+                android:id="@+id/txtSummary"
+                style="@style/CardFont.Item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uma breve descrição do incidente: aqui uma breve descrição do incidente. Aqui uma breve descrição do incidente."
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Sistema"/>
+
+        <TextView
+            android:id="@+id/txtAcronymId"
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIXYZ"/>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Descrição"/>
+
+        <TextView
+            android:id="@+id/txtDescription"
+            style="@style/CardFont.Item"
+            android:paddingBottom="@dimen/default_view_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aqui uma descrição mais detalhada do incidente. Aqui uma descrição mais detalhada do incidente. Aqui uma descrição mais detalhada do incidente."/>
+
+        <TextView
+            android:id="@+id/txtReporter"
+            style="@style/CardFont.Item.Small"
+            android:paddingBottom="@dimen/padding_before_item_divider"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="por Fabio Miranda"/>
+
+        <View style="@style/ItemDividerHorizontal"/>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Proprietário"/>
+
+        <TextView
+            android:id="@+id/txtOwner"
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bruno de Azevedo Maia"/>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Seguem"/>
+
+        <TextView
+            android:id="@+id/txtFollowers"
+            style="@style/CardFont.Item"
+            android:paddingBottom="@dimen/default_view_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eu, Viviane Machado + 3 pessoas"/>
+
+        <View style="@style/ItemDividerHorizontal"/>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text=""/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtTotalActions"
+                style="@style/CardFont.Item"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:text="NN AÇÕES"
+                tools:ignore="RtlSymmetry"/>
+
+            <Button
+                style="@style/CardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INCLUIR NOVA AÇÃO"
+                android:onClick="newAction"/>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text=""/>
+
+        <View style="@style/ItemDividerHorizontal"/>
+
+        <LinearLayout
+            android:id="@+id/layInsertionPoint"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+         </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+

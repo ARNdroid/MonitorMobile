@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/doubled_view_padding"
+    android:background="@drawable/card_selector">
+
+    <TextView
+        style="@style/CardFont.Item.Small"
+        android:id="@+id/txtDate"
+        android:paddingTop="@dimen/default_view_padding"
+        android:paddingBottom="@dimen/default_view_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18/05/2014 às 16:31"/>
+
+    <TextView
+        style="@style/CardFont.Item"
+        android:id="@+id/txtSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aqui a descrição resumida da ação. Aqui a descrição resumida da ação. Aqui a descrição resumida da ação."/>
+
+    <TextView
+        style="@style/CardFont.Item.Small"
+        android:id="@+id/txtAgent"
+        android:paddingBottom="@dimen/default_view_padding"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_view_padding"
+        android:text="por Alceu Neto"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgXs"
+            android:background="@drawable/card_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/plus_x_color"
+            android:contentDescription="Mais CAIXA"/>
+
+        <TextView
+            style="@style/CardFont.Item"
+            android:id="@+id/txtXsCount"
+            android:layout_gravity="bottom"
+            android:paddingRight="@dimen/doubled_view_padding"
+            android:paddingEnd="@dimen/doubled_view_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"
+            tools:ignore="RtlSymmetry"/>
+
+        <ImageView
+            android:id="@+id/imgComments"
+            android:background="@drawable/card_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/comment_color"
+            android:contentDescription="Comentário"/>
+
+        <TextView
+            style="@style/CardFont.Item"
+            android:id="@+id/txtCommentsCount"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NN"
+            tools:ignore="RtlSymmetry"/>
+
+    </LinearLayout>
+
+    <View style="@style/ItemDividerHorizontal"/>
+
+</LinearLayout>

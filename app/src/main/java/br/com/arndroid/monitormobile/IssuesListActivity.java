@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -67,7 +68,10 @@ public class IssuesListActivity extends ListActivity implements LoaderManager.Lo
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        // TODO: implement
+        Intent intent = new Intent(this, IssueActivity.class);
+        intent.putExtra(IssueActivity.ISSUE_ID_KEY, id);
+        startActivity(intent);
+
     }
 
     @Override

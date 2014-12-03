@@ -23,16 +23,28 @@
 
         <activity
             android:name=".DashboardListActivity"
+            android:launchMode="singleTop"
             android:label="@string/app_name" >
         </activity>
 
         <activity
             android:name="br.com.arndroid.monitormobile.IssuesListActivity"
+            android:launchMode="singleTop"
             android:parentActivityName=".DashboardListActivity"
             tools:ignore="UnusedAttribute" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.arndroid.monitormobile.DashboardListActivity" />
+        </activity>
+
+        <activity
+            android:name="br.com.arndroid.monitormobile.IssueActivity"
+            android:label="@string/title_activity_issue"
+            android:parentActivityName=".IssuesListActivity"
+            tools:ignore="UnusedAttribute" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.arndroid.monitormobile.IssuesListActivity" />
         </activity>
 
         <activity

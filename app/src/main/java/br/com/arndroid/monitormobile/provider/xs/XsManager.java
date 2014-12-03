@@ -75,4 +75,28 @@ public class XsManager {
         }
         return false;
     }
+
+    public boolean userHasXsForAction(Long userId, Long actionId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Xs.CONTENT_URI,
+                    Contract.Xs.ID_PROJECTION, Contract.Xs.ACTION_ID_AND_LIKER_ID_SELECTION,
+                    new String[]{actionId.toString(), userId.toString()}, null);
+            return c.getCount() > 0;
+        } finally {
+            if (c != null) c.close();
+        }
+    }
+
+    public int totalXsForAction(Long actionId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Xs.CONTENT_URI,
+                    Contract.Xs.ID_PROJECTION, Contract.Xs.ACTION_ID_SELECTION,
+                    new String[]{actionId.toString()}, null);
+            return c.getCount();
+        } finally {
+            if (c != null) c.close();
+        }
+    }
 }

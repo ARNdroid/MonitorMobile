@@ -18,5 +18,6 @@
     <string name="title_activity_subscriptions">Minhas Assinaturas</string>
     <string name="action_subscriptions">Minhas assinaturas</string>
     <string name="action_dashboard_type">Visualizar por</string>
+    <string name="title_activity_issue">Incidente</string>
 
 </resources>

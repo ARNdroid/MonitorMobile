@@ -58,4 +58,28 @@ public class CommentsManager {
         mContext.getContentResolver().delete(ContentUris.withAppendedId(Contract.Comments.CONTENT_URI,
                 id), null, null);
     }
+
+    public boolean userHasCommentsForAction(Long userId, Long actionId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Comments.CONTENT_URI,
+                    Contract.Comments.ID_PROJECTION, Contract.Comments.ACTION_ID_AND_COMMENTER_ID_SELECTION,
+                    new String[]{actionId.toString(), userId.toString()}, null);
+            return c.getCount() > 0;
+        } finally {
+            if (c != null) c.close();
+        }
+    }
+
+    public int totalCommentsForAction(Long actionId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Comments.CONTENT_URI,
+                    Contract.Comments.ID_PROJECTION, Contract.Comments.ACTION_ID_SELECTION,
+                    new String[]{actionId.toString()}, null);
+            return c.getCount();
+        } finally {
+            if (c != null) c.close();
+        }
+    }
 }
