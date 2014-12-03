@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_view_padding"
+    tools:context="br.com.arndroid.monitormobile.NewIssueActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_selector"
+        android:orientation="vertical"
+        android:padding="@dimen/doubled_view_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/imgFlagAndClockType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="Flag and clock"
+                android:paddingEnd="@dimen/padding_image_dashboard"
+                android:paddingRight="@dimen/padding_image_dashboard"
+                android:src="@drawable/flag_sample_and_clock_sample_full"
+                tools:ignore="RtlSymmetry"/>
+
+            <EditText
+                android:id="@+id/edtSummary"
+                style="@style/CardFont.Item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Aqui uma breve descrição do incidente"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Sistema"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spnAcronymId" />
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="Descrição"/>
+
+        <EditText
+            android:id="@+id/edtDescription"
+            style="@style/CardFont.Item"
+            android:paddingBottom="@dimen/default_view_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Aqui uma descrição mais detalhada do incidente."/>
+
+        <TextView
+            style="@style/CardFont.Item.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text=""/>
+
+        <Button
+            style="@style/CardButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REGISTRAR INCIDENTE"
+            android:onClick="newIssue"/>
+
+    </LinearLayout>
+
+</ScrollView>

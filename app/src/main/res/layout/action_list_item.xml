@@ -12,17 +12,37 @@
         style="@style/CardFont.Item.Small"
         android:id="@+id/txtDate"
         android:paddingTop="@dimen/default_view_padding"
-        android:paddingBottom="@dimen/default_view_padding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="18/05/2014 às 16:31"/>
+
+    <TextView
+        style="@style/CardFont.Item.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_view_padding"
+        android:text="Ação"/>
 
     <TextView
         style="@style/CardFont.Item"
         android:id="@+id/txtSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aqui a descrição resumida da ação. Aqui a descrição resumida da ação. Aqui a descrição resumida da ação."/>
+        android:text="Aqui a descrição resumida da ação."/>
+
+    <TextView
+        style="@style/CardFont.Item.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/default_view_padding"
+        android:text="Descrição"/>
+
+    <TextView
+        style="@style/CardFont.Item"
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aqui uma descrição detalhada da ação. Aqui uma descrição detalhada da ação. Aqui uma descrição detalhada da ação."/>
 
     <TextView
         style="@style/CardFont.Item.Small"

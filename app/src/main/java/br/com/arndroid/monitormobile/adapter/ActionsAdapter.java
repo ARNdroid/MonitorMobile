@@ -41,6 +41,7 @@ public class ActionsAdapter extends CursorAdapter {
         ViewHolder holder = new ViewHolder(
                 (TextView) view.findViewById(R.id.txtDate),
                 (TextView) view.findViewById(R.id.txtSummary),
+                (TextView) view.findViewById(R.id.txtDescription),
                 (TextView) view.findViewById(R.id.txtAgent),
                 (ImageView) view.findViewById(R.id.imgXs),
                 (TextView) view.findViewById(R.id.txtXsCount),
@@ -58,6 +59,7 @@ public class ActionsAdapter extends CursorAdapter {
         final ActionsEntity entity = ActionsEntity.fromCursor(cursor);
         holder.txtDate.setText(TimeStampUtils.timeStampToFormattedString(entity.getTimeStamp()));
         holder.txtSummary.setText(entity.getSummary());
+        holder.txtDescription.setText(entity.getDescription());
         holder.txtAgent.setText("por " + mUsersManager.userFromId(entity.getAgentId()).getShortName());
         final Long currentUserId = mUsersManager.getCurrentUser().getId();
         holder.imgXs.setImageResource(mXsManager.userHasXsForAction(currentUserId, entity.getId()) ? R.drawable.plus_x_color : R.drawable.plus_x_bw);
@@ -89,16 +91,18 @@ public class ActionsAdapter extends CursorAdapter {
 
         public final TextView txtDate;
         public final TextView txtSummary;
+        public final TextView txtDescription;
         public final TextView txtAgent;
         public final ImageView imgXs;
         public final TextView txtXsCount;
         public final ImageView imgComments;
         public final TextView txtCommentsCount;
 
-        private ViewHolder(TextView txtDate, TextView txtSummary, TextView txtAgent, ImageView imgXs,
+        private ViewHolder(TextView txtDate, TextView txtSummary, TextView txtDescription, TextView txtAgent, ImageView imgXs,
                            TextView txtXsCount, ImageView imgComments, TextView txtCommentsCount) {
             this.txtDate = txtDate;
             this.txtSummary = txtSummary;
+            this.txtDescription = txtDescription;
             this.txtAgent = txtAgent;
             this.imgXs = imgXs;
             this.txtXsCount = txtXsCount;

@@ -9,6 +9,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -54,6 +55,13 @@ public class IssuesListActivity extends ListActivity implements LoaderManager.Lo
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_issues_list, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int itemId = item.getItemId();
 
@@ -61,6 +69,13 @@ public class IssuesListActivity extends ListActivity implements LoaderManager.Lo
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+
+            case R.id.action_add_issue:
+                Intent intent = new Intent(this, NewIssueActivity.class);
+                intent.putExtra(NewIssueActivity.ACRONYM_ID_KEY, mAcronymId);
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

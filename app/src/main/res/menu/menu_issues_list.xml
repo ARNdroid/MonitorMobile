@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="br.com.arndroid.monitormobile.DashboardListActivity">
+
+    <item android:id="@+id/action_add_issue"
+          android:title="@string/action_add_issue"
+          android:icon="@drawable/ic_menu_add"
+          android:showAsAction="ifRoom"
+          tools:ignore="AppCompatResource"/>
+
+</menu>

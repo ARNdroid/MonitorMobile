@@ -54,6 +54,22 @@ public class SystemsManager {
         return result;
     }
 
+    public List<String> allAcronymIds() {
+        ArrayList<String> result = new ArrayList<String>();
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Systems.CONTENT_URI, null, null, null, Contract.Systems.ACRONYM_ID_ASC);
+            if(c.moveToFirst()) {
+                do {
+                    result.add(SystemsEntity.fromCursor(c).getAcronymId());
+                } while (c.moveToNext());
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+        return result;
+    }
+
     public void refresh(SystemsEntity entity) {
 
         entity.validateOrThrow();
