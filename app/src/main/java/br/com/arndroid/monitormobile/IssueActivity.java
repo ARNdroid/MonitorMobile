@@ -139,11 +139,11 @@ public class IssueActivity extends Activity implements LoaderManager.LoaderCallb
         final int totalActions = mAdapter.getCount();
         final String strTotalActions;
         if (totalActions == 0) {
-            strTotalActions = "NENHUMA AÇÃO";
+            strTotalActions = "Nenhuma ação";
         } else if (totalActions == 1) {
-            strTotalActions = "1 AÇÃO";
+            strTotalActions = "1 ação";
         } else {
-            strTotalActions =  totalActions + " AÇÕES";
+            strTotalActions =  totalActions + " ações";
         }
         mTxtTotalActions.setText(strTotalActions);
         for (int position = 0; position < totalActions; position++) {
