@@ -159,15 +159,5 @@ public class IssuesManagerTest extends ProviderTestCase2<Provider> {
             exceptionThrew = true;
         }
         assertTrue("We expected a exception here.", exceptionThrew);
-
-        exceptionThrew = false;
-        entity = new IssuesEntity(null, "SIXYZ", TimeStampUtils.dateToTimeStamp(new Date()), 0, 0, 0,
-                "Some summary", "Some description", 0L, null);
-        try {
-            mManager.refresh(entity);
-        } catch (Contract.TargetException e) {
-            exceptionThrew = true;
-        }
-        assertTrue("We expected a exception here.", exceptionThrew);
     }
 }

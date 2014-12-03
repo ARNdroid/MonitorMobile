@@ -55,7 +55,7 @@ public class FollowersManager {
                 }
                 return firstFollowerName;
             } else {
-                return "Sem seguidores";
+                return "(sem seguidores)";
             }
         } finally {
             if (c != null) c.close();

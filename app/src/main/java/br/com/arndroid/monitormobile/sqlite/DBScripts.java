@@ -431,4 +431,59 @@ public class DBScripts {
             db.endTransaction();
         }
     }
+
+    public static void scriptV02ToV03(SQLiteDatabase db) {
+        db.beginTransaction();
+        try {
+
+            // issues.owner_id is now nullable
+
+            final String currentTableName = Contract.Issues.TABLE_NAME;
+            final String tempTableName = Contract.Issues.TABLE_NAME + "_TMP";
+
+            db.execSQL("ALTER TABLE " + currentTableName + " RENAME TO " + tempTableName + ";");
+
+            db.execSQL("CREATE TABLE " + Contract.Issues.TABLE_NAME + " ("
+                    + Contract.Issues.ACRONYM_ID + " TEXT NOT NULL, "
+                    + Contract.Issues._ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+                    + Contract.Issues.TIME_STAMP + " TEXT NOT NULL, "
+                    + Contract.Issues.STATE + " INTEGER NOT NULL, "
+                    + Contract.Issues.FLAG_TYPE + " INTEGER NOT NULL, "
+                    + Contract.Issues.CLOCK_TYPE + " INTEGER NOT NULL, "
+                    + Contract.Issues.SUMMARY + " TEXT NOT NULL, "
+                    + Contract.Issues.DESCRIPTION + " TEXT NOT NULL, "
+                    + Contract.Issues.REPORTER_ID + " INTEGER NOT NULL, "
+                    + Contract.Issues.OWNER_ID + " INTEGER);");
+
+            db.execSQL("INSERT INTO " + currentTableName + "("
+                    + Contract.Issues.ACRONYM_ID + ", "
+                    + Contract.Issues._ID + ", "
+                    + Contract.Issues.TIME_STAMP + ", "
+                    + Contract.Issues.STATE + ", "
+                    + Contract.Issues.FLAG_TYPE + ", "
+                    + Contract.Issues.CLOCK_TYPE + ", "
+                    + Contract.Issues.SUMMARY + ", "
+                    + Contract.Issues.DESCRIPTION + ", "
+                    + Contract.Issues.REPORTER_ID + ", "
+                    + Contract.Issues.OWNER_ID + ") "
+                    + "SELECT "
+                    + Contract.Issues.ACRONYM_ID + ", "
+                    + Contract.Issues._ID + ", "
+                    + Contract.Issues.TIME_STAMP + ", "
+                    + Contract.Issues.STATE + ", "
+                    + Contract.Issues.FLAG_TYPE + ", "
+                    + Contract.Issues.CLOCK_TYPE + ", "
+                    + Contract.Issues.SUMMARY + ", "
+                    + Contract.Issues.DESCRIPTION + ", "
+                    + Contract.Issues.REPORTER_ID + ", "
+                    + Contract.Issues.OWNER_ID + " "
+                    + "FROM " + tempTableName + ";");
+
+            db.execSQL("DROP TABLE " + tempTableName + ";");
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
 }

@@ -53,7 +53,8 @@ public class IssuesAdapter extends CursorAdapter {
                 DashboardUtils.getImageResourceIdForStateFlagTypeAndClockType(entity.getState(),
                         entity.getFlagType(), entity.getClockType(), true));
         holder.txtSummary.setText(entity.getSummary());
-        holder.txtOwner.setText(mUsersManager.userFromId(entity.getOwnerId()).getShortName());
+        holder.txtOwner.setText(entity.getOwnerId() == null ?
+                "(não atribuído)" : mUsersManager.userFromId(entity.getOwnerId()).getShortName());
         holder.txtFollowers.setText(mFollowersManager.humanPhraseFromIssueId(entity.getId()));
         holder.txtLastAction.setText(TimeStampUtils.timeStampToFormattedString(entity.getTimeStamp()));
     }

@@ -130,10 +130,8 @@ public class IssuesEntity extends AbstractEntity {
         if (reporterId == null) {
             throwNullValueException(Contract.Issues.REPORTER_ID);
         }
-        if (ownerId == null) {
-            throwNullValueException(Contract.Issues.OWNER_ID);
-        }
-    }
+        // ownerId can be null when a new issue is created.
+   }
 
     @Override
     public String getTableName() {
@@ -360,7 +358,7 @@ public class IssuesEntity extends AbstractEntity {
 
     @SuppressWarnings("UnusedDeclaration")
     public Long getOwnerId() {
-        return ownerId;
+        return ownerId == 0L ? null : ownerId;
     }
 
     public void setOwnerId(Long ownerId) {

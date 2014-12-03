@@ -82,7 +82,8 @@ public class IssueActivity extends Activity implements LoaderManager.LoaderCallb
         final String reportPhrase = "por " + usersManager.userFromId(mEntity.getReporterId()).getShortName()
                 + " em " + TimeStampUtils.timeStampToFormattedString(mEntity.getTimeStamp());
         mTxtReporter.setText(reportPhrase);
-        mTxtOwner.setText(usersManager.userFromId(mEntity.getOwnerId()).getShortName());
+        mTxtOwner.setText(mEntity.getOwnerId() == null ?
+                "(não atribuído)" : usersManager.userFromId(mEntity.getOwnerId()).getShortName());
         final FollowersManager followersManager = new FollowersManager(this);
         mTxtFollowers.setText(followersManager.humanPhraseFromIssueId(mEntity.getId()));
     }

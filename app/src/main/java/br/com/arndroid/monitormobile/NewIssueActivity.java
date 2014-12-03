@@ -115,7 +115,7 @@ public class NewIssueActivity extends Activity {
                     mEdtSummary.getText().toString().trim(),
                     mEdtDescription.getText().toString().trim(),
                     mCurrentUserId,
-                    mCurrentUserId);
+                    null);
             final IssuesManager issuesManager = new IssuesManager(this);
             issuesManager.refresh(newIssueEntity);
 
