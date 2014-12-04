@@ -9,7 +9,7 @@ public class TimeStampUtilsTest extends TestCase {
 
     public void testDateToTimeStampMustReturnCorrectValues() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(1, Calendar.FEBRUARY, 3, 4, 5);
-        Assert.assertEquals("000102030405", TimeStampUtils.dateToTimeStamp(calendar.getTime()));
+        calendar.set(1, Calendar.FEBRUARY, 3, 4, 5, 6);
+        Assert.assertEquals("00010203040506", TimeStampUtils.dateToTimeStamp(calendar.getTime()));
     }
 }
