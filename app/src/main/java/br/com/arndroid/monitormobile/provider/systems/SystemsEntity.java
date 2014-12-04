@@ -89,7 +89,7 @@ public class SystemsEntity extends AbstractEntity {
                     return false;
             }
 
-            // acronymId:
+            // description:
             if (this.acronymId != null) {
                 if (!this.acronymId.equals(temp.acronymId))
                     return false;

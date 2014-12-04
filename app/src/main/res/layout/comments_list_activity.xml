@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/default_view_padding">
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@color/card_foreground"
+        android:dividerHeight="1dp"/>
+
+    <TextView
+        android:id="@android:id/empty"
+        style="@style/CardFont"
+        android:padding="@dimen/doubled_view_padding"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Oh! Ainda não existem comentários para esta ação.\n\nAdicione um novo comentário logo abaixo."
+        android:textSize="22sp"/>
+
+    <LinearLayout
+        style="@style/Card"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtNewComment"
+            android:layout_gravity="bottom"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Um novo comentário aqui"/>
+
+        <ImageButton
+            android:background="@drawable/card_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/doubled_view_padding"
+            android:src="@drawable/ic_menu_send"
+            android:onClick="newComment"
+            android:contentDescription="Adicionar ação"/>
+
+    </LinearLayout>
+
+</LinearLayout>

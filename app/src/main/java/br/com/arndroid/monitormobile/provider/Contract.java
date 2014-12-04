@@ -434,8 +434,7 @@ public class Contract {
 		 * Sort order
 		 */
 
-        @SuppressWarnings("UnusedDeclaration")
-        public static final String TIME_STAMP_DESC = TIME_STAMP + " DESC";
+        public static final String TIME_STAMP_ASC = TIME_STAMP + " ASC";
 
 		/*
 		 * Utility methods

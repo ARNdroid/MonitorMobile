@@ -1,7 +1,7 @@
 package br.com.arndroid.monitormobile.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.com.arndroid.monitormobile.CommentsListActivity;
 import br.com.arndroid.monitormobile.R;
 import br.com.arndroid.monitormobile.provider.actions.ActionsEntity;
 import br.com.arndroid.monitormobile.provider.comments.CommentsManager;
@@ -21,15 +22,15 @@ public class ActionsAdapter extends CursorAdapter {
 
     private final CommentsManager mCommentsManager;
     private final XsManager mXsManager;
-    private final AlertDialog.Builder mBuilder;
     private UsersManager mUsersManager;
+    private Context mContext;
 
     public ActionsAdapter(Context context) {
         super(context, null, false);
         mUsersManager = new UsersManager(context);
         mCommentsManager = new CommentsManager(context);
         mXsManager = new XsManager(context);
-        mBuilder = new AlertDialog.Builder(context);
+        mContext = context;
     }
 
     @Override
@@ -74,10 +75,9 @@ public class ActionsAdapter extends CursorAdapter {
         holder.imgComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBuilder.setMessage("Estamos trabalhando para disponbilizar esta funcionalidade nas próximas versões! Por favor, aguardem cenas do próximo episódio...")
-                        .setTitle("Em construção")
-                        .setPositiveButton("Mesmo ansioso compreendo", null);
-                mBuilder.create().show();
+                Intent intent = new Intent(ActionsAdapter.this.mContext, CommentsListActivity.class);
+                intent.putExtra(CommentsListActivity.ACTION_ID_KEY, entity.getId());
+                ActionsAdapter.this.mContext.startActivity(intent);
             }
         });
         holder.txtCommentsCount.setText(String.valueOf(mCommentsManager.totalCommentsForAction(entity.getId())));
