@@ -22,5 +22,6 @@
     <string name="title_activity_new_issue">Novo Incidente</string>
     <string name="action_add_issue">Novo incidente</string>
     <string name="title_activity_comment_list">Comentários</string>
+    <string name="action_follow">Seguir</string>
 
 </resources>

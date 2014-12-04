@@ -101,4 +101,36 @@ public class FollowersManager {
         }
         return false;
     }
+
+    public boolean userFollowsIssue(Long followerId, Long issueId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Followers.CONTENT_URI,
+                    Contract.Followers.ID_PROJECTION, Contract.Followers.ISSUE_ID_AND_FOLLOWER_ID_SELECTION,
+                    new String[]{issueId.toString(), followerId.toString()}, null);
+            return c.getCount() > 0;
+        } finally {
+            if (c != null) c.close();
+        }
+    }
+
+    public void toggleUserFollowsIssue(Long followerId, Long issueId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Followers.CONTENT_URI,
+                    Contract.Followers.ID_PROJECTION, Contract.Followers.ISSUE_ID_AND_FOLLOWER_ID_SELECTION,
+                    new String[]{issueId.toString(), followerId.toString()}, null);
+
+            final FollowersEntity entity;
+            if (c.moveToFirst()) {
+                entity = FollowersEntity.fromCursor(c);
+                remove(entity.getId());
+            } else {
+                entity = new FollowersEntity(null, issueId, followerId);
+                refresh(entity);
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+    }
 }

@@ -10,6 +10,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -122,10 +123,32 @@ public class IssueActivity extends Activity implements
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.issue_activity, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_follow);
+        final FollowersManager followersManager = new FollowersManager(this);
+        final UsersManager usersManager = new UsersManager(this);
+        menuItem.setChecked(followersManager.userFollowsIssue(usersManager.getCurrentUser().getId(),
+                mIssuesEntity.getId()));
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int itemId = item.getItemId();
 
         switch (itemId) {
+            case R.id.action_follow:
+                final UsersManager usersManager = new UsersManager(this);
+                final FollowersManager followersManager = new FollowersManager(this);
+                final Long currentUserId = usersManager.getCurrentUser().getId();
+                final Long issueId = mIssuesEntity.getId();
+                followersManager.toggleUserFollowsIssue(currentUserId,
+                        issueId);
+                mTxtFollowers.setText(followersManager.humanPhraseFromIssueId(issueId));
+                item.setChecked(followersManager.userFollowsIssue(currentUserId, issueId));
+                return true;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
