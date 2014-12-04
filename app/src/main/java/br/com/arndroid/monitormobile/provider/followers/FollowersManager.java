@@ -37,17 +37,18 @@ public class FollowersManager {
         }
     }
 
-    public String humanPhraseFromIssueId(Long issueId) {
+    public String humanPhraseFromIssueId(Long issueId, Long featuredUserId) {
         Cursor c = null;
         try {
             c = mContext.getContentResolver().query(Contract.Followers.CONTENT_URI, null,
                     Contract.Followers.ISSUE_ID_SELECTION, new String[] {issueId.toString()}, null);
             final int count = c.getCount();
-            if(count > 0) {
-                c.moveToFirst();
+            if(c.moveToFirst()) {
+                final boolean featuredUserFollows = userFollowsIssue(featuredUserId, issueId);
                 final FollowersEntity entity = FollowersEntity.fromCursor(c);
                 final UsersManager manager = new UsersManager(mContext);
-                String firstFollowerName = manager.userFromId(entity.getFollowerId()).getShortName();
+                String firstFollowerName = featuredUserFollows ?
+                        "Eu" : manager.userFromId(entity.getFollowerId()).getShortName();
                 if (count > 2) {
                     firstFollowerName += " +" + (count - 1) + " pessoas";
                 } else if (count > 1) {

@@ -101,7 +101,7 @@ public class IssueActivity extends Activity implements
         mTxtOwner.setText(mIssuesEntity.getOwnerId() == null ?
                 "(não atribuído)" : usersManager.userFromId(mIssuesEntity.getOwnerId()).getShortName());
         final FollowersManager followersManager = new FollowersManager(this);
-        mTxtFollowers.setText(followersManager.humanPhraseFromIssueId(mIssuesEntity.getId()));
+        mTxtFollowers.setText(followersManager.humanPhraseFromIssueId(mIssuesEntity.getId(), new UsersManager(this).getCurrentUser().getId()));
     }
 
     private void bindScreen() {
@@ -146,7 +146,7 @@ public class IssueActivity extends Activity implements
                 final Long issueId = mIssuesEntity.getId();
                 followersManager.toggleUserFollowsIssue(currentUserId,
                         issueId);
-                mTxtFollowers.setText(followersManager.humanPhraseFromIssueId(issueId));
+                mTxtFollowers.setText(followersManager.humanPhraseFromIssueId(issueId, currentUserId));
                 item.setChecked(followersManager.userFollowsIssue(currentUserId, issueId));
                 return true;
             case android.R.id.home:
