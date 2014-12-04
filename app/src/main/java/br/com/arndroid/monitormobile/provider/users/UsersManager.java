@@ -8,6 +8,7 @@ import android.net.Uri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.arndroid.monitormobile.provider.Contract;
@@ -62,6 +63,32 @@ public class UsersManager {
         UsersEntity result = null;
         if (PreferencesUtils.isCurrentUserRegistered(mContext)) {
             result = userFromShortName(PreferencesUtils.getCurrentUserShortName(mContext));
+        }
+        return result;
+    }
+
+    public List<String> getAllUsersShortName(List<Long> excludedIdList) {
+        List<String> result = new ArrayList<String>();
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Users.CONTENT_URI, null, null, null, Contract.Users.SHORT_NAME_ASC);
+            if(c.moveToFirst()) {
+                do {
+                    final UsersEntity entity = UsersEntity.fromCursor(c);
+                    boolean include = true;
+                    for (Long id : excludedIdList) {
+                        if (entity.getId().equals(id)) {
+                            include = false;
+                            break;
+                        }
+                    }
+                    if (include) {
+                        result.add(entity.getShortName());
+                    }
+                } while (c.moveToNext());
+            }
+        } finally {
+            if (c != null) c.close();
         }
         return result;
     }
@@ -135,6 +162,22 @@ public class UsersManager {
             }
             subscriptionsManager.refresh(new SubscriptionsEntity(null, subscriptionMode, acronymId,
                     currentUser.getId()));
+        }
+    }
+
+    public UsersEntity getUserFromShortName(String shortName) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Users.CONTENT_URI, null,
+                    Contract.Users.SHORT_NAME_SELECTION, new String[] {shortName}, null);
+            if(c.getCount() > 0) {
+                c.moveToFirst();
+                return UsersEntity.fromCursor(c);
+            } else {
+                return null;
+            }
+        } finally {
+            if (c != null) c.close();
         }
     }
 }

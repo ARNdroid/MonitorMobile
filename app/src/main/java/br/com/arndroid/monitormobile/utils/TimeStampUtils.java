@@ -20,7 +20,7 @@ public class TimeStampUtils {
     private static int MINUTE_START = 10;
     private static int MINUTE_END = 12;
 
-    private static final String TIME_STAMP_FORMAT_STRING = "yyyyMMddHHmm";
+    private static final String TIME_STAMP_FORMAT_STRING = "yyyyMMddHHmmss";
 
     public static String dateToTimeStamp(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(TIME_STAMP_FORMAT_STRING);

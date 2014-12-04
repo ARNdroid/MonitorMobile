@@ -137,7 +137,8 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/doubled_view_padding"
                 android:src="@drawable/menu_add_blue"
-                android:onClick="newAction"/>
+                android:onClick="newAction"
+                android:contentDescription="Adicionar ação"/>
 
         </LinearLayout>
 

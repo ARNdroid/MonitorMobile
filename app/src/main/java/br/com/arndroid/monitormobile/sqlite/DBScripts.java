@@ -234,15 +234,17 @@ public class DBScripts {
         actions.add(new ActionsEntity(null, issues.get(27).getId(), issues.get(27).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(27).getReporterId()));
         actions.add(new ActionsEntity(null, issues.get(28).getId(), issues.get(28).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(28).getReporterId()));
         actions.add(new ActionsEntity(null, issues.get(29).getId(), issues.get(29).getTimeStamp(), "Abertura",   "Abertura do incidente",                                                        issues.get(29).getReporterId()));
-        actions.add(new ActionsEntity(null, issues.get(16).getId(), issues.get(16).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(0).getId()));
-        actions.add(new ActionsEntity(null, issues.get(17).getId(), issues.get(17).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(1).getId()));
-        actions.add(new ActionsEntity(null, issues.get(18).getId(), issues.get(18).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(2).getId()));
-        actions.add(new ActionsEntity(null, issues.get(19).getId(), issues.get(19).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(3).getId()));
-        actions.add(new ActionsEntity(null, issues.get(20).getId(), issues.get(20).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(4).getId()));
-        actions.add(new ActionsEntity(null, issues.get(22).getId(), issues.get(22).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(5).getId()));
-        actions.add(new ActionsEntity(null, issues.get(24).getId(), issues.get(24).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(6).getId()));
-        actions.add(new ActionsEntity(null, issues.get(26).getId(), issues.get(26).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(7).getId()));
-        actions.add(new ActionsEntity(null, issues.get(28).getId(), issues.get(28).getTimeStamp(), "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(0).getId()));
+        final Date future = new Date(); future.setTime(future.getTime() + 1000 * 60);
+        final String futureTimeStamp = TimeStampUtils.dateToTimeStamp(future);
+        actions.add(new ActionsEntity(null, issues.get(16).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(0).getId()));
+        actions.add(new ActionsEntity(null, issues.get(17).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(1).getId()));
+        actions.add(new ActionsEntity(null, issues.get(18).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(2).getId()));
+        actions.add(new ActionsEntity(null, issues.get(19).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(3).getId()));
+        actions.add(new ActionsEntity(null, issues.get(20).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(4).getId()));
+        actions.add(new ActionsEntity(null, issues.get(22).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(5).getId()));
+        actions.add(new ActionsEntity(null, issues.get(24).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(6).getId()));
+        actions.add(new ActionsEntity(null, issues.get(26).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(7).getId()));
+        actions.add(new ActionsEntity(null, issues.get(28).getId(), futureTimeStamp,               "Fechamento", "Fechamento do incidente pelo motivo [aqui uma descrição detalhada do motivo]", users.get(0).getId()));
         db.beginTransaction();
         try {
             for (ActionsEntity a : actions) {
