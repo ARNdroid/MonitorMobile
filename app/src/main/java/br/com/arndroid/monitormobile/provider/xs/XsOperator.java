@@ -1,5 +1,7 @@
 package br.com.arndroid.monitormobile.provider.xs;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.net.Uri;
 
@@ -78,5 +80,53 @@ public class XsOperator extends BaseProviderOperator {
             parameters.setSelection(Contract.Xs.ID_SELECTION);
             parameters.setSelectionArgs(new String[] {uri.getLastPathSegment()});
         }
+    }
+
+    @Override
+    public Uri insert(Uri uri, ContentValues values, Provider provider) {
+        final Uri resultUri = super.insert(uri, values, provider);
+
+        if(resultUri != null) {
+            // It could be better. We could notify the correct Action id. Nevertheless it's ok for now...
+            final Uri extraUri = Contract.Actions.CONTENT_URI;
+            final ContentResolver resolver = provider.getContext().getContentResolver();
+            LOG.trace("insert about to notify extraUri={}", extraUri);
+            resolver.notifyChange(extraUri, null);
+            LOG.trace("insert notified extraUri={}", extraUri);
+        }
+
+        return resultUri;
+    }
+
+    @Override
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs, Provider provider) {
+        final int result = super.update(uri, values, selection, selectionArgs, provider);
+
+        if(result > FAIL) {
+            // It could be better. We could notify the correct Action id. Nevertheless it's ok for now...
+            final Uri extraUri = Contract.Actions.CONTENT_URI;
+            final ContentResolver resolver = provider.getContext().getContentResolver();
+            LOG.trace("insert about to notify extraUri={}", extraUri);
+            resolver.notifyChange(extraUri, null);
+            LOG.trace("insert notified extraUri={}", extraUri);
+        }
+
+        return result;
+    }
+
+    @Override
+    public int delete(Uri uri, String selection, String[] selectionArgs, Provider provider) {
+        final int result = super.delete(uri, selection, selectionArgs, provider);
+
+        if(result > FAIL) {
+            // It could be better. We could notify the correct Action id. Nevertheless it's ok for now...
+            final Uri extraUri = Contract.Actions.CONTENT_URI;
+            final ContentResolver resolver = provider.getContext().getContentResolver();
+            LOG.trace("insert about to notify extraUri={}", extraUri);
+            resolver.notifyChange(extraUri, null);
+            LOG.trace("insert notified extraUri={}", extraUri);
+        }
+
+        return result;
     }
 }

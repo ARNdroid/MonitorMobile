@@ -20,7 +20,7 @@ public class DashboardPanel {
 
     public DashboardPanel(Cursor cursor) {
 
-        LOG.debug("Inside constructor: cursor.getCount()={}", cursor.getCount());
+        LOG.trace("Inside constructor: cursor.getCount()={}", cursor.getCount());
 
         if (cursor.moveToFirst()) {
             map = new HashMap<String, DashboardItem>();

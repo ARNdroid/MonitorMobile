@@ -99,4 +99,24 @@ public class XsManager {
             if (c != null) c.close();
         }
     }
+
+    public void toggleXsForActionAndUser(Long actionId, Long likerId) {
+        Cursor c = null;
+        try {
+            c = mContext.getContentResolver().query(Contract.Xs.CONTENT_URI,
+                    Contract.Xs.ID_PROJECTION, Contract.Xs.ACTION_ID_AND_LIKER_ID_SELECTION,
+                    new String[]{actionId.toString(), likerId.toString()}, null);
+
+            final XsEntity entity;
+            if (c.moveToFirst()) {
+                entity = XsEntity.fromCursor(c);
+                remove(entity.getId());
+            } else {
+                entity = new XsEntity(null, actionId, likerId);
+                refresh(entity);
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+    }
 }

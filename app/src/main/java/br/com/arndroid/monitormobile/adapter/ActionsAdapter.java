@@ -66,10 +66,7 @@ public class ActionsAdapter extends CursorAdapter {
         holder.imgXs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBuilder.setMessage("Estamos trabalhando para disponbilizar esta funcionalidade nas próximas versões! Por favor, aguardem cenas do próximo episódio...")
-                        .setTitle("Em construção")
-                        .setPositiveButton("Mesmo ansioso compreendo", null);
-                mBuilder.create().show();
+                mXsManager.toggleXsForActionAndUser(entity.getId(), currentUserId);
             }
         });
         holder.txtXsCount.setText(String.valueOf(mXsManager.totalXsForAction(entity.getId())));
