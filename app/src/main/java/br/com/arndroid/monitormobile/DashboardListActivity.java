@@ -62,7 +62,7 @@ public class DashboardListActivity extends ListActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_dashboard, menu);
+        getMenuInflater().inflate(R.menu.dashboard_list_activity, menu);
         mDashboardTypeMenuItem = menu.findItem(R.id.action_dashboard_type);
         updateMenuIcons();
         return true;

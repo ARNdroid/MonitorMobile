@@ -57,7 +57,7 @@ public class IssuesListActivity extends ListActivity implements LoaderManager.Lo
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_issues_list, menu);
+        getMenuInflater().inflate(R.menu.issues_list_activity, menu);
         return true;
     }
 
