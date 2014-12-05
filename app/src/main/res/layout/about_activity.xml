@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/default_view_padding"
-            android:text="0.6.0" />
+            android:text="0.7.0" />
 
         <TextView
             style="@style/CardFont.Header"
@@ -39,6 +39,13 @@
 
         <View
             style="@style/HeaderDivider" />
+
+        <TextView
+            style="@style/CardFont.Item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/default_view_padding"
+            android:text="0.6.0 em 04/12/14" />
 
         <TextView
             style="@style/CardFont.Item"

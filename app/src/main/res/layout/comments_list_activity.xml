@@ -15,16 +15,36 @@
         android:divider="@color/card_foreground"
         android:dividerHeight="1dp"/>
 
-    <TextView
+    <LinearLayout
+        style="@style/Card"
         android:id="@android:id/empty"
-        style="@style/CardFont"
-        android:padding="@dimen/doubled_view_padding"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Oh! Ainda não existem comentários para esta ação.\n\nAdicione um novo comentário logo abaixo."
-        android:textSize="22sp"/>
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/happy_sun"/>
+        <TextView
+            style="@style/CardFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Oh! Ainda não existem comentários para esta ação."
+            android:textSize="22sp"/>
+
+        <TextView
+            style="@style/CardFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/doubled_view_padding"
+            android:gravity="center"
+            android:text="Adicione um comentário abaixo."
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         style="@style/Card"

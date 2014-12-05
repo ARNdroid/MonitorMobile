@@ -59,7 +59,7 @@ public class DashboardPanel {
     }
 
     public int getAcronymIdCount() {
-        return acronymIdKeySet.length;
+        return acronymIdKeySet == null ? 0 : acronymIdKeySet.length;
     }
 
     public DashboardItem getDashboardItemForPosition(int position) {

@@ -8,15 +8,40 @@
 
     <ListView android:id="@android:id/list"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="0dp"
+              android:layout_weight="1"
               android:divider="@color/card_foreground"
               android:dividerHeight="1dp"/>
 
-    <TextView android:id="@android:id/empty"
-              style="@style/Card"
-              android:textSize="22sp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="[Nenhum incidente]"/>
+    <LinearLayout
+        style="@style/Card"
+        android:id="@android:id/empty"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/happy_sun"/>
+        <TextView
+            style="@style/CardFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Oba! Nenhum incidente hoje."
+            android:textSize="22sp"/>
+
+        <TextView
+            style="@style/CardFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/doubled_view_padding"
+            android:gravity="center"
+            android:text="Você pode assinar outros sistemas utilizando o menu da aplicação."
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
