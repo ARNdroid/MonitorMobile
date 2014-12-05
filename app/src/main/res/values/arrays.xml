@@ -28,4 +28,9 @@
         <item>Normal</item>
     </string-array>
 
+    <string-array name="my_issues_type_list">
+        <item>Atribuídos a mim</item>
+        <item>Abertos por mim</item>
+    </string-array>
+
 </resources>

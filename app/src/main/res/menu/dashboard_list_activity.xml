@@ -8,6 +8,11 @@
           android:showAsAction="ifRoom"
           tools:ignore="AppCompatResource"/>
 
+    <item android:id="@+id/action_my_issues"
+          android:title="@string/action_my_issues"
+          android:showAsAction="never"
+          tools:ignore="AppCompatResource"/>
+
     <item android:id="@+id/action_subscriptions"
           android:title="@string/action_subscriptions"
           android:showAsAction="never"

@@ -293,6 +293,8 @@ public class Contract {
 
         public static final String ID_SELECTION = _ID + "=?";
         public static final String ACRONYM_ID_SELECTION = ACRONYM_ID + "=?";
+        public static final String REPORTER_ID_SELECTION = REPORTER_ID + "=?";
+        public static final String OWNER_ID_SELECTION = OWNER_ID + "=?";
         public static final String DASHBOARD_SELECTION = Subscriptions.SUBSCRIBER_ID + "=? AND " + Subscriptions.MODE_TYPE + ">0";
 
 		/*

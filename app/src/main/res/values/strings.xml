@@ -23,5 +23,6 @@
     <string name="action_add_issue">Novo incidente</string>
     <string name="title_activity_comment_list">Comentários</string>
     <string name="action_follow">Seguir</string>
+    <string name="action_my_issues">Meus incidentes</string>
 
 </resources>

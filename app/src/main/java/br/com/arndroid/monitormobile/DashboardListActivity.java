@@ -25,6 +25,7 @@ public class DashboardListActivity extends ListActivity implements
         StringListDialog.OnStringSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String DASHBOARD_TYPE_DIALOG = "DASHBOARD_TYPE_DIALOG";
+    private static final String MY_ISSUES_TYPE_DIALOG = "MY_ISSUES_TYPE_DIALOG";
 
     private DashboardAdapter mAdapter;
     private MenuItem mDashboardTypeMenuItem;
@@ -55,6 +56,7 @@ public class DashboardListActivity extends ListActivity implements
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(this, IssuesListActivity.class);
+        intent.putExtra(IssuesListActivity.LIST_TYPE_KEY, IssuesListActivity.LIST_TYPE_ACRONYM);
         intent.putExtra(IssuesListActivity.ACRONYM_ID_KEY, mAdapter.getAcronymIdForPosition(position));
         startActivity(intent);
     }
@@ -88,14 +90,20 @@ public class DashboardListActivity extends ListActivity implements
 
         final Intent intent;
 
+        final StringListDialog dialog = new StringListDialog();
         switch (itemId) {
             case R.id.action_dashboard_type:
-                final StringListDialog dialog = new StringListDialog();
                 dialog.setTitle("Visualizar por");
                 dialog.setStringListId(R.array.dashboard_type_list);
                 dialog.setInitialIndex(PreferencesUtils.getLastDashboardType(this));
                 dialog.show(getFragmentManager(), DASHBOARD_TYPE_DIALOG);
+                return true;
 
+            case R.id.action_my_issues:
+                dialog.setTitle("Visualizar");
+                dialog.setStringListId(R.array.my_issues_type_list);
+                dialog.setInitialIndex(0);
+                dialog.show(getFragmentManager(), MY_ISSUES_TYPE_DIALOG);
                 return true;
 
             case R.id.action_subscriptions:
@@ -144,8 +152,19 @@ public class DashboardListActivity extends ListActivity implements
 
     @Override
     public void onStringSelected(String tag, int chosenIndex) {
-        PreferencesUtils.setLastDashboardType(this, chosenIndex);
-        updateMenuIcons();
-        mAdapter.setDashboardType(chosenIndex);
+
+        if (DASHBOARD_TYPE_DIALOG.equals(tag)) {
+            PreferencesUtils.setLastDashboardType(this, chosenIndex);
+            updateMenuIcons();
+            mAdapter.setDashboardType(chosenIndex);
+        } else if (MY_ISSUES_TYPE_DIALOG.equals(tag)) {
+            Intent intent = new Intent(this, IssuesListActivity.class);
+            if (chosenIndex == 0) {
+                intent.putExtra(IssuesListActivity.LIST_TYPE_KEY, IssuesListActivity.LIST_TYPE_MY_OWNED_ISSUES);
+            } else {
+                intent.putExtra(IssuesListActivity.LIST_TYPE_KEY, IssuesListActivity.LIST_TYPE_MY_OPENED_ISSUES);
+            }
+            startActivity(intent);
+        }
     }
 }
