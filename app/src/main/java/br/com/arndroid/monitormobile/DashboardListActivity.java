@@ -70,6 +70,16 @@ public class DashboardListActivity extends ListActivity implements
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (PreferencesUtils.isScreenTipShown(this, PreferencesUtils.SCREEN_TIP_DASHBOARD_KEY)) {
+            Intent intent = new Intent(this, ScreenTipActivity.class);
+            intent.putExtra(ScreenTipActivity.SCREEN_TIP_KEY, PreferencesUtils.SCREEN_TIP_DASHBOARD_KEY);
+            startActivity(intent);
+        }
+    }
+
     private void updateMenuIcons() {
         final int dashboardType = PreferencesUtils.getLastDashboardType(this);
         switch (dashboardType) {

@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import br.com.arndroid.monitormobile.dialog.StringListDialog;
 import br.com.arndroid.monitormobile.provider.users.UsersEntity;
 import br.com.arndroid.monitormobile.provider.users.UsersManager;
 import br.com.arndroid.monitormobile.sqlite.DBOpenHelper;
 import br.com.arndroid.monitormobile.utils.DashboardUtils;
 import br.com.arndroid.monitormobile.utils.PreferencesUtils;
-public class SimulationsActivity extends Activity {
+public class SimulationsActivity extends Activity implements StringListDialog.OnStringSelectedListener {
+
+    private static final String CONFIGURE_SCREEN_TIPS_TYPE_DIALOG = "CONFIGURE_SCREEN_TIPS_TYPE_DIALOG";
 
     TextView mTxtUserShortName;
 
@@ -74,5 +77,18 @@ public class SimulationsActivity extends Activity {
         PreferencesUtils.setLastDashboardType(this, DashboardUtils.DASHBOARD_TYPE_FLAG_AND_CLOCK);
         refreshScreen();
         Toast.makeText(this, "Usuário reset realizado com sucesso.", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setScreenTips(View view) {
+        final StringListDialog dialog = new StringListDialog();
+        dialog.setTitle("Configurar");
+        dialog.setStringListId(R.array.configure_screen_tips_list);
+        dialog.setInitialIndex(0);
+        dialog.show(getFragmentManager(), CONFIGURE_SCREEN_TIPS_TYPE_DIALOG);
+    }
+
+    @Override
+    public void onStringSelected(String tag, int chosenIndex) {
+        PreferencesUtils.setAllScreenTipsShown(this, chosenIndex == 0);
     }
 }

@@ -24,5 +24,8 @@
     <string name="title_activity_comment_list">Comentários</string>
     <string name="action_follow">Seguir</string>
     <string name="action_my_issues">Meus incidentes</string>
+    <string name="text_screen_tip_dashboard">Na tela a seguir são exibidos incidentes nos sistemas que você acompanha categorizados por importância (bandeira) e/ou demora na resolução (cronômetro). Os seus sistemas podem ser modificados no menu \'Minhas assinaturas\'.</string>
+    <string name="entendi">Entendi</string>
+    <string name="screen_tips_configuration">CONFIGURAR DICAS DE TELA</string>
 
 </resources>

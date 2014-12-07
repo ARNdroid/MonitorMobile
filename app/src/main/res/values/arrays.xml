@@ -33,4 +33,9 @@
         <item>Abertos por mim</item>
     </string-array>
 
+    <string-array name="configure_screen_tips_list">
+        <item>Exibir todas</item>
+        <item>Ocultar todas</item>
+    </string-array>
+
 </resources>

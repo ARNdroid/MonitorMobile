@@ -5,6 +5,11 @@ import android.content.SharedPreferences;
 
 public class PreferencesUtils {
 
+    public static final String SCREEN_TIP_DASHBOARD_KEY = "SCREEN_TIP_DASHBOARD_KEY";
+    // Mind the gap: when adding a new constant above you must update:
+    //   PreferencesUtils.setAllScreenTipsShown()
+    //   ScreenTipsUtils.getScreenTipText()
+
     private static final String PREFERENCES_FILE_NAME = "mob_preferences";
     private static final String USER_SHORT_NAME_PREFERENCE_KEY = "USER_SHORT_NAME";
     private static final String LAST_DASHBOARD_TYPE_KEY = "LAST_DASHBOARD_TYPE";
@@ -38,5 +43,22 @@ public class PreferencesUtils {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(LAST_DASHBOARD_TYPE_KEY, lastDashboardType);
         editor.apply();
+    }
+
+    public static void setScreenTipShown(Context context, String screenTipKey, boolean shown) {
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(screenTipKey, shown);
+        editor.apply();
+    }
+
+    public static void setAllScreenTipsShown(Context context, boolean shown) {
+        setScreenTipShown(context, SCREEN_TIP_DASHBOARD_KEY, shown);
+        // Mind the gap: new screen tips here.
+    }
+
+    public static boolean isScreenTipShown(Context context, String screenTipKey) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
+        return prefs.getBoolean(screenTipKey, true);
     }
 }
