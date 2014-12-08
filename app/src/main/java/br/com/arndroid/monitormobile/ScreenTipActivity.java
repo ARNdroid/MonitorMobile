@@ -35,6 +35,10 @@ public class ScreenTipActivity extends Activity {
     private void refreshScreen() {
         if (PreferencesUtils.SCREEN_TIP_DASHBOARD_KEY.equals(mScreenTipKey)) {
             mTxtTip.setText(ScreenTipsUtils.getScreenTipText(this, PreferencesUtils.SCREEN_TIP_DASHBOARD_KEY));
+        } else if (PreferencesUtils.SCREEN_TIP_ISSUES_LIST_KEY.equals(mScreenTipKey)) {
+            mTxtTip.setText(ScreenTipsUtils.getScreenTipText(this, PreferencesUtils.SCREEN_TIP_ISSUES_LIST_KEY));
+        } else if (PreferencesUtils.SCREEN_TIP_ISSUE_KEY.equals(mScreenTipKey)) {
+            mTxtTip.setText(ScreenTipsUtils.getScreenTipText(this, PreferencesUtils.SCREEN_TIP_ISSUE_KEY));
         } else {
             throw new IllegalArgumentException("Invalid mScreenTipKey=" + mScreenTipKey);
         }

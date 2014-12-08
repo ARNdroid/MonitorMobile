@@ -100,6 +100,7 @@
 
         <activity
             android:name="br.com.arndroid.monitormobile.ScreenTipActivity"
+            android:label="@string/title_activity_screen_tip"
             android:theme="@android:style/Theme.Holo.Light.Dialog">
         </activity>
 

@@ -26,7 +26,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/happy_sun"/>
+            android:src="@drawable/happy_sun"
+            android:contentDescription="Tudo ok."/>
+
         <TextView
             style="@style/CardFont"
             android:layout_width="match_parent"

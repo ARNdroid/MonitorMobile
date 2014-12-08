@@ -18,6 +18,7 @@ import br.com.arndroid.monitormobile.adapter.IssuesAdapter;
 import br.com.arndroid.monitormobile.provider.Contract;
 import br.com.arndroid.monitormobile.provider.users.UsersEntity;
 import br.com.arndroid.monitormobile.provider.users.UsersManager;
+import br.com.arndroid.monitormobile.utils.PreferencesUtils;
 
 public class IssuesListActivity extends ListActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -77,6 +78,16 @@ public class IssuesListActivity extends ListActivity implements LoaderManager.Lo
         outState.putInt(LIST_TYPE_KEY, mListType);
         if (mListType == LIST_TYPE_ACRONYM) {
             outState.putString(ACRONYM_ID_KEY, mAcronymId);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (PreferencesUtils.isScreenTipShown(this, PreferencesUtils.SCREEN_TIP_ISSUES_LIST_KEY)) {
+            Intent intent = new Intent(this, ScreenTipActivity.class);
+            intent.putExtra(ScreenTipActivity.SCREEN_TIP_KEY, PreferencesUtils.SCREEN_TIP_ISSUES_LIST_KEY);
+            startActivity(intent);
         }
     }
 

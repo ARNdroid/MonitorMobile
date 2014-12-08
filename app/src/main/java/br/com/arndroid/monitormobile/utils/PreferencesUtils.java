@@ -6,8 +6,11 @@ import android.content.SharedPreferences;
 public class PreferencesUtils {
 
     public static final String SCREEN_TIP_DASHBOARD_KEY = "SCREEN_TIP_DASHBOARD_KEY";
+    public static final String SCREEN_TIP_ISSUES_LIST_KEY = "SCREEN_TIP_ISSUES_LIST_KEY";
+    public static final String SCREEN_TIP_ISSUE_KEY = "SCREEN_TIP_ISSUE_KEY";
     // Mind the gap: when adding a new constant above you must update:
     //   PreferencesUtils.setAllScreenTipsShown()
+    //   ScreenTipActivity.refreshScreen()
     //   ScreenTipsUtils.getScreenTipText()
 
     private static final String PREFERENCES_FILE_NAME = "mob_preferences";
@@ -54,6 +57,8 @@ public class PreferencesUtils {
 
     public static void setAllScreenTipsShown(Context context, boolean shown) {
         setScreenTipShown(context, SCREEN_TIP_DASHBOARD_KEY, shown);
+        setScreenTipShown(context, SCREEN_TIP_ISSUES_LIST_KEY, shown);
+        setScreenTipShown(context, SCREEN_TIP_ISSUE_KEY, shown);
         // Mind the gap: new screen tips here.
     }
 

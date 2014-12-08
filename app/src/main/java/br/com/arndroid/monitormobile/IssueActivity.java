@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import br.com.arndroid.monitormobile.provider.users.UsersEntity;
 import br.com.arndroid.monitormobile.provider.users.UsersManager;
 import br.com.arndroid.monitormobile.utils.DashboardUtils;
 import br.com.arndroid.monitormobile.utils.IssueUtils;
+import br.com.arndroid.monitormobile.utils.PreferencesUtils;
 import br.com.arndroid.monitormobile.utils.TimeStampUtils;
 
 public class IssueActivity extends Activity implements
@@ -120,6 +122,16 @@ public class IssueActivity extends Activity implements
     protected void onSaveInstanceState(@SuppressWarnings("NullableProblems") Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(ISSUE_ID_KEY, mIssuesEntity.getId());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (PreferencesUtils.isScreenTipShown(this, PreferencesUtils.SCREEN_TIP_ISSUE_KEY)) {
+            Intent intent = new Intent(this, ScreenTipActivity.class);
+            intent.putExtra(ScreenTipActivity.SCREEN_TIP_KEY, PreferencesUtils.SCREEN_TIP_ISSUE_KEY);
+            startActivity(intent);
+        }
     }
 
     @Override
