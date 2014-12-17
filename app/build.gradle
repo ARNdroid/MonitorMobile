@@ -4,10 +4,14 @@ android {
     MOBBuildProfile buildProfile = new MOBBuildProfile()
 
     android.applicationVariants.all { variant ->
-        // Change outputFile name for all variants
-        // The pattern is 'EasyTargetDiet-major_minor_hotfix-VARIANT.apk'
-        //noinspection GroovyAssignabilityCheck
-        variant.outputFile = file("$project.buildDir/outputs/apk/" + buildProfile.getAPKNameForVariant(variant.baseName))
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //noinspection GroovyAssignabilityCheck
+                def newApkFileName = "$project.buildDir/outputs/apk/" + buildProfile.getAPKNameForVariant(variant.baseName)
+                output.outputFile = new File(newApkFileName)
+            }
+        }
     }
 
     compileSdkVersion 21
